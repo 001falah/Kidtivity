@@ -1,0 +1,215 @@
+ :root {
+      --purple: #66058f;
+      --accent: #343440;
+      --yellow: #ffc107;
+      --magenta: #f111f1;
+      --white: #fff;
+      --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--white);
+      color: var(--purple);
+    }
+    .container {
+      max-width: 1080px;
+      margin: 32px auto;
+      box-shadow: var(--box-shadow);
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      background: var(--white);
+      border-bottom: 1.5px solid #eedaf5;
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    header nav a {
+      color: var(--purple);
+      text-decoration: none;
+      margin: 0 14px;
+      font-weight: 500;
+      transition: color .18s;
+    }
+    header nav a:hover {
+      color: var(--accent);
+    }
+    .cart-icon {
+      color: #6F18A7;
+      font-size: 1.8em;
+      cursor: pointer;
+      margin-left: 16px;
+      transition: color 0.15s, transform 0.12s;
+      display: inline-block;
+    }
+    .cart-icon:hover,
+    .cart-icon:focus {
+      color: var(--accent);
+      transform: scale(1.12);
+      outline: none;
+    }
+    .cart-icon:active {
+      color: #f732e3;
+      transform: scale(0.97);
+    }
+
+    /* Hero About Section */
+    .about-hero {
+      background: var(--purple);
+      color: var(--white);
+      padding: 56px 32px 36px;
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      flex-wrap: wrap;
+    }
+    .about-hero-content {
+      flex: 2;
+      min-width: 260px;
+    }
+    .about-hero-content h1 {
+      font-size: 2.7em;
+      font-weight: 800;
+      margin: 0 0 24px;
+      line-height: 1.1;
+      color: var(--white);
+    }
+    .about-hero-content p {
+      font-size: 1.18em;
+      color: var(--white);
+      line-height: 1.45;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 500;
+      max-width: 440px;
+    }
+    .about-hero-image {
+      flex: 2;
+      min-width: 220px;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 12px;
+    }
+    .about-hero-image img {
+      width: 90%;
+      max-width: 380px;
+      border-radius: 18px;
+      box-shadow: 0 8px 34px rgba(0,0,0,0.24);
+      display: block;
+      background: var(--white);
+    }
+
+    /* CARD ROW */
+    .team-section {
+      background: var(--white);
+      padding: 60px 32px 38px;
+    }
+    .team-section h2 {
+      color: var(--purple);
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .team-section p.top-line {
+      color: var(--accent);
+      font-size: 1.13em;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .team-cards {
+      display: flex;
+      gap: 36px;
+      justify-content: center;
+      margin-bottom: 24px;
+      margin-top: 24px;
+      flex-wrap: nowrap;
+    }
+    .team-card {
+      background: var(--purple);
+      border-radius: 26px;
+      padding: 32px 20px 22px;
+      flex: 1 1 256px;
+      max-width: 280px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(140,33,180,0.10);
+      color: var(--white);
+      position: relative;
+    }
+    .team-card img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      background: var(--white);
+      box-shadow: 0 0 10px rgba(0,0,0,0.07);
+    }
+    .team-card h3 {
+      margin: 0 0 7px 0;
+      color: var(--yellow);
+      font-size: 1.19em;
+      font-weight: 700;
+    }
+    .team-card .role {
+      color: var(--magenta);
+      font-size: 1.02em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .team-card p {
+      color: var(--white);
+      font-size: 1em;
+      margin-bottom: 0;
+    }
+    footer {
+      background: var(--white);
+      color: var(--purple);
+      text-align: center;
+      padding: 22px 0;
+      border-top: 1px solid #eedaf5;
+      font-size: .98em;
+    }
+    footer nav a {
+      margin: 0 11px;
+      text-decoration: none;
+      color: var(--purple);
+      transition: color .18s;
+    }
+    footer nav a:hover {
+      color: var(--accent);
+    }
+    /* RESPONSIVE */
+    @media (max-width: 1080px) {
+      .container {max-width: 99vw;}
+      .about-hero, .team-section {padding: 36px 4vw;}
+    }
+    @media (max-width: 900px) {
+      .team-cards {gap: 18px;}
+      .about-hero-content h1 {font-size: 2em;}
+    }
+    @media (max-width: 780px) {
+      .about-hero {flex-direction: column-reverse; gap: 26px; text-align: center;}
+      .about-hero-image {justify-content: center;}
+      .team-cards {flex-wrap: wrap;}
+      .team-card {max-width: 330px; min-width: 180px;}
+    }
+    @media (max-width: 600px) {
+      .team-cards {flex-direction: column; align-items: center; gap: 18px;}
+      .team-card {width: 98vw; max-width: 370px;}
+      .about-hero-content p {font-size: .97em;}
+      .about-hero-image img {width: 99%;}
+    }
