@@ -19,15 +19,12 @@
     window.location.href = 'contact.html';
   });
 
-  // instagram 
-document.getElementById('insta').addEventListener('click',function(){
-  window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==');
-});
-
-// Buy button
-document.querySelectorAll('.buyBtn').forEach(function(button) {
-  button.addEventListener('click', function() {
-    const checkoutPage = this.getAttribute('data-checkout');
-    window.location.href = checkoutPage;
-  });
+  // Buy Button
+  document.addEventListener('DOMContentLoaded', function () {
+  const buyButton = document.getElementById('buyBtn1');
+  if (buyButton) {
+    buyButton.addEventListener('click', function () {
+      window.location.href = 'checkout1.html';
+    });
+  }
 });
