@@ -20,20 +20,20 @@
   });
 
   // Buy Button
-  document.addEventListener('DOMContentLoaded', function () {
-  const buyButton = document.getElementById('buyBtn1');
-  if (buyButton) {
-    buyButton.addEventListener('click', function () {
+ document.addEventListener('DOMContentLoaded', function () {
+  const buyBtn1 = document.getElementById('buyBtn1');
+  const buyBtn2 = document.getElementById('buyBtn2');
+
+  if (buyBtn1) {
+    buyBtn1.addEventListener('click', function () {
       window.location.href = 'checkout1.html';
     });
   }
-});
 
- document.addEventListener('DOMContentLoaded', function () {
-  const buyButton = document.getElementById('buyBtn2');
-  if (buyButton) {
-    buyButton.addEventListener('click', function () {
+  if (buyBtn2) {
+    buyBtn2.addEventListener('click', function () {
       window.location.href = 'checkout2.html';
     });
   }
 });
+
