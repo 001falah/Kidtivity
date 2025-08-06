@@ -27,4 +27,4 @@ document.getElementById('insta').addEventListener('click',function(){
 // Buy button
 document.getElementById('buyBtn1').addEventListener('click',function(){
   window.location.href = 'checkout1.html'
-})
+});
