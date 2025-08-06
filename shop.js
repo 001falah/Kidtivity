@@ -25,6 +25,9 @@ document.getElementById('insta').addEventListener('click',function(){
 });
 
 // Buy button
-document.getElementById('buyBtn1').addEventListener('click',function(){
-  window.location.href = 'checkout1.html';
+document.querySelectorAll('.buyBtn').forEach(function(button) {
+  button.addEventListener('click', function() {
+    const checkoutPage = this.getAttribute('data-checkout');
+    window.location.href = checkoutPage;
+  });
 });
