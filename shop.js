@@ -28,3 +28,12 @@
     });
   }
 });
+
+ document.addEventListener('DOMContentLoaded', function () {
+  const buyButton = document.getElementById('buyBtn1');
+  if (buyButton) {
+    buyButton.addEventListener('click', function () {
+      window.location.href = 'checkout2.html';
+    });
+  }
+});

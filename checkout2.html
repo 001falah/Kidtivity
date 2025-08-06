@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout | Kidtivity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="checkout1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!--Tab logo-->
+  <link rel="icon" type="image/png" href="images/tablogo.png">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="images/logo.png" alt="Kidtivity Logo" class="logo-img" id="home-page" />
+      </div>
+      <nav>
+        <a href="#" id="home-page">Home</a>
+        <a href="#" id="shopLink">Shop</a>
+        <a href="#" id="aboutpage">About</a>
+        <a href="#" id="contact">Contact</a>
+      </nav>
+      <i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i>
+    </header>
+
+    <main class="checkout-main">
+      <!-- Order Summary -->
+      <aside class="order-summary" aria-label="Order Summary">
+        <h3>Order Summary</h3>
+        <div class="order-prod">
+          <img src="tshirt.jpg" alt="Nike T-Shirt" />
+          <div class="prod-info">
+            <b>Nike Sportswear Men's T-Shirt</b>
+            <span>Size: XL &nbsp;|&nbsp; Colour: Red</span>
+          </div>
+        </div>
+        <div class="order-details">
+          <div class="row"><span>Subtotal</span><span>₹2,455</span></div>
+          <div class="row"><span>Discount (50%)</span><span>-₹1,229</span></div>
+          <div class="row"><span>Shipping</span><span>Free</span></div>
+          <div class="row total"><span>Total</span><span>₹1,226</span></div>
+        </div>
+      </aside>
+
+      <!-- Checkout Form -->
+      <section class="checkout-form-box">
+        <h2>Checkout</h2>
+        <form id="checkoutForm" autocomplete="off" class="checkout-form">
+          <!-- Full Name -->
+          <div class="input-row">
+            <input type="text" id="firstname" name="firstname" placeholder="First Name" required />
+            <input type="text" id="lastname" name="lastname" placeholder="Last Name" required />
+          </div>
+
+          <!-- Mobile Number -->
+          <label for="phone">Mobile Number</label>
+          <div class="input-row" style="align-items: center;">
+            <select id="countrycode" name="countrycode" aria-label="Country code" readonly>
+              <option value="+91" selected>+91</option>
+            </select>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              placeholder="10-digit mobile number"
+              required
+            />
+          </div>
+
+          <!-- Email -->
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required />
+
+          <!-- Full Address -->
+          <label for="address">Full Address</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Flat / House No., Building, Area, Landmark"
+            required
+          />
+
+          <!-- State, City, PIN -->
+          <div class="input-row">
+            <select id="state" name="state" required aria-label="State">
+              <option value="" disabled selected>Select State</option>
+              <option>Maharashtra</option>
+              <option>Karnataka</option>
+              <option>Tamil Nadu</option>
+              <option>Delhi</option>
+              <option>West Bengal</option>
+              <option>Uttar Pradesh</option>
+              <option>Telangana</option>
+              <option>Gujarat</option>
+              <option>Punjab</option>
+              <option>Rajasthan</option>
+              <!-- Add more states as needed -->
+            </select>
+            <input type="text" id="city" name="city" placeholder="City" required />
+            <input
+              type="text"
+              id="pincode"
+              name="pincode"
+              placeholder="PIN Code"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              required
+            />
+          </div>
+
+          <!-- Terms Agreement
+          <div class="agreement">
+            <input type="checkbox" id="agree" required />
+            <label for="agree">
+              By confirming the order, I accept the
+              <a href="#" style="color: var(--magenta); text-decoration: underline;">terms</a> of the user agreement.
+            </label>
+          </div>  -->
+
+          <button type="submit" class="pay-btn">Place Order</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+     <footer>
+      <nav>
+        <a href="#">About Us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Contact</a>
+        <a href="#" id="insta">Instagram</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script src="checkout1.js"></script>
+</body>
+</html>
+
