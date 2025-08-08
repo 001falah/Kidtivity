@@ -297,3 +297,12 @@ footer nav a:hover {
     order: -1; /* Show order summary on top */
   }
 }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 16px;
+    text-align: center; 
+  }
+}
