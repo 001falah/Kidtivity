@@ -44,3 +44,39 @@ document.getElementById('checkoutForm').addEventListener('submit', function (e) 
   // Redirect or reset form
   window.location.href = 'index.html'; // Change as needed
 });
+
+
+// Google form
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyOunvP0QSCDhd9W3ujGYnaScxTRqWwkO4aBlDrFhjg0VwrntgZN1PqUOCaY9unVkPLZA/exec';
+
+  document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = {
+      firstname: document.getElementById("firstname").value,
+      lastname: document.getElementById("lastname").value,
+      countrycode: document.getElementById("countrycode").value,
+      phone: document.getElementById("phone").value,
+      email: document.getElementById("email").value,
+      address: document.getElementById("address").value,
+      state: document.getElementById("state").value,
+      city: document.getElementById("city").value,
+      pincode: document.getElementById("pincode").value
+    };
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert("Order placed successfully!");
+      document.getElementById("checkoutForm").reset();
+    })
+    .catch(error => {
+      console.error("Error!", error);
+      alert("Something went wrong. Please try again.");
+    });
+  });
+
