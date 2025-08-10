@@ -213,3 +213,11 @@
       .about-hero-content p {font-size: .97em;}
       .about-hero-image img {width: 99%;}
     }
+    @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 16px;
+    text-align: center; 
+  }
+}
