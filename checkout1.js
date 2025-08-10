@@ -32,42 +32,58 @@ pmButtons.forEach((btn) => {
 });
 
 // Your Google Apps Script Web App URL
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyOunvP0QSCDhd9W3ujGYnaScxTRqWwkO4aBlDrFhjg0VwrntgZN1PqUOCaY9unVkPLZA/exec';
-
-document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  // Collect form data
-  const formData = {
-    firstname: document.getElementById('firstname').value.trim(),
-    lastname: document.getElementById('lastname').value.trim(),
-    countrycode: document.getElementById('countrycode').value.trim(),
-    phone: document.getElementById('phone').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    address: document.getElementById('address').value.trim(),
-    state: document.getElementById('state').value.trim(),
-    city: document.getElementById('city').value.trim(),
-    pincode: document.getElementById('pincode').value.trim(),
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwJCXL-umuS8JXjr7XdFL8-R7Psa2y6wH8bMhG6Xt2kWR2jwn_TuxdWncGbMH_VnbaNlw/exec"; // From Apps Script deployment
+
+  // Get form values
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+
+  // Get order summary values from the page
+  const productName = document.querySelector(".order-prod b")?.textContent.trim() || "";
+  const sizeColourText = document.querySelector(".order-prod span")?.textContent.trim() || "";
+  const subtotal = document.querySelector(".order-details .row:nth-child(1) span:last-child")?.textContent.trim() || "";
+  const discount = document.querySelector(".order-details .row:nth-child(2) span:last-child")?.textContent.trim() || "";
+  const shipping = document.querySelector(".order-details .row:nth-child(3) span:last-child")?.textContent.trim() || "";
+  const total = document.querySelector(".order-details .row.total span:last-child")?.textContent.trim() || "";
+
+  // Extract size and colour
+  let size = "", colour = "";
+  if (sizeColourText.includes("Size:") && sizeColourText.includes("Colour:")) {
+    size = sizeColourText.split("|")[0].replace("Size:", "").trim();
+    colour = sizeColourText.split("|")[1].replace("Colour:", "").trim();
+  }
+
+  // Merge all data
+  const payload = {
+    ...formData,
+    productName,
+    size,
+    colour,
+    subtotal,
+    discount,
+    shipping,
+    total
   };
 
-  // Send data to Google Sheets via Apps Script Web App
-  fetch(scriptURL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error('Network response was not OK');
-      return response.json();
-    })
-    .then((data) => {
-      // Show thank you popup/message
-      alert('Thanks for your order! We will confirm it soon.');
-      // Reset form
-      document.getElementById('checkoutForm').reset();
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again.');
+  try {
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
+
+    const json = await res.json();
+
+    if (json.result === "success") {
+      alert("✅ Order placed successfully! Thank you for shopping with us.");
+      e.target.reset();
+    } else {
+      alert("❌ Something went wrong while placing your order. Please try again.");
+    }
+
+  } catch (err) {
+    alert("❌ Something went wrong: " + err.message);
+  }
 });
