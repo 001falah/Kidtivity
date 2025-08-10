@@ -35,12 +35,12 @@ pmButtons.forEach((btn) => {
 document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwJCXL-umuS8JXjr7XdFL8-R7Psa2y6wH8bMhG6Xt2kWR2jwn_TuxdWncGbMH_VnbaNlw/exec"; // From Apps Script deployment
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyzp4Mldeps93ag8g8iEDypUqdJw7n2jlWbRc64zhOzk2WvvweJaJHvpZYJ4J1qrQHktQ/exec"; // Replace with your deployed Web App URL
 
-  // Get form values
+  // Collect form data
   const formData = Object.fromEntries(new FormData(e.target).entries());
 
-  // Get order summary values from the page
+  // Extract order summary details
   const productName = document.querySelector(".order-prod b")?.textContent.trim() || "";
   const sizeColourText = document.querySelector(".order-prod span")?.textContent.trim() || "";
   const subtotal = document.querySelector(".order-details .row:nth-child(1) span:last-child")?.textContent.trim() || "";
@@ -48,14 +48,13 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   const shipping = document.querySelector(".order-details .row:nth-child(3) span:last-child")?.textContent.trim() || "";
   const total = document.querySelector(".order-details .row.total span:last-child")?.textContent.trim() || "";
 
-  // Extract size and colour
   let size = "", colour = "";
   if (sizeColourText.includes("Size:") && sizeColourText.includes("Colour:")) {
     size = sizeColourText.split("|")[0].replace("Size:", "").trim();
     colour = sizeColourText.split("|")[1].replace("Colour:", "").trim();
   }
 
-  // Merge all data
+  // Prepare payload to send
   const payload = {
     ...formData,
     productName,
@@ -74,16 +73,31 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
       body: JSON.stringify(payload)
     });
 
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status}`);
+    }
+
     const json = await res.json();
 
     if (json.result === "success") {
       alert("✅ Order placed successfully! Thank you for shopping with us.");
       e.target.reset();
     } else {
-      alert("❌ Something went wrong while placing your order. Please try again.");
+      alert("❌ Error: " + (json.error || "Unknown error"));
     }
-
   } catch (err) {
     alert("❌ Something went wrong: " + err.message);
+    console.error(err);
   }
 });
+
+//checking
+fetch("https://script.google.com/macros/s/AKfycbyzp4Mldeps93ag8g8iEDypUqdJw7n2jlWbRc64zhOzk2WvvweJaJHvpZYJ4J1qrQHktQ/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({firstname: "Test"})
+})
+.then(res => res.json())
+.then(console.log)
+.catch(console.error);
+
