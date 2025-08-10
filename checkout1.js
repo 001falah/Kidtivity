@@ -1,4 +1,4 @@
-<script>
+
   const form = document.getElementById('gform');
 
   form.addEventListener('submit', function(event) {
@@ -17,4 +17,4 @@
       alert('Something went wrong. Please try again.');
     });
   });
-</script>
+
