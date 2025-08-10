@@ -1,5 +1,3 @@
-
-// Your Google Apps Script Web App URL
 document.getElementById('checkoutForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -16,9 +14,8 @@ document.getElementById('checkoutForm').addEventListener('submit', async functio
   };
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbw6xEFCeZvIqNUbGutC2SgjnnyM_JSZ0i8hxhzonkG11p5eIBocmeL2Ni4mu2xnR0eE7Q/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbx0s8AmdBZd6AtQbn8IY196rjGF27lYhnFOC0QZ9TTsX04oM2YKQVWBI1meqIJFMe77zg/exec', {
       method: 'POST',
-      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -31,9 +28,9 @@ document.getElementById('checkoutForm').addEventListener('submit', async functio
       alert("Order placed successfully!");
       this.reset();
     } else {
-      alert("Sorry, something went wrong. Please try again.");
+      alert("Sorry, something went wrong: " + (result.message || "Unknown error"));
     }
   } catch (error) {
-    alert("Sorry, something went wrong. Please try again.");
+    alert("Sorry, something went wrong: " + error.message);
   }
 });
