@@ -14,7 +14,7 @@ document.getElementById('checkoutForm').addEventListener('submit', async functio
   };
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbx0s8AmdBZd6AtQbn8IY196rjGF27lYhnFOC0QZ9TTsX04oM2YKQVWBI1meqIJFMe77zg/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbz6SwuUfhrHZmP7VYfPWgQLWILBSJoJ4J7wlb2Nqo-HAjnIkRR1u34S1c0oo4jVIJ_90A/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
