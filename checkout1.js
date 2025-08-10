@@ -1,103 +1,39 @@
-// Delivery method toggle buttons
-const deliveryBtn = document.getElementById('deliveryBtn');
-const storeBtn = document.getElementById('storeBtn');
-
-if (deliveryBtn && storeBtn) {
-  deliveryBtn.addEventListener('click', () => {
-    deliveryBtn.classList.add('active');
-    deliveryBtn.setAttribute('aria-pressed', 'true');
-    storeBtn.classList.remove('active');
-    storeBtn.setAttribute('aria-pressed', 'false');
-  });
-
-  storeBtn.addEventListener('click', () => {
-    storeBtn.classList.add('active');
-    storeBtn.setAttribute('aria-pressed', 'true');
-    deliveryBtn.classList.remove('active');
-    deliveryBtn.setAttribute('aria-pressed', 'false');
-  });
-}
-
-// Payment method toggle buttons
-const pmButtons = document.querySelectorAll('.payment-methods button');
-pmButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    pmButtons.forEach((b) => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
-  });
-});
 
 // Your Google Apps Script Web App URL
-document.getElementById("checkoutForm").addEventListener("submit", async function(e) {
+document.getElementById('checkoutForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyzp4Mldeps93ag8g8iEDypUqdJw7n2jlWbRc64zhOzk2WvvweJaJHvpZYJ4J1qrQHktQ/exec"; // Replace with your deployed Web App URL
-
-  // Collect form data
-  const formData = Object.fromEntries(new FormData(e.target).entries());
-
-  // Extract order summary details
-  const productName = document.querySelector(".order-prod b")?.textContent.trim() || "";
-  const sizeColourText = document.querySelector(".order-prod span")?.textContent.trim() || "";
-  const subtotal = document.querySelector(".order-details .row:nth-child(1) span:last-child")?.textContent.trim() || "";
-  const discount = document.querySelector(".order-details .row:nth-child(2) span:last-child")?.textContent.trim() || "";
-  const shipping = document.querySelector(".order-details .row:nth-child(3) span:last-child")?.textContent.trim() || "";
-  const total = document.querySelector(".order-details .row.total span:last-child")?.textContent.trim() || "";
-
-  let size = "", colour = "";
-  if (sizeColourText.includes("Size:") && sizeColourText.includes("Colour:")) {
-    size = sizeColourText.split("|")[0].replace("Size:", "").trim();
-    colour = sizeColourText.split("|")[1].replace("Colour:", "").trim();
-  }
-
-  // Prepare payload to send
-  const payload = {
-    ...formData,
-    productName,
-    size,
-    colour,
-    subtotal,
-    discount,
-    shipping,
-    total
+  const formData = {
+    firstname: this.firstname.value.trim(),
+    lastname: this.lastname.value.trim(),
+    countrycode: this.countrycode.value.trim(),
+    phone: this.phone.value.trim(),
+    email: this.email.value.trim(),
+    address: this.address.value.trim(),
+    state: this.state.value.trim(),
+    city: this.city.value.trim(),
+    pincode: this.pincode.value.trim()
   };
 
   try {
-    const res = await fetch(WEB_APP_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+    const response = await fetch('https://script.google.com/macros/s/AKfycbw6xEFCeZvIqNUbGutC2SgjnnyM_JSZ0i8hxhzonkG11p5eIBocmeL2Ni4mu2xnR0eE7Q/exec', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     });
 
-    if (!res.ok) {
-      throw new Error(`Network error: ${res.status}`);
-    }
+    const result = await response.json();
 
-    const json = await res.json();
-
-    if (json.result === "success") {
-      alert("✅ Order placed successfully! Thank you for shopping with us.");
-      e.target.reset();
+    if (result.result === "success") {
+      alert("Order placed successfully!");
+      this.reset();
     } else {
-      alert("❌ Error: " + (json.error || "Unknown error"));
+      alert("Sorry, something went wrong. Please try again.");
     }
-  } catch (err) {
-    alert("❌ Something went wrong: " + err.message);
-    console.error(err);
+  } catch (error) {
+    alert("Sorry, something went wrong. Please try again.");
   }
 });
-
-//checking
-fetch("https://script.google.com/macros/s/AKfycbyzp4Mldeps93ag8g8iEDypUqdJw7n2jlWbRc64zhOzk2WvvweJaJHvpZYJ4J1qrQHktQ/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({firstname: "Test"})
-})
-.then(res => res.json())
-.then(console.log)
-.catch(console.error);
-
