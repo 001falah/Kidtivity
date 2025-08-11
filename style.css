@@ -1,5 +1,4 @@
 :root {
-  --blue: #dddddd;
   --purple: #66058f;
   --accent: #343440;
   --yellow: #ffc107;
@@ -165,7 +164,7 @@ header nav a:hover {
   display: flex;
   justify-content: space-around;
   padding: 40px 20px;
-  background-color: #6a0dad;
+  background-color: var(--purple);
   flex-wrap: wrap;
   gap: 24px;
 }
