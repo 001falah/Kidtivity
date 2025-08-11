@@ -1,59 +1,56 @@
-  //Nav Bar
-  document.getElementById('home-page').addEventListener('click',function(){
-    window.location.href = 'index.html'
-  });
+document.addEventListener('DOMContentLoaded', function () {
   
+  // Footer
+  document.getElementById('f-contact').addEventListener('click', function(e) {
+    e.preventDefault(); // prevent empty link jumping to top
+    window.location.href = 'contact.html';
+  });
+
+  document.getElementById('f-aboutpage').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'about.html';
+  });
+
+  // Nav
+  document.getElementById('home-page').addEventListener('click', function(){
+    window.location.href = 'index.html';
+  });
+
   document.getElementById('cartIcon').addEventListener('click', function() {
     window.location.href = 'shop.html';
   });
 
-    document.getElementById('shopLink').addEventListener('click', function() {
+  document.getElementById('shopLink').addEventListener('click', function() {
     window.location.href = 'shop.html';
   });
 
-    document.getElementById('aboutpage').addEventListener('click', function() {
+  document.getElementById('aboutpage').addEventListener('click', function() {
     window.location.href = 'about.html';
   });
 
-    document.getElementById('contact').addEventListener('click', function() {
+  document.getElementById('contact').addEventListener('click', function() {
     window.location.href = 'contact.html';
   });
-  
-//Footer
-document.getElementById('f-contact').addEventListener('click',function(){
-  window.location.href = 'contact.html'
-});
 
-  document.getElementById('f-aboutpage').addEventListener('click', function() {
-    window.location.href = 'about.html';
+  document.getElementById('insta').addEventListener('click', function(){
+    window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
   });
 
-  // instagram 
-document.getElementById('insta').addEventListener('click',function(){
-  window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==','_blank');
-});
-
-
-  //Shop Section 
+  // Shop Section
   document.querySelectorAll('.shop-item').forEach(card => {
-  // Click event to navigate on mouse click
-  card.addEventListener('click', () => {
-    const url = card.getAttribute('data-url');
-    if (url) window.location.href = url;
-  });
-
-  // Keyboard accessibility: Enter and Space keys
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault(); // Prevent page scroll on Space
+    card.addEventListener('click', () => {
       const url = card.getAttribute('data-url');
       if (url) window.location.href = url;
-    }
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const url = card.getAttribute('data-url');
+        if (url) window.location.href = url;
+      }
+    });
   });
-});
 
-// Wait for the DOM to load
-document.addEventListener('DOMContentLoaded', function () {
   // Join Us Button
   const joinUsBtn = document.getElementById('joinUsBtn');
   if (joinUsBtn) {
@@ -71,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
       window.open(videoLink, '_blank');
     });
   }
+
 });
+
 
 
