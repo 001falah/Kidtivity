@@ -285,6 +285,43 @@ header nav a:hover {
   color: #fff; /* adjust if needed */
 }
 
+/* Shop Button */
+
+/* Shop Buy Button */
+.buy-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: var(--yellow);
+  color: var(--white);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 22px;
+  font-weight: 600;
+  font-size: 0.95em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.buy-btn2 {
+  background-color: var(--purple);
+}
+
+.buy-btn:hover {
+  background: var(--accent);
+  transform: scale(1.05);
+}
+
+.buy-btn:active {
+  transform: scale(0.95);
+}
+
+/* Make shop item container relative to position button */
+.shop-item {
+  position: relative;
+  padding-bottom: 60px; /* space so text doesn't overlap button */
+}
+
 /* Purple card derived from base purple */
 .shop-purple {
   background: color-mix(in srgb, var(--purple) 80%, white);
@@ -303,6 +340,9 @@ header nav a:hover {
   border-radius: 12px;
   margin-bottom: 12px;
 }
+
+/* Shop Button */
+
 
 /* Testimonial */
 .testimonial {
