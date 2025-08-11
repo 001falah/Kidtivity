@@ -26,7 +26,6 @@ html, body {
 }
 
 /* Header */
-
 header {
   display: flex;
   align-items: center;
@@ -79,10 +78,9 @@ header nav a:hover {
 .cart-icon:active {
   color: #f732e3;
   transform: scale(0.97);
-} 
+}
 
 /* Hero Section */
-
 .hero {
   display: flex;
   flex-wrap: wrap;
@@ -157,14 +155,12 @@ header nav a:hover {
 }
 
 /* Purple background section */
-
 .purple-bg {
   background: var(--purple);
   color: var(--yellow);
 }
 
 /* Info bubbles */
-
 .info-bubbles {
   display: flex;
   justify-content: space-around;
@@ -198,7 +194,6 @@ header nav a:hover {
 }
 
 /* How it works section */
-
 .how-it-works {
   background: var(--white);
   color: var(--purple);
@@ -246,12 +241,11 @@ header nav a:hover {
 }
 
 /* Shop section */
-
 .shop-section {
-  padding: 32px 16px;
-  color: var(--yellow);
+  padding: 32px 16px 70px 16px;
   text-align: center;
-  background: var(--purple);
+  background: var(--purple); /* keep purple background */
+  color: var(--yellow);
 }
 
 .shop-section h2 {
@@ -267,37 +261,40 @@ header nav a:hover {
 }
 
 .shop-item {
-  background: rgba(255,255,255,0.07);
   border-radius: 14px;
   padding: 18px 26px;
-  flex: 1 1 220px;
-  max-width: 280px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow .15s, background .17s;
-  cursor: pointer;
-  width: 100%;
+  flex: 1 1 280px;
+  max-width: 320px;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.shop-item.active {
+.shop-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* Purple card derived from base purple */
+.shop-purple {
+  background: color-mix(in srgb, var(--purple) 80%, white);
+  color: #fff;
+}
+
+/* Yellow card */
+.shop-yellow {
   background: var(--yellow);
-  color: var(--purple);
-  box-shadow: 0 4px 20px rgba(255,239,31,0.18);
+  color: #fff;
 }
 
-.shop-icon {
-  display: block;
-  width: 58px;
-  height: 58px;
-  background: var(--purple);
+.shop-img {
+  width: 100%;
+  height: auto;
   border-radius: 12px;
   margin-bottom: 12px;
 }
 
 /* Testimonial */
-
 .testimonial {
   background: var(--white);
   padding: 36px 20px;
@@ -328,7 +325,6 @@ blockquote {
 }
 
 /* Footer */
-
 footer {
   background: var(--white);
   color: var(--purple);
@@ -350,7 +346,6 @@ footer nav a:hover {
 }
 
 /* Responsive Design */
-
 @media (max-width: 1024px) {
   .hero-image img {
     max-width: 300px;
@@ -410,8 +405,7 @@ footer nav a:hover {
   }
 
   .info-bubbles,
-  .hiw-steps,
-  .shop-items {
+  .hiw-steps {
     flex-direction: column;
     align-items: center;
     gap: 28px;
@@ -422,10 +416,15 @@ footer nav a:hover {
     max-width: 90%;
   }
 
+  /* Shop section on mobile */
+  .shop-items {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .shop-item {
     width: 100%;
     max-width: 300px;
-    min-width: auto;
   }
 
   .testimonial {
@@ -483,15 +482,12 @@ footer nav a:hover {
   }
 
   .shop-item {
-    width: 100%;
     max-width: 100%;
     padding: 20px 16px;
   }
 
-  .shop-icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 8px;
+  .shop-img {
+    border-radius: 8px;
   }
 
   .testimonial-avatar {

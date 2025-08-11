@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kidtivity - Unbox Fun & Learning Every Month</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <!--Tab logo-->
-  <link rel="icon" type="image/png" href="images/tablogo.png">
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link rel="icon" type="image/png" href="images/tablogo.png" />
 </head>
 <body>
   <div class="container">
-    <!-- Header / Navigation -->
+    <!-- Header -->
     <header>
       <div class="logo">
-        <img src="images/logo.png" alt="Kidtivity logo" class="logo-img">
+        <img src="images/logo.png" alt="Kidtivity logo" class="logo-img" />
       </div>
       <nav>
         <a href="#" id="home-page">Home</a>
@@ -22,7 +24,11 @@
         <a href="#" id="aboutpage">About</a>
         <a href="#" id="contact">Contact</a>
       </nav>
-<i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i> 
+      <i
+        class="fas fa-shopping-cart cart-icon"
+        id="cartIcon"
+        aria-label="Cart"
+      ></i>
     </header>
 
     <!-- Hero Section -->
@@ -36,26 +42,38 @@
         </div>
       </div>
       <div class="hero-image">
-        <!-- Replace this with your generated SVG or PNG image -->
         <img src="images/hero.png" alt="Children playing and learning" />
       </div>
     </section>
 
     <!-- Info Bubbles -->
-   <section class="info-bubbles purple-bg" style="padding: 40px 20px; background-color: #6a0dad;">
-  <div class="bubble">
-    <img class="bubble-icon" src="images/Learn-through-play.jpg" alt="Play Icon" />
-    <p>Learn Through Play</p>
-  </div>
-  <div class="bubble">
-    <img class="bubble-icon" src="images/creative-crafts.jpg" alt="Creative Crafts" />
-    <p>Creative Crafts</p>
-  </div>
-  <div class="bubble">
-    <img class="bubble-icon" src="images/skillbased-games.jpg" alt="Skill-Based Games" />
-    <p>Skill-Based Games</p>
-  </div>
-</section>
+    <section class="info-bubbles purple-bg">
+      <div class="bubble">
+        <img
+          class="bubble-icon"
+          src="images/Learn-through-play.jpg"
+          alt="Play Icon"
+        />
+        <p>Learn Through Play</p>
+      </div>
+      <div class="bubble">
+        <img
+          class="bubble-icon"
+          src="images/creative-crafts.jpg"
+          alt="Creative Crafts"
+        />
+        <p>Creative Crafts</p>
+      </div>
+      <div class="bubble">
+        <img
+          class="bubble-icon"
+          src="images/skillbased-games.jpg"
+          alt="Skill-Based Games"
+        />
+        <p>Skill-Based Games</p>
+      </div>
+    </section>
+
     <!-- How It Works -->
     <section class="how-it-works">
       <h2>How It Works</h2>
@@ -66,30 +84,41 @@
         </div>
         <div class="hiw-step">
           <span class="hiw-icon hiw-box"></span>
-          <p>Subscribe & Get Box Monthly</p>
+          <p>Subscribe &amp; Get Box Monthly</p>
         </div>
         <div class="hiw-step">
           <span class="hiw-icon hiw-star"></span>
-          <p>Watch Your Child Learn & Enjoy!</p>
+          <p>Watch Your Child Learn &amp; Enjoy!</p>
         </div>
       </div>
     </section>
 
     <!-- Shop Section -->
-    <section class="shop-section purple-bg">
+    <section class="shop-section">
       <h2>Shop</h2>
       <div class="shop-items">
-        <div class="shop-item">
-          <span class="shop-icon shop-2-3"></span>
-          <p>Box for Ages 2–3</p>
+        <!-- Card 1 -->
+        <div
+          class="shop-item shop-purple"
+          data-url="product-2-4.html"
+          tabindex="0"
+          role="link"
+          aria-label="Box for Ages 2 to 4"
+        >
+          <img src="images/hero.png" alt="Box for Ages 2–4" class="shop-img" />
+          <p>Box for Ages 2–4</p>
         </div>
-        <div class="shop-item active">
-          <span class="shop-icon shop-4-5"></span>
-          <p>Box for Ages 4–5</p>
-        </div>
-        <div class="shop-item">
-          <span class="shop-icon shop-6-7"></span>
-          <p>Box for Ages 6–7</p>
+
+        <!-- Card 2 -->
+        <div
+          class="shop-item shop-yellow"
+          data-url="product-5-7.html"
+          tabindex="0"
+          role="link"
+          aria-label="Box for Ages 5 to 7"
+        >
+          <img src="images/hero.png" alt="Box for Ages 5–7" class="shop-img" />
+          <p>Box for Ages 5–7</p>
         </div>
       </div>
     </section>
@@ -113,6 +142,7 @@
       </nav>
     </footer>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
