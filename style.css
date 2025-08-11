@@ -223,17 +223,18 @@ header nav a:hover {
   margin: 0 auto;
 }
 
-.hiw-icon {
+.hiw-icon-img {
   display: block;
   margin: 0 auto 12px;
-  width: 56px;
-  height: 56px;
-  background: var(--yellow);
+  width: 180px;
+  height: 180px;
   border-radius: 14px;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(255, 239, 31, 0.18);
 }
 
 .hiw-step p {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
   margin: 0 auto;
   max-width: 90%;
