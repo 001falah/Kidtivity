@@ -24,7 +24,7 @@ document.getElementById('f-contact').addEventListener('click',function(){
   window.location.href = 'contact.html'
 });
 
-  document.getElementById('aboutpage').addEventListener('click', function() {
+  document.getElementById('f-aboutpage').addEventListener('click', function() {
     window.location.href = 'about.html';
   });
 
