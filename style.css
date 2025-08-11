@@ -276,6 +276,15 @@ header nav a:hover {
   cursor: pointer;
 }
 
+.shop-item ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+  font-size: 0.9em;
+  margin-top: 8px;
+  color: #fff; /* adjust if needed */
+}
+
 /* Purple card derived from base purple */
 .shop-purple {
   background: color-mix(in srgb, var(--purple) 80%, white);
