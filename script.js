@@ -1,4 +1,4 @@
-  //Home page
+  //Nav Bar
   document.getElementById('home-page').addEventListener('click',function(){
     window.location.href = 'index.html'
   });
@@ -19,6 +19,20 @@
     window.location.href = 'contact.html';
   });
   
+//Footer
+document.getElementById('f-contact').addEventListener('click',function(){
+  window.location.href = 'contact.html'
+});
+
+  document.getElementById('aboutpage').addEventListener('click', function() {
+    window.location.href = 'about.html';
+  });
+
+  // instagram 
+document.getElementById('insta').addEventListener('click',function(){
+  window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==','_blank');
+});
+
 
   //Shop Section 
   document.querySelectorAll('.shop-item').forEach(card => {
@@ -59,8 +73,4 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// instagram 
-document.getElementById('insta').addEventListener('click',function(){
-  window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==','_blank');
-});
 
