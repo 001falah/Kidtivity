@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Shop Section
-  document.querySelectorAll('.shop-item').forEach(card => {
+  /*document.querySelectorAll('.shop-item').forEach(card => {
     card.addEventListener('click', () => {
       const url = card.getAttribute('data-url');
       if (url) window.location.href = url;
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (url) window.location.href = url;
       }
     });
-  });
+  });*/
 
   // Join Us Button
   const joinUsBtn = document.getElementById('joinUsBtn');
