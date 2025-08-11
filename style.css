@@ -305,7 +305,7 @@ header nav a:hover {
   display: inline-block;
   width: 54px;
   height: 54px;
-  background: var(--purple);
+  background: var(--white);
   border-radius: 50%;
   margin-bottom: 8px;
   vertical-align: middle;
