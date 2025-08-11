@@ -71,5 +71,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Buy Button
+
+document.addEventListener("DOMContentLoaded", function () {
+    // First product Buy Now button
+    const firstBuyBtn = document.querySelector(".shop-section .shop-item:first-child .buy-btn");
+    if (firstBuyBtn) {
+        firstBuyBtn.addEventListener("click", function () {
+            window.location.href = "checkout1.html";
+        });
+    }
+
+    // Second product Buy Now button
+    const secondBuyBtn = document.querySelector(".shop-section .shop-item:nth-child(2) .buy-btn");
+    if (secondBuyBtn) {
+        secondBuyBtn.addEventListener("click", function () {
+            window.location.href = "checkout2.html";
+        });
+    }
+});
 
 
