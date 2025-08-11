@@ -273,6 +273,7 @@ header nav a:hover {
 .shop-item:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
 }
 
 /* Purple card derived from base purple */
