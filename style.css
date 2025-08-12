@@ -380,7 +380,13 @@ header nav a:hover {
   margin-bottom: 12px;
 }
 
-/* Shop Button */
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  margin: 10px 0;
+}
+
 
 
 /* Testimonial */
