@@ -291,6 +291,38 @@ header nav a:hover {
   color: #fff; /* adjust if needed */
 }
 
+/* Change bullets to ticks for lists inside cards */
+.shop-item ul {
+  list-style: none; /* Remove default bullets */
+  padding: 0;
+  margin: 10px 0 16px 0;
+  font-size: 0.95em;
+  text-align: left;
+  color: var(--white);
+}
+
+.shop-item ul li {
+  position: relative;
+  padding-left: 22px; /* Space for tick */
+  margin-bottom: 8px;
+  line-height: 1.4em;
+}
+
+.shop-item ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 0.9em;
+  color: var(--yellow); /* Tick color for purple cards */
+}
+
+/* Tick color for yellow theme cards */
+.shop-yellow ul li::before,
+.simple-card2::before {
+  color: var(--purple);
+}
+
 /* Shop Button */
 
 /* Shop Buy Button */
