@@ -428,7 +428,7 @@ footer nav a:hover {
   header {
     flex-direction: column;
     gap: 18px;
-    padding: 20px 16px;
+    padding: 20px 4px;
     text-align: center; 
   }
 
