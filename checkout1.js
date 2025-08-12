@@ -5,17 +5,52 @@ function isMobile() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Load product info from localStorage and update checkout page
-  let productName = localStorage.getItem("productName");
-  let productImg = localStorage.getItem("productImg");
+  // First check if new unified product data exists
+  const productData = JSON.parse(localStorage.getItem("selectedProduct"));
 
-  if (productName && productImg) {
-    const productImageElement = document.querySelector(".order-prod img");
-    const productNameElement = document.querySelector(".prod-info b");
+  if (productData && productData.name && productData.image) {
+    // Update Order Summary Image & Name
+    document.querySelector(".order-prod img").setAttribute("src", productData.image);
+    document.querySelector(".order-prod img").setAttribute("alt", productData.name);
+    document.querySelector(".order-prod .prod-info b").innerText = productData.name;
 
-    productImageElement.setAttribute("src", productImg);
-    productImageElement.setAttribute("alt", productName);
-    productNameElement.textContent = productName;
+    // Update Price in checkout summary
+    const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
+    const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
+    const totalElement = document.querySelector(".order-details .total span:last-child");
+
+    if (subtotalElement) subtotalElement.textContent = productData.price;
+    if (discountElement) discountElement.textContent = "-₹0";
+    if (totalElement) totalElement.textContent = productData.price;
+
+    // Hide size/colour
+    const prodInfoSpan = document.querySelector(".order-prod .prod-info span");
+    if (prodInfoSpan) prodInfoSpan.style.display = "none";
+  } else {
+    // Fallback to old keys: productName/productImg/productPrice
+    let productName = localStorage.getItem("productName");
+    let productImg = localStorage.getItem("productImg");
+    let productPrice = localStorage.getItem("productPrice");
+
+    if (productName && productImg) {
+      const productImageElement = document.querySelector(".order-prod img");
+      const productNameElement = document.querySelector(".prod-info b");
+
+      productImageElement.setAttribute("src", productImg);
+      productImageElement.setAttribute("alt", productName);
+      productNameElement.textContent = productName;
+    }
+
+    if (productPrice) {
+      // Update the order summary total price display (assuming no discount for simplicity)
+      const totalElement = document.querySelector(".order-details .total span:last-child");
+      if (totalElement) totalElement.textContent = `₹${productPrice}`;
+
+      const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
+      const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
+      if (subtotalElement) subtotalElement.textContent = `₹${productPrice}`;
+      if (discountElement) discountElement.textContent = `-₹0`;
+    }
   }
 });
 
@@ -94,37 +129,3 @@ function showQRCode(paymentLink) {
   overlay.appendChild(qrBox);
   document.body.appendChild(overlay);
 }
-
-
-// taking the card price
-// checkout1.js
-document.addEventListener("DOMContentLoaded", function () {
-    let productName = localStorage.getItem("productName");
-    let productImg = localStorage.getItem("productImg");
-    let productPrice = localStorage.getItem("productPrice");
-
-    if (productName && productImg) {
-        const productImageElement = document.querySelector(".order-prod img");
-        const productNameElement = document.querySelector(".prod-info b");
-
-        productImageElement.setAttribute("src", productImg);
-        productImageElement.setAttribute("alt", productName);
-        productNameElement.textContent = productName;
-    }
-
-    if (productPrice) {
-        // Update the order summary total price display (assuming no discount for simplicity)
-        const totalElement = document.querySelector(".order-details .total span:last-child");
-        if (totalElement) {
-            // Set price formatted with currency symbol
-            totalElement.textContent = `₹${productPrice}`;
-        }
-
-        // Also update subtotal and discount if needed or adjust accordingly
-        // Example: Set subtotal = price, discount = 0, shipping = Free (you can adjust logic as needed)
-        const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
-        const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
-        if (subtotalElement) subtotalElement.textContent = `₹${productPrice}`;
-        if (discountElement) discountElement.textContent = `-₹0`;
-    }
-});

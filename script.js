@@ -36,21 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
   });
 
-  // Shop Section
-  /*document.querySelectorAll('.shop-item').forEach(card => {
-    card.addEventListener('click', () => {
-      const url = card.getAttribute('data-url');
-      if (url) window.location.href = url;
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const url = card.getAttribute('data-url');
-        if (url) window.location.href = url;
-      }
-    });
-  });*/
-
   // Join Us Button
   const joinUsBtn = document.getElementById('joinUsBtn');
   if (joinUsBtn) {
@@ -69,26 +54,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-});
+  // ============================================
+  // Buy Buttons for BOTH Home Page & Shop Page
+  // ============================================
 
-// Buy Button
+  // Home Page cards: .shop-item
+  document.querySelectorAll(".shop-section .shop-item .buy-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      const card = this.closest(".shop-item");
+      const productName = card.querySelector("h3").innerText.trim();
+      const productPrice = card.querySelector(".price").innerText.trim();
+      const productImage = card.querySelector(".shop-img").getAttribute("src");
 
-document.addEventListener("DOMContentLoaded", function () {
-    // First product Buy Now button
-    const firstBuyBtn = document.querySelector(".shop-section .shop-item:first-child .buy-btn");
-    if (firstBuyBtn) {
-        firstBuyBtn.addEventListener("click", function () {
-            window.location.href = "checkout1.html";
-        });
-    }
+      localStorage.setItem("selectedProduct", JSON.stringify({
+        name: productName,
+        price: productPrice,
+        image: productImage
+      }));
 
-    // Second product Buy Now button
-    const secondBuyBtn = document.querySelector(".shop-section .shop-item:nth-child(2) .buy-btn");
-    if (secondBuyBtn) {
-        secondBuyBtn.addEventListener("click", function () {
-            window.location.href = "checkout2.html";
-        });
-    }
-});
-
+      window.location.href = "checkout1.html";
+    });
+  });
+  });
 

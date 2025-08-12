@@ -50,44 +50,25 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".simple-card").forEach(card => {
         let buyBtn = card.querySelector("button");
 
-        buyBtn.addEventListener("click", function () {
-            // Get Product Name and Image
-            let productName = card.querySelector("h3").textContent.trim();
-            let productImg = card.querySelector("img").getAttribute("src");
-
-            // Store in localStorage
-            localStorage.setItem("productName", productName);
-            localStorage.setItem("productImg", productImg);
-
-            // Go to checkout page
-            window.location.href = "checkout1.html";
-        });
-    });
-});
-
-
-// taking the cards Price
-// shop.js
-document.addEventListener("DOMContentLoaded", function () {
-    // ... existing header and footer nav code ...
-
-    // Handle Buy Buttons for All Cards
-    document.querySelectorAll(".simple-card").forEach(card => {
-        let buyBtn = card.querySelector("button");
+        if (!buyBtn) return; // safety check
 
         buyBtn.addEventListener("click", function () {
-            let productName = card.querySelector("h3").textContent.trim();
-            let productImg = card.querySelector("img").getAttribute("src");
+            // Get Product Data
+            let productName = card.querySelector("h3")?.textContent.trim() || "";
+            let productImg = card.querySelector("img")?.getAttribute("src") || "";
+            let priceText = card.querySelector(".price")?.textContent.trim() || "";
 
-            // Get price text, e.g. "₹3999"
-            let priceText = card.querySelector(".price").textContent.trim();
-            // Remove non-digit characters, keep decimal if any, and convert to number
+            // Remove currency symbols and keep only digits/decimal
             let price = priceText.replace(/[^\d.]/g, "");
 
-            localStorage.setItem("productName", productName);
-            localStorage.setItem("productImg", productImg);
-            localStorage.setItem("productPrice", price);
+            // Store in localStorage (single object for easy retrieval)
+            localStorage.setItem("selectedProduct", JSON.stringify({
+                name: productName,
+                price: price,
+                image: productImg
+            }));
 
+            // Go to checkout page
             window.location.href = "checkout1.html";
         });
     });
