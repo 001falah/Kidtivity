@@ -1,3 +1,6 @@
+/* ========================================
+   Root Variables
+======================================== */
 :root {
   --purple: #66058f;
   --accent: #343440;
@@ -7,6 +10,9 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
+/* ========================================
+   Base Styles
+======================================== */
 body {
   background: var(--white);
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -27,7 +33,9 @@ body {
   box-sizing: border-box;
 }
 
-/* Header */
+/* ========================================
+   Header
+======================================== */
 header {
   display: flex;
   align-items: center;
@@ -58,12 +66,14 @@ header nav a:hover {
   transition: color 0.2s, transform 0.15s;
 }
 
-.cart-icon:hover { 
-  color: var(--accent); 
-  transform: scale(1.1); 
+.cart-icon:hover {
+  color: var(--accent);
+  transform: scale(1.1);
 }
 
-/* Checkout Main Layout */
+/* ========================================
+   Checkout Layout
+======================================== */
 .checkout-main {
   display: flex;
   gap: 36px;
@@ -72,7 +82,9 @@ header nav a:hover {
   justify-content: center;
 }
 
-/* Order Summary */
+/* ========================================
+   Order Summary
+======================================== */
 .order-summary {
   flex: 1 1 320px;
   background: var(--white);
@@ -104,7 +116,9 @@ header nav a:hover {
   transition: transform 0.2s;
 }
 
-.order-prod img:hover { transform: scale(1.05); }
+.order-prod img:hover {
+  transform: scale(1.05);
+}
 
 .prod-info {
   display: flex;
@@ -144,7 +158,9 @@ header nav a:hover {
   padding-top: 8px;
 }
 
-/* Checkout form box */
+/* ========================================
+   Checkout Form
+======================================== */
 .checkout-form-box {
   flex: 1.5 1 400px;
   background: var(--white);
@@ -196,7 +212,9 @@ header nav a:hover {
   box-shadow: 0 1px 8px #f111f144;
 }
 
-/* Place Order button */
+/* ========================================
+   Place Order Button
+======================================== */
 button.pay-btn {
   width: 100%;
   padding: 15px 0;
@@ -216,7 +234,9 @@ button.pay-btn:hover {
   box-shadow: 0 4px 16px rgba(140, 33, 180, 0.3);
 }
 
-/* Secure checkout note */
+/* ========================================
+   Secure Checkout Note
+======================================== */
 .secure-checkout {
   text-align: center;
   margin-top: 12px;
@@ -229,12 +249,14 @@ button.pay-btn:hover {
   color: var(--purple);
 }
 
-/* Payment Confirmation Section */
+/* ========================================
+   Payment Confirmation Section
+======================================== */
 #payment-confirm-section {
   background: #f8f3fd;
   border-radius: 12px;
   padding: 18px;
-  box-shadow: 0 2px 8px rgba(102,5,143,0.08);
+  box-shadow: 0 2px 8px rgba(102, 5, 143, 0.08);
 }
 
 #payment-confirm-section h3 {
@@ -259,7 +281,9 @@ button.pay-btn:hover {
   background: var(--yellow);
 }
 
-/* Footer */
+/* ========================================
+   Footer
+======================================== */
 footer {
   text-align: center;
   padding: 22px 0;
@@ -272,24 +296,32 @@ footer nav a {
   text-decoration: none;
 }
 
-footer nav a:hover { 
+footer nav a:hover {
   color: var(--accent);
   text-decoration: none;
 }
 
-/* Responsive */
+/* ========================================
+   Responsive Design
+======================================== */
 @media (max-width: 920px) {
-  .checkout-main { flex-direction: column; }
-  .order-summary { order: -1; }
+  .checkout-main {
+    flex-direction: column;
+  }
+  .order-summary {
+    order: -1;
+  }
 }
 
-/* Tablet header stack */
 @media (max-width: 768px) {
-  header { flex-direction: column; gap: 14px; }
+  header {
+    flex-direction: column;
+    gap: 14px;
+  }
 }
 
-/* Mobile stacked header: logo → nav → cart */
 @media (max-width: 500px) {
+  /* Header adjustments for mobile */
   header {
     display: flex;
     flex-direction: column;
@@ -314,5 +346,21 @@ footer nav a:hover {
   }
   .cart-icon {
     font-size: 1.4em;
+  }
+
+  /* Make order image appear above product info */
+  .order-prod {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .order-prod img {
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+  }
+  .prod-info {
+    max-width: 100%;
+    margin-top: 10px;
   }
 }
