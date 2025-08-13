@@ -59,7 +59,7 @@ header nav a:hover {
 }
 
 .cart-icon:hover { 
-  color: var(--magenta); 
+  color: var(--accent); 
   transform: scale(1.1); 
 }
 
