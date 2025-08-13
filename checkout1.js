@@ -25,11 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".order-prod .prod-info span").innerText = productData.description;
         }
 
-        const discountPercent = 10; // Example: 10% discount
-        const shippingCharge = 40;  // Example: ₹40 shipping fee
+        const discountPercent = 10;
+        const shippingCharge = 40;
 
         const subtotal = parseFloat(String(productData.price).replace(/[₹,]/g, "")) || 0;
-
         const discountValue = (discountPercent / 100) * subtotal;
 
         document.getElementById("subtotalAmount").textContent = `₹${subtotal.toFixed(2)}`;
@@ -75,7 +74,16 @@ form.addEventListener('submit', function (event) {
 
         const upiId = 'falah07mohammed@oksbi';
         const name = 'Kidtivity';
-        const gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
+        
+        // Detect iPhone/iPad and set proper UPI payment scheme
+        let gpayUrl;
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            // Google Pay iOS scheme
+            gpayUrl = `gpay://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
+        } else {
+            // Generic UPI for Android/other platforms
+            gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
+        }
 
         if (isMobile()) {
             window.location.href = gpayUrl;
@@ -120,15 +128,14 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
         formStatusMessage.textContent = '✅ Payment verified and recorded successfully! Thank you for your order.';
         document.getElementById("payment-confirm-section").style.display = "none";
         
-        // Clear the form
+        // Clear form and localStorage order
         form.reset();
-        // Clear product data from local storage (empty cart/order)
         localStorage.removeItem("selectedProduct");
 
-        // Redirect to homepage after 3 seconds
+        // Redirect after 3 seconds
         setTimeout(() => {
             window.location.href = "index.html";
-        }, 100);
+        }, 3000);
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
