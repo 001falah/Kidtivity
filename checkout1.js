@@ -152,3 +152,52 @@ function showQRCode(paymentLink) {
   document.body.appendChild(overlay);
 }
 
+
+// Redirecting
+document.addEventListener("DOMContentLoaded", function () {
+    // ---------- HEADER LINKS ----------
+    document.getElementById("home-page").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "index.html";
+    });
+
+    document.getElementById("shopLink").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "shop.html";
+    });
+
+    document.getElementById("aboutpage").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "about.html";
+    });
+
+    // ⚠ NOTE: There are two "contact" IDs in your HTML — one in header and one in footer.
+    // This will pick the first one unless we target separately. 
+    // Better give them unique IDs for clarity, e.g., contactHeader & contactFooter
+    document.querySelector("header #contact").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "contact.html";
+    });
+
+    // ---------- FOOTER LINKS ----------
+    document.getElementById("about").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "about.html";
+    });
+
+    document.querySelector("footer #contact").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "contact.html";
+    });
+
+    document.getElementById("insta").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
+    });
+
+    document.getElementById("WhatsApp").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+    });
+});
+
