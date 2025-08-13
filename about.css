@@ -80,19 +80,18 @@ header nav a:hover {
   padding: 56px 32px 36px;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* keeps text left, image right */
   gap: 42px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* prevent wrapping on desktop */
   margin-top: 40px;
   border-radius: 16px;
-  max-width: 1300px; /* or desired width */
-  padding-left: 32px;  /* optional, adjust padding as needed */
-  padding-right: 32px;
-  width: 100%;  /* make full width within max-width */
+  max-width: 1300px;
+  width: 100%;
   box-sizing: border-box;
 }
 
 .about-hero-content {
-  flex: 2;
+  flex: 1;
   min-width: 260px;
 }
 .about-hero-content h1 {
@@ -110,6 +109,18 @@ header nav a:hover {
   margin-bottom: 20px;
   font-weight: 500;
   max-width: 440px;
+}
+
+.about-hero-image {
+  flex: 1; /* let it size proportionally */
+  display: flex;
+  justify-content: flex-end; /* pushes image to the right */
+}
+.about-hero-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* keeps aspect ratio */
 }
 
 /* Team Group Photo Section */
@@ -159,9 +170,7 @@ header nav a:hover {
   border: 2.5px solid var(--purple);
 }
 
-/* -------------------------------
-   Promo Box - Full Width
-----------------------------------*/
+/* Promo Box */
 .promo-box {
   position: relative;
   background: var(--white);
@@ -178,7 +187,6 @@ header nav a:hover {
   left: 50%;
   transform: translateX(-50%);
 }
-
 
 /* Girl image & yellow background */
 .promo-image-wrapper {
@@ -217,7 +225,7 @@ header nav a:hover {
   object-fit: cover;
 }
 
-/* Text area */
+/* Promo text */
 .promo-text-content {
   flex: 1;
   z-index: 5;
@@ -301,7 +309,12 @@ footer nav a:hover {
 }
 
 @media (max-width: 780px) {
-  .about-hero {flex-direction: column-reverse; gap: 26px; text-align: center;}
+  .about-hero {
+    flex-direction: column-reverse;
+    gap: 26px;
+    text-align: center;
+    flex-wrap: wrap;
+  }
   .about-hero-image {justify-content: center;}
 }
 
@@ -315,9 +328,7 @@ footer nav a:hover {
   .about-hero-image.team-group-bg {
     padding: 14px 2vw;
   }
-  .team-photo-row {
-    gap: 12px;
-  }
+  .team-photo-row { gap: 12px; }
   .team-photo-member img {
     width: 64px;
     height: 64px;
@@ -347,15 +358,9 @@ footer nav a:hover {
     width: 100%;
     z-index: 10;
   }
-  .promo-title {
-    font-size: 1.8em;
-  }
-  .promo-list {
-    font-size: 1em;
-  }
-  .promo-solution {
-    font-size: 1.1em;
-  }
+  .promo-title { font-size: 1.8em; }
+  .promo-list { font-size: 1em; }
+  .promo-solution { font-size: 1.1em; }
 }
 
 @media (max-width: 768px) {
