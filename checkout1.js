@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Hide size/colour
     const prodInfoSpan = document.querySelector(".order-prod .prod-info span");
-    if (prodInfoSpan) prodInfoSpan.style.display = "none";
+    if (prodInfoSpan) prodInfoSpan.style.display = "block";
   } else {
     // Fallback to old keys: productName/productImg/productPrice
     let productName = localStorage.getItem("productName");

@@ -11,40 +11,30 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--white);
+  background: #faf9fc;
   color: var(--purple);
   line-height: 1.4;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 32px auto;
-  box-shadow: var(--box-shadow);
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: var(--box-shadow);
 }
 
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 32px;
-  background: var(--white);
+  padding: 20px 32px;
   border-bottom: 1.5px solid #eedaf5;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
-
 .logo-img {
-  height: 40px;
-  width: auto;
-  display: block;
+  height: 42px;
 }
 
 header nav a {
@@ -52,8 +42,6 @@ header nav a {
   text-decoration: none;
   margin: 0 14px;
   font-weight: 500;
-  transition: color 0.18s ease;
-  cursor: pointer;
 }
 
 header nav a:hover {
@@ -61,26 +49,12 @@ header nav a:hover {
 }
 
 .cart-icon {
-  color: #6F18A7;
+  color: var(--purple);
   font-size: 1.8em;
-  vertical-align: middle;
   cursor: pointer;
-  margin-left: 16px;
-  transition: color 0.15s, transform 0.12s;
-  display: inline-block;
+  transition: color 0.2s, transform 0.15s;
 }
-
-.cart-icon:hover,
-.cart-icon:focus {
-  color: var(--accent);
-  transform: scale(1.12);
-  outline: none;
-}
-
-.cart-icon:active {
-  color: #f732e3;
-  transform: scale(0.97);
-}
+.cart-icon:hover { color: var(--magenta); transform: scale(1.1); }
 
 .checkout-main {
   display: flex;
@@ -96,17 +70,13 @@ header nav a:hover {
   background: var(--white);
   border-radius: 16px;
   box-shadow: var(--box-shadow);
-  padding: 32px 28px 24px 28px;
-  color: var(--accent);
-  min-width: 280px;
-  max-width: 100%;
+  padding: 28px;
 }
 
 .order-summary h3 {
-  font-size: 1.25em;
-  font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 700;
   margin-bottom: 26px;
-  text-align: center;
   color: var(--purple);
 }
 
@@ -121,12 +91,20 @@ header nav a:hover {
   width: 84px;
   height: 84px;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 12px;
   background: #f8f3fd;
+  transition: transform 0.2s;
+}
+.order-prod img:hover { transform: scale(1.05); }
+
+.prod-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 200px;
 }
 
 .prod-info b {
-  display: block;
   font-size: 1em;
   color: var(--purple);
 }
@@ -135,13 +113,16 @@ header nav a:hover {
   display: block;
   font-size: 0.95em;
   color: #7e71a8;
-  margin-top: 5px;
+  margin-top: 4px;
+}
+
+.order-details {
+  margin-top: 10px;
 }
 
 .order-details .row {
   display: flex;
   justify-content: space-between;
-  font-size: 1em;
   margin: 9px 0;
 }
 
@@ -160,43 +141,32 @@ header nav a:hover {
   background: var(--white);
   border-radius: 16px;
   box-shadow: var(--box-shadow);
-  padding: 32px 28px 24px 28px;
-  color: var(--purple);
+  padding: 28px;
 }
 
 .checkout-form-box h2 {
-  margin: 0 0 28px;
+  margin-bottom: 28px;
   font-size: 1.9em;
   font-weight: 700;
   text-align: center;
-  color: var(--purple);
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .checkout-form label {
   font-weight: 600;
   display: block;
-  margin-top: 18px;
-  margin-bottom: 8px;
-  color: var(--purple);
+  margin: 12px 0 6px;
 }
 
 .input-row {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-}
-
-.input-row input,
-.input-row select {
-  flex: 1 1 0;
-  padding: 12px 14px;
-  font-size: 1em;
-  border-radius: 12px;
-  border: 1.5px solid #eedaf5;
-  color: var(--accent);
-  background: var(--white);
-  transition: border-color 0.2s ease;
-  min-width: 0;
+  margin-bottom: 16px; /* Added for vertical spacing */
 }
 
 .checkout-form input,
@@ -207,9 +177,7 @@ header nav a:hover {
   border-radius: 12px;
   border: 1.5px solid #eedaf5;
   background: var(--white);
-  color: var(--accent);
-  transition: border-color 0.17s ease;
-  margin-bottom: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .checkout-form input:focus,
@@ -219,27 +187,6 @@ header nav a:hover {
   box-shadow: 0 1px 8px #f111f144;
 }
 
-.agreement {
-  margin-top: 20px;
-  font-size: 0.9em;
-  display: flex;
-  align-items: flex-start;
-  color: #7e71a8;
-  gap: 10px;
-}
-
-.agreement input[type="checkbox"] {
-  margin-top: 3px;
-  accent-color: var(--magenta);
-  cursor: pointer;
-}
-
-.agreement label a {
-  color: var(--magenta);
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 /* Place Order button */
 button.pay-btn {
   width: 100%;
@@ -247,62 +194,46 @@ button.pay-btn {
   border-radius: 26px;
   font-weight: 700;
   font-size: 1.2em;
-  background: var(--purple);
+  background: linear-gradient(135deg, var(--purple), var(--magenta));
   color: var(--white);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(140, 33, 180, 0.24);
-  transition: background 0.2s, transform 0.12s ease;
   margin-top: 18px;
+  transition: transform 0.15s, box-shadow 0.2s;
 }
-
-button.pay-btn:hover,
-button.pay-btn:focus {
-  background: var(--yellow);
-  color: var(--purple);
-  outline: none;
+button.pay-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(140, 33, 180, 0.3);
 }
 
-/* Footer */
+/* Secure checkout note */
+.secure-checkout {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9em;
+  color: #7e71a8;
+}
+.secure-checkout i {
+  margin-right: 6px;
+  color: var(--purple);
+}
 
 footer {
-  background: var(--white);
-  color: var(--purple);
   text-align: center;
   padding: 22px 0;
   border-top: 1px solid #eedaf5;
-  font-size: .98em;
 }
-
 footer nav a {
   margin: 0 11px;
-  text-decoration: none;
   color: var(--purple);
-  transition: color .18s;
 }
-
-footer nav a:hover {
-  color: var(--accent);
-}
+footer nav a:hover { color: var(--accent); }
 
 /* Responsive */
 @media (max-width: 920px) {
-  .checkout-main {
-    flex-direction: column;
-    padding: 32px 24px 60px;
-  }
-  .order-summary {
-    margin-bottom: 36px;
-    order: -1; /* Show order summary on top */
-  }
+  .checkout-main { flex-direction: column; }
+  .order-summary { order: -1; }
 }
-
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 18px;
-    padding: 20px 16px;
-    text-align: center; 
-  }
+  header { flex-direction: column; gap: 14px; }
 }
