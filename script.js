@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const watchVideoBtn = document.getElementById('watchVideoBtn');
   if (watchVideoBtn) {
     watchVideoBtn.addEventListener('click', function () {
-      const videoWebURL = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MTkzdDcxcGxuaTVlaQ==';
+      const videoWebURL = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MXNjdjlhODhvd212MA==';
 
       if (isMobile()) {
         // Try converting to deep link (may not always work with Reels)
