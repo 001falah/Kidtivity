@@ -59,8 +59,8 @@ form.addEventListener('submit', function (event) {
   event.preventDefault();
 
   // Show loading message while sending
-  formStatusMessage.style.color = 'blue';
-  formStatusMessage.textContent = '⏳ Sending message, please wait...';
+  formStatusMessage.style.color = 'green';
+  formStatusMessage.textContent = '⏳ Processing, please wait...';
 
   // Get product details from the order summary
   const productName = document.querySelector(".order-prod .prod-info b").innerText;
@@ -123,7 +123,7 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
   // Create form data again with UPI Transaction ID
   const formData = new FormData(form);
 
-  formStatusMessage.style.color = 'blue';
+  formStatusMessage.style.color = 'green';
   formStatusMessage.textContent = '⏳ Verifying payment, please wait...';
 
   fetch(googleScriptURL, {
