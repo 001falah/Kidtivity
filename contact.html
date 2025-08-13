@@ -58,7 +58,10 @@
         </div>
       </div>
       <!-- Right: Contact Form -->
-      <form class="contact-form">
+      <form class="contact-form"   id="gform"
+          method="post"
+          action="https://script.google.com/macros/s/AKfycby5cPC20OWrwY-6hRwJgRN3uXQEaftlXoPc6B59RHfKI0-yDC-YYPQ9SZV78MVOG812/exec"
+          autocomplete="off">
         <div class="form-row">
           <div class="input-group">
             <label for="firstName">First Name</label>
@@ -84,6 +87,8 @@
           <textarea id="message" name="message" placeholder="Write your message..." rows="3"></textarea>
         </div>
         <button class="send-btn" type="submit">Send Message</button>
+        <!-- Message container -->
+        <div id="formMessage" style="margin-top:10px; font-weight:bold;"></div>
       </form>
     </section>
   </main>
