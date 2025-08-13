@@ -120,3 +120,40 @@ footer {
     margin: 0 8px;
   }
 }
+
+ /* Mobile resposive header */
+@media (max-width: 500px) {
+  header {
+    display: flex;
+    flex-direction: column; /* stack all children vertically */
+    align-items: center;
+    padding: 12px 0; /* adjust padding for consistency */
+    gap: 10px; /* spacing between rows */
+  }
+
+  /* Logo - its own row */
+  .logo-img {
+    height: 36px; /* slightly smaller for mobile but still clear */
+    width: auto;
+    display: block;
+  }
+
+  /* Nav links - second row */
+  header nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* keep all nav links in one horizontal line */
+    justify-content: center;
+    gap: 12px;
+  }
+
+  header nav a {
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+
+  /* Cart icon - third row */
+  .cart-icon {
+    font-size: 1.4em;
+  }
+}
