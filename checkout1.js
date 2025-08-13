@@ -220,13 +220,47 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "contact.html";
   });
 
+  // Enhanced WhatsApp and Instagram links behavior
   document.getElementById("insta").addEventListener("click", function (e) {
     e.preventDefault();
-    window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
+    const instagramAppUrl = "instagram://user?username=kidtivity.in";
+    const instagramWebUrl = "https://www.instagram.com/kidtivity.in/";
+    openAppOrLink(instagramAppUrl, instagramWebUrl);
   });
 
   document.getElementById("WhatsApp").addEventListener("click", function (e) {
     e.preventDefault();
-    window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+    const whatsappAppUrl = "whatsapp://send?text=Hi%20there!";
+    const whatsappWebUrl = "https://wa.me/";
+    openAppOrLink(whatsappAppUrl, whatsappWebUrl);
   });
 });
+
+// Function to open app if installed or fallback to web URL on mobile; open web URL in new tab on desktop
+function openAppOrLink(appUrl, webUrl) {
+  if (isMobile()) {
+    let timeout;
+    const start = Date.now();
+
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appUrl;
+    document.body.appendChild(iframe);
+
+    timeout = setTimeout(() => {
+      const end = Date.now();
+      if (end - start < 1200) {
+        // App not opened, redirect to web fallback
+        window.location.href = webUrl;
+      }
+    }, 1000);
+
+    window.addEventListener('blur', () => {
+      clearTimeout(timeout); // User switched to app, cancel fallback
+    });
+  } else {
+    // On desktop just open web link in a new tab
+    window.open(webUrl, '_blank');
+  }
+}
+
