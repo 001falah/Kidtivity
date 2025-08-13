@@ -312,7 +312,7 @@ footer {
 .send-btn {
   margin-top: 13px;
   padding: 12px 0;
-  background: #5f259f;
+  background: var(--purple);
   color: #fff;
   font-size: 1.1rem;
   border: none;
