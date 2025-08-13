@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('insta').addEventListener('click', function(){
-    window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
+    window.open('https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
   });
 
   document.getElementById('WhatsApp').addEventListener('click', function(e) {

@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('insta')?.addEventListener('click', (e) => {
         e.preventDefault();
         window.open(
-            'https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==',
+            'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==',
             '_blank'
         );
     });
