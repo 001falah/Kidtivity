@@ -371,7 +371,7 @@ footer nav a:hover {
     text-align: center; 
   }
 }
-
+ /* Mobile resposive header */
 @media (max-width: 500px) {
   header {
     display: flex;
