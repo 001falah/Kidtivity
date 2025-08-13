@@ -27,6 +27,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Header */
 header {
   display: flex;
   align-items: center;
@@ -56,8 +57,13 @@ header nav a:hover {
   cursor: pointer;
   transition: color 0.2s, transform 0.15s;
 }
-.cart-icon:hover { color: var(--magenta); transform: scale(1.1); }
 
+.cart-icon:hover { 
+  color: var(--magenta); 
+  transform: scale(1.1); 
+}
+
+/* Checkout Main Layout */
 .checkout-main {
   display: flex;
   gap: 36px;
@@ -97,6 +103,7 @@ header nav a:hover {
   background: #f8f3fd;
   transition: transform 0.2s;
 }
+
 .order-prod img:hover { transform: scale(1.05); }
 
 .prod-info {
@@ -137,7 +144,7 @@ header nav a:hover {
   padding-top: 8px;
 }
 
-/* Checkout form */
+/* Checkout form box */
 .checkout-form-box {
   flex: 1.5 1 400px;
   background: var(--white);
@@ -168,7 +175,7 @@ header nav a:hover {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 16px; /* Added for vertical spacing */
+  margin-bottom: 16px;
 }
 
 .checkout-form input,
@@ -203,6 +210,7 @@ button.pay-btn {
   margin-top: 18px;
   transition: transform 0.15s, box-shadow 0.2s;
 }
+
 button.pay-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(140, 33, 180, 0.3);
@@ -215,25 +223,58 @@ button.pay-btn:hover {
   font-size: 0.9em;
   color: #7e71a8;
 }
+
 .secure-checkout i {
   margin-right: 6px;
   color: var(--purple);
 }
 
+/* Payment Confirmation Section */
+#payment-confirm-section {
+  background: #f8f3fd;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(102,5,143,0.08);
+}
+
+#payment-confirm-section h3 {
+  margin-top: 0;
+  color: var(--purple);
+}
+
+#payment-confirm-section input {
+  border: 1.5px solid #eedaf5;
+  border-radius: 8px;
+}
+
+#confirmPaymentBtn {
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#confirmPaymentBtn:hover {
+  background: var(--magenta);
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 22px 0;
   border-top: 1px solid #eedaf5;
 }
+
 footer nav a {
   margin: 0 11px;
   color: var(--purple);
   text-decoration: none;
 }
+
 footer nav a:hover { 
   color: var(--accent);
   text-decoration: none;
-
 }
 
 /* Responsive */
@@ -241,43 +282,36 @@ footer nav a:hover {
   .checkout-main { flex-direction: column; }
   .order-summary { order: -1; }
 }
+
+/* Tablet header stack */
 @media (max-width: 768px) {
   header { flex-direction: column; gap: 14px; }
 }
 
-
- /* Mobile resposive header */
+/* Mobile stacked header: logo → nav → cart */
 @media (max-width: 500px) {
   header {
     display: flex;
-    flex-direction: column; /* stack all children vertically */
+    flex-direction: column;
     align-items: center;
-    padding: 12px 0; /* adjust padding for consistency */
-    gap: 10px; /* spacing between rows */
+    padding: 12px 0;
+    gap: 10px;
   }
-
-  /* Logo - its own row */
   .logo-img {
-    height: 36px; /* slightly smaller for mobile but still clear */
+    height: 36px;
     width: auto;
-    display: block;
   }
-
-  /* Nav links - second row */
   header nav {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; /* keep all nav links in one horizontal line */
+    flex-wrap: nowrap;
     justify-content: center;
     gap: 12px;
   }
-
   header nav a {
     font-size: 0.9em;
     white-space: nowrap;
   }
-
-  /* Cart icon - third row */
   .cart-icon {
     font-size: 1.4em;
   }

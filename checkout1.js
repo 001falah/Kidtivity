@@ -1,20 +1,18 @@
+// Form reference
 const form = document.getElementById('gform');
 
 function isMobile() {
   return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+// Prefill order summary from localStorage
 document.addEventListener("DOMContentLoaded", function () {
-  // First check if new unified product data exists
   const productData = JSON.parse(localStorage.getItem("selectedProduct"));
-
   if (productData && productData.name && productData.image) {
-    // Update Order Summary Image & Name
-    document.querySelector(".order-prod img").setAttribute("src", productData.image);
-    document.querySelector(".order-prod img").setAttribute("alt", productData.name);
+    document.querySelector(".order-prod img").src = productData.image;
+    document.querySelector(".order-prod img").alt = productData.name;
     document.querySelector(".order-prod .prod-info b").innerText = productData.name;
 
-    // Update Price in checkout summary
     const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
     const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
     const totalElement = document.querySelector(".order-details .total span:last-child");
@@ -22,76 +20,78 @@ document.addEventListener("DOMContentLoaded", function () {
     if (subtotalElement) subtotalElement.textContent = productData.price;
     if (discountElement) discountElement.textContent = "-₹0";
     if (totalElement) totalElement.textContent = productData.price;
-
-    // Hide size/colour
-    const prodInfoSpan = document.querySelector(".order-prod .prod-info span");
-    if (prodInfoSpan) prodInfoSpan.style.display = "block";
-  } else {
-    // Fallback to old keys: productName/productImg/productPrice
-    let productName = localStorage.getItem("productName");
-    let productImg = localStorage.getItem("productImg");
-    let productPrice = localStorage.getItem("productPrice");
-
-    if (productName && productImg) {
-      const productImageElement = document.querySelector(".order-prod img");
-      const productNameElement = document.querySelector(".prod-info b");
-
-      productImageElement.setAttribute("src", productImg);
-      productImageElement.setAttribute("alt", productName);
-      productNameElement.textContent = productName;
-    }
-
-    if (productPrice) {
-      // Update the order summary total price display (assuming no discount for simplicity)
-      const totalElement = document.querySelector(".order-details .total span:last-child");
-      if (totalElement) totalElement.textContent = `₹${productPrice}`;
-
-      const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
-      const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
-      if (subtotalElement) subtotalElement.textContent = `₹${productPrice}`;
-      if (discountElement) discountElement.textContent = `-₹0`;
-    }
   }
 });
 
+// Handle checkout form submission
 form.addEventListener('submit', function (event) {
   event.preventDefault();
-
   const formData = new FormData(form);
 
+  // 1. Save order to backend (Google Sheet / DB) with "Pending" status
   fetch(form.action, {
     method: 'POST',
     body: formData,
     mode: 'no-cors'
   })
   .then(() => {
-    // Get the total amount dynamically from the order summary
+    // 2. Payment link
     const totalElement = document.querySelector('.order-details .total span:last-child');
     const amountText = totalElement ? totalElement.textContent.replace(/[^\d.]/g, '') : '0';
     const amount = parseFloat(amountText);
 
-    const upiId = 'falah07mohammed@oksbi'; // Your UPI ID
-    const name = 'Kidtivity';               // Your store name
-
+    const upiId = 'falah07mohammed@oksbi';
+    const name = 'Kidtivity';
     const gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
 
+    // 3. Open payment method
     if (isMobile()) {
-      // On mobile devices: open Google Pay directly
+      alert("Please complete your payment and then confirm it below.");
       window.location.href = gpayUrl;
     } else {
-      // On desktops: show QR code popup
       showQRCode(gpayUrl);
+      alert("Please scan and pay, then confirm your payment below.");
     }
 
+    // 4. Reset form and show confirm payment block
     form.reset();
+    document.getElementById("payment-confirm-section").style.display = "block";
   })
   .catch(() => {
-    alert('Something went wrong. Please try again.');
+    alert('Something went wrong. Please try again to place your order.');
   });
 });
 
+// Handle confirm payment button
+document.getElementById("confirmPaymentBtn").addEventListener("click", function () {
+  const txnId = document.getElementById("txnId").value.trim();
+  if (!txnId) {
+    alert("Please enter your UPI Transaction ID.");
+    return;
+  }
+
+  // Send transaction ID to backend for manual verification
+  fetch("verify_payment.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ transactionId: txnId })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      alert("✅ Payment verified! Your order has been placed successfully.");
+      document.getElementById("payment-confirm-section").style.display = "none";
+    } else {
+      alert("❌ Payment not found or not yet received. Please wait a few minutes or try again.");
+    }
+  })
+  .catch(() => {
+    alert("Error verifying payment. Please try again.");
+  });
+});
+
+// Show QR popup for desktop
 function showQRCode(paymentLink) {
-  // Create overlay for QR code popup
   const overlay = document.createElement('div');
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
@@ -104,7 +104,6 @@ function showQRCode(paymentLink) {
   overlay.style.justifyContent = 'center';
   overlay.style.zIndex = '9999';
 
-  // QR code container box
   const qrBox = document.createElement('div');
   qrBox.style.background = '#fff';
   qrBox.style.padding = '20px';
