@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     /* ------------------------------
+       Function: Detect Mobile Device
+    ------------------------------ */
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+    }
+
+    /* ------------------------------
        Header Navigation
     ------------------------------ */
     document.getElementById('home-page')?.addEventListener('click', () => {
@@ -35,21 +42,42 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = 'contact.html';
     });
 
+    /* ------------------------------
+       Instagram Link (Footer)
+    ------------------------------ */
     document.getElementById('insta')?.addEventListener('click', (e) => {
         e.preventDefault();
-        window.open(
-            'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==',
-            '_blank'
-        );
+
+        if (isMobile()) {
+            // Try opening Instagram app
+            window.location.href = "instagram://user?username=kidtivity.in";
+            // Fallback to website if app not available
+            setTimeout(() => {
+                window.location.href = "https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==";
+            }, 1000);
+        } else {
+            // Desktop: open in new tab
+            window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
+        }
     });
 
-    // ✅ WhatsApp link in footer
+    /* ------------------------------
+       WhatsApp Link (Footer)
+    ------------------------------ */
     document.getElementById('WhatsApp')?.addEventListener('click', (e) => {
         e.preventDefault();
-        window.open(
-            'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t',
-            '_blank'
-        );
+
+        if (isMobile()) {
+            // Try opening WhatsApp group in app
+            window.location.href = "whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI";
+            // Fallback to WhatsApp web
+            setTimeout(() => {
+                window.location.href = "https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t";
+            }, 1000);
+        } else {
+            // Desktop: open in new tab
+            window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+        }
     });
 
     /* ------------------------------
@@ -65,10 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
             let priceText = card.querySelector(".price")?.textContent.trim() || "";
             let price = priceText.replace(/[^\d.]/g, ""); // numbers only
 
-            // ✅ Get the hidden description text
+            // Get the hidden description text
             let productDescription = card.querySelector("#description")?.textContent.trim() || "";
 
-            // ✅ Save all data to localStorage
+            // Save all data to localStorage
             localStorage.setItem("selectedProduct", JSON.stringify({
                 name: productName,
                 price: price,
