@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
     window.open('https://www.instagram.com/kidtivitybox?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
   });
 
+  document.getElementById('WhatsApp').addEventListener('click', function(e) {
+  e.preventDefault(); // stop default empty link
+  window.open('https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t', '_blank');
+});
+
+
   // Join Us Button
   const joinUsBtn = document.getElementById('joinUsBtn');
   if (joinUsBtn) {
