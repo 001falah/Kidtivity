@@ -1,3 +1,6 @@
+/* ==============================
+   1. ROOT VARIABLES
+   ============================== */
 :root {
   --purple: #66058f;
   --accent: #343440;
@@ -7,12 +10,26 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
+/* ==============================
+   2. BASE STYLES
+   ============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: var(--white);
   font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
   color: var(--purple);
   overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .container {
@@ -24,9 +41,11 @@ body {
   border-radius: 16px;
   overflow: hidden;
   padding: 0 16px;
-  box-sizing: border-box;
 }
-/* Header */
+
+/* ==============================
+   3. HEADER
+   ============================== */
 header {
   display: flex;
   align-items: center;
@@ -73,21 +92,21 @@ header nav a:hover {
 .cart-icon:focus {
   color: var(--accent);
   transform: scale(1.12);
-  outline: none;
 }
-
 .cart-icon:active {
   color: #f732e3;
   transform: scale(0.97);
 }
 
-/* Hero Section */
+/* ==============================
+   4. HERO SECTION
+   ============================== */
 .hero {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background: var(--white);
   padding: 38px 32px;
+  background: var(--white);
 }
 
 .hero-content {
@@ -97,14 +116,14 @@ header nav a:hover {
 
 .hero-content h1 {
   color: var(--purple);
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   font-size: 2.5em;
   font-weight: bold;
 }
 
 .hero-content p {
   font-size: 1.2em;
-  margin: 0 0 16px;
+  margin-bottom: 16px;
 }
 
 .hero-buttons {
@@ -114,11 +133,11 @@ header nav a:hover {
 .join-us,
 .watch-btn {
   padding: 10px 26px;
-  border: none;
   border-radius: 22px;
   font-weight: 600;
   font-size: 1em;
   cursor: pointer;
+  border: none;
   transition: background .15s;
 }
 
@@ -131,7 +150,6 @@ header nav a:hover {
 
 .join-us:hover {
   background: var(--accent);
-  color: var(--white);
 }
 
 .watch-btn {
@@ -147,21 +165,22 @@ header nav a:hover {
   flex: 1;
   text-align: right;
   min-width: 240px;
+  padding: 0 100px;
 }
 
 .hero-image img {
   max-width: 400px;
-  height: auto;
   border-radius: 14px;
 }
 
-/* Purple background section */
+/* ==============================
+   5. INFO BUBBLES
+   ============================== */
 .purple-bg {
   background: var(--purple);
   color: var(--yellow);
 }
 
-/* Info bubbles */
 .info-bubbles {
   display: flex;
   justify-content: space-around;
@@ -172,29 +191,34 @@ header nav a:hover {
 }
 
 .bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   flex: 1 1 120px;
   max-width: 180px;
-  margin: 0 10px;
 }
 
 .bubble-icon {
   display: block;
-  margin: 0 auto 12px;
+  margin: 0 auto 12px auto;
   width: 80px;
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  margin-bottom: 12px;
 }
 
 .bubble p {
   color: white;
-  font-size: 1.2em;
+  font-size: 0.9em;
   font-weight: 600;
 }
 
-/* How it works section */
+/* ==============================
+   6. HOW IT WORKS
+   ============================== */
 .how-it-works {
   background: var(--white);
   color: var(--purple);
@@ -210,43 +234,42 @@ header nav a:hover {
 
 .hiw-steps {
   display: flex;
-  flex-wrap: nowrap;
   justify-content: center;
   gap: 24px;
   padding: 0 16px;
+  flex-wrap: nowrap;
 }
 
 .hiw-step {
-  flex: 1 1 100%;
   max-width: 280px;
   min-width: 200px;
-  box-sizing: border-box;
   text-align: center;
   margin: 0 auto;
 }
 
 .hiw-icon-img {
-  display: block;
-  margin: 0 auto 12px;
   width: 180px;
   height: 180px;
   border-radius: 14px;
   object-fit: contain;
   box-shadow: 0 2px 8px rgba(255, 239, 31, 0.18);
+  margin-bottom: 12px;
 }
 
 .hiw-step p {
   font-size: 0.9em;
   font-weight: 500;
-  margin: 0 auto;
   max-width: 90%;
+  margin: 0 auto;
 }
 
-/* Shop section */
+/* ==============================
+   7. SHOP SECTION
+   ============================== */
 .shop-section {
-  padding: 32px 16px 70px 16px;
+  padding: 32px 16px 70px;
   text-align: center;
-  background: var(--purple); /* keep purple background */
+  background: var(--purple);
   color: var(--yellow);
 }
 
@@ -263,14 +286,13 @@ header nav a:hover {
 }
 
 .shop-item {
+  position: relative;
   border-radius: 14px;
-  padding: 18px 26px;
+  padding: 18px 26px 60px;
   flex: 1 1 280px;
   max-width: 320px;
   text-align: center;
-  text-decoration: none;
-  transition: transform 0.15s, box-shadow 0.15s;
-  padding-bottom: 20px;
+  transition: 0.15s;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -283,19 +305,9 @@ header nav a:hover {
 }
 
 .shop-item ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  text-align: left;
-  font-size: 0.9em;
-  margin-top: 8px;
-  color: #fff; /* adjust if needed */
-}
-
-/* Change bullets to ticks for lists inside cards */
-.shop-item ul {
-  list-style: none; /* Remove default bullets */
+  list-style: none;
   padding: 0;
-  margin: 10px 0 16px 0;
+  margin: 10px 0 16px;
   font-size: 0.95em;
   text-align: left;
   color: var(--white);
@@ -303,7 +315,7 @@ header nav a:hover {
 
 .shop-item ul li {
   position: relative;
-  padding-left: 22px; /* Space for tick */
+  padding-left: 22px;
   margin-bottom: 8px;
   line-height: 1.4em;
 }
@@ -314,22 +326,37 @@ header nav a:hover {
   left: 0;
   top: 2px;
   font-size: 0.9em;
-  color: var(--yellow); /* Tick color for purple cards */
+  color: var(--yellow);
 }
 
-/* Tick color for yellow theme cards */
-.shop-yellow ul li::before,
-.simple-card2::before {
+.shop-yellow ul li::before {
   color: var(--purple);
 }
 
-/* Shop Button */
+.shop-purple {
+  background: color-mix(in srgb, var(--purple) 80%, white);
+  color: #fff;
+}
 
-/* Shop Buy Button */
+.shop-yellow {
+  background: var(--yellow);
+  color: #fff;
+}
+
+.shop-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+}
+
 .buy-btn {
-  position: static; /* Remove absolute positioning for responsiveness */
   display: inline-block;
-  margin-top: 16px;
   background: var(--yellow);
   color: var(--white);
   border: none;
@@ -339,7 +366,7 @@ header nav a:hover {
   font-size: 0.95em;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: background 0.15s ease, transform 0.12s ease;
+  transition: 0.15s ease;
 }
 
 .buy-btn2 {
@@ -355,55 +382,24 @@ header nav a:hover {
   transform: scale(0.95);
 }
 
-/* Make shop item container relative to position button */
-.shop-item {
-  position: relative;
-  padding-bottom: 60px; /* space so text doesn't overlap button */
-}
-
-/* Purple card derived from base purple */
-.shop-purple {
-  background: color-mix(in srgb, var(--purple) 80%, white);
-  color: #fff;
-}
-
-/* Yellow card */
-.shop-yellow {
-  background: var(--yellow);
-  color: #fff;
-}
-
-.shop-img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.price {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
-  margin: 10px 0;
-}
-
-
-
-/* Testimonial */
+/* ==============================
+   8. TESTIMONIAL
+   ============================== */
 .testimonial {
   background: var(--white);
   padding: 36px 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .testimonial-avatar {
-  display: inline-block;
   width: 120px;
   height: 120px;
-  background: var(--white);
   border-radius: 50%;
-  margin-bottom: 8px;
-  vertical-align: middle;
+  margin: 0 auto 8px auto;
+  display: block;
 }
 
 .stars {
@@ -416,17 +412,18 @@ blockquote {
   color: var(--purple);
   font-size: 1.08em;
   font-style: italic;
-  margin: 0;
 }
 
-/* Footer */
+/* ==============================
+   9. FOOTER
+   ============================== */
 footer {
   background: var(--white);
   color: var(--purple);
   text-align: center;
   padding: 22px 0;
   border-top: 1px solid #eedaf5;
-  font-size: .98em;
+  font-size: 0.98em;
 }
 
 footer nav a {
@@ -440,215 +437,109 @@ footer nav a:hover {
   color: var(--accent);
 }
 
-/* Responsive Design */
+/* ==============================
+   10. RESPONSIVE MEDIA QUERIES
+   ============================== */
 @media (max-width: 1024px) {
-  .hero-image img {
-    max-width: 300px;
-  }
-
-  .join-us,
-  .watch-btn {
-    font-size: 0.9em;
-    padding: 8px 20px;
-  }
-
-  .info-bubbles {
-    padding: 30px 15px;
-  }
-
-  .bubble {
-    max-width: 130px;
-    margin: 0 6px;
-  }
+  .hero-image img { max-width: 300px; }
+  .join-us, .watch-btn { font-size: 0.9em; padding: 8px 20px; }
+  .info-bubbles { padding: 30px 15px; }
+  .bubble { max-width: 130px; }
 }
 
 @media (max-width: 768px) {
+  header { flex-direction: column; gap: 18px; text-align: center; padding: 20px 4px; }
+  .hero { flex-direction: column; text-align: center; padding: 28px 16px; }
+  .hero-image { text-align: center; margin-top: 24px; padding: 0; }
+  .hero-image img { max-width: 240px; }
+  .join-us, .watch-btn { width: 100%; margin-bottom: 12px; }
+  .info-bubbles, .hiw-steps { flex-direction: column; align-items: center; gap: 28px; padding: 30px 12px; }
+  .hiw-step { max-width: 90%; }
+  .shop-items { flex-direction: column; align-items: center; }
+  .shop-item { width: 100%; max-width: 300px; }
+  .buy-btn { width: 100%; padding: 12px 0; font-size: 1em; margin-top: auto; }
+}
+
+@media (max-width: 500px) {
+  header { flex-direction: column; align-items: center; padding: 12px 0; gap: 10px; }
+  .logo-img { height: 36px; }
+  header nav { display: flex; gap: 12px; flex-wrap: nowrap; justify-content: center; }
+  header nav a { font-size: 0.9em; white-space: nowrap; }
+  .cart-icon { font-size: 1.4em; }
+}
+
+/* FINAL MERGED FIX FOR BELOW 400px */
+@media (max-width: 400px) {
+  /* HEADER */
   header {
     flex-direction: column;
-    gap: 18px;
-    padding: 20px 4px;
-    text-align: center; 
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0;
+    text-align: center;
+  }
+  .logo-img {
+    height: 30px;
+    width: auto;
+  }
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  header nav a {
+    font-size: 0.8em;
+  }
+  .cart-icon {
+    font-size: 1.1em;
+    margin-left: 0;
   }
 
+  /* HERO */
   .hero {
     flex-direction: column;
     text-align: center;
-    padding: 28px 16px;
+    padding: 16px 10px;
+    gap: 14px;
   }
-
-  .hero-image {
-    text-align: center;
-    margin-top: 24px;
-  }
-
-  .hero-image img {
-    max-width: 240px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.8em;
-  }
-
-  .hero-content p {
-    font-size: 1em;
-  }
-
-  .join-us,
-  .watch-btn {
-    width: 100%;
-    margin-bottom: 12px;
-  }
-
-  .info-bubbles,
-  .hiw-steps {
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    padding: 30px 12px;
-  }
-
-  .hiw-step {
-    max-width: 90%;
-  }
-
-  /* Shop section on mobile */
-  .shop-items {
+  .hero-content {
+    order: 1;
+    flex: 1 1 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
-
-  .shop-item {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .testimonial {
-    padding: 28px 12px;
-  }
-
-  blockquote {
-    font-size: 1em;
-    margin: 0 12px;
-  }
-
-  footer {
-    font-size: 0.9em;
-    padding: 18px 0;
-  }
-
-  footer nav a {
-    margin: 0 8px;
-  }
-}
-
-@media (max-width: 400px) {
   .hero-content h1 {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    line-height: 1.3em;
+    margin-bottom: 6px;
   }
-
   .hero-content p {
-    font-size: 0.9em;
+    font-size: 0.8em;
+    margin-bottom: 8px;
   }
-
   .hero-buttons {
     flex-direction: column;
+    gap: 8px;
+    width: 100%;
   }
-
   .join-us,
   .watch-btn {
-    margin-right: 0;
+    width: 100%;
+    font-size: 0.8em;
+    padding: 6px;
   }
-
-  .bubble-icon {
-    width: 60px;
-    height: 60px;
+  .hero-image {
+    order: 2;
+    padding: 0;
+    display: flex;
+    justify-content: center;
   }
-
-  .bubble p {
-    font-size: 1em;
-  }
-
-  .how-it-works h2 {
-    font-size: 1.4em;
-  }
-
-  .shop-section h2 {
-    font-size: 1.5em;
-  }
-
-  .shop-item {
-    max-width: 300px;
-    padding: 20px 16px;
-  }
-
-  .shop-img {
+  .hero-image img {
+    max-width: 160px;
     border-radius: 8px;
   }
-
-  .testimonial-avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .stars {
-    font-size: 1.1em;
-  }
-
-  blockquote {
-    font-size: 0.9em;
-  }
 }
 
-/* Buy button resposive */
-@media (max-width: 768px) {
-  .buy-btn {
-    width: 100%;       /* Make full-width on smaller screens */
-    padding: 12px 0;
-    font-size: 1em;
-    margin-top: auto;  /* Push to bottom if using flex layout */
-  }
-}
-
-/* Ensure images and videos scale properly */
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
- /* Mobile resposive header */
-@media (max-width: 500px) {
-  header {
-    display: flex;
-    flex-direction: column; /* stack all children vertically */
-    align-items: center;
-    padding: 12px 0; /* adjust padding for consistency */
-    gap: 10px; /* spacing between rows */
-  }
-
-  /* Logo - its own row */
-  .logo-img {
-    height: 36px; /* slightly smaller for mobile but still clear */
-    width: auto;
-    display: block;
-  }
-
-  /* Nav links - second row */
-  header nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /* keep all nav links in one horizontal line */
-    justify-content: center;
-    gap: 12px;
-  }
-
-  header nav a {
-    font-size: 0.9em;
-    white-space: nowrap;
-  }
-
-  /* Cart icon - third row */
-  .cart-icon {
-    font-size: 1.4em;
-  }
-}
