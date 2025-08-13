@@ -10,7 +10,7 @@ function isMobile() {
 }
 
 // ----------------------------
-// Prefill order summary from localStorage
+// Prefill order summary from localStorage + Calculate Total
 // ----------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const productData = JSON.parse(localStorage.getItem("selectedProduct"));
@@ -24,13 +24,30 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".order-prod .prod-info span").innerText = productData.description;
     }
 
-    const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
-    const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
-    const totalElement = document.querySelector(".order-details .total span:last-child");
+    // Define discount as percentage
+    const discountPercent = 10; // Example 10% discount
+    const shippingCharge = 40; // For example ₹40 shipping fee
 
-    if (subtotalElement) subtotalElement.textContent = `₹${productData.price}`;
-    if (discountElement) discountElement.textContent = "₹0";
-    if (totalElement) totalElement.textContent = `₹${productData.price}`;
+    // Clean and parse price to number
+    const subtotal = parseFloat(String(productData.price).replace(/[₹,]/g, "")) || 0;
+
+    // Calculate discount amount as percentage of subtotal
+    const discountValue = (discountPercent / 100) * subtotal;
+
+    // Set amounts in the UI
+    document.getElementById("subtotalAmount").textContent = `₹${subtotal.toFixed(2)}`;
+    document.getElementById("discountAmount").textContent = `${discountPercent}%`;
+    document.getElementById("shippingAmount").textContent = `₹${shippingCharge.toFixed(2)}`;
+
+    // Calculate final total: subtotal - discount + shipping
+    const calculatedTotal = subtotal - discountValue + shippingCharge;
+
+    document.getElementById("totalAmount").textContent = `₹${calculatedTotal.toFixed(2)}`;
+
+    console.log(`Subtotal: ₹${subtotal}`);
+    console.log(`Discount (${discountPercent}%): ₹${discountValue}`);
+    console.log(`Shipping: ₹${shippingCharge}`);
+    console.log(`Total: ₹${calculatedTotal}`);
   }
 });
 
@@ -42,8 +59,7 @@ form.addEventListener('submit', function (event) {
 
   // Get product details from the order summary
   const productName = document.querySelector(".order-prod .prod-info b").innerText;
-  const totalElement = document.querySelector('.order-details .total span:last-child');
-  const amountText = totalElement ? totalElement.textContent.replace(/[^\d.]/g, '') : '0';
+  const amountText = document.getElementById("totalAmount").textContent.replace(/[^\d.]/g, '');
   const amount = parseFloat(amountText) || 0;
 
   // Fill hidden fields
@@ -152,52 +168,49 @@ function showQRCode(paymentLink) {
   document.body.appendChild(overlay);
 }
 
-
-// Redirecting
+// ----------------------------
+// Navigation redirects
+// ----------------------------
 document.addEventListener("DOMContentLoaded", function () {
-    // ---------- HEADER LINKS ----------
-    document.getElementById("homepage").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "index.html";
-    });
+  // HEADER LINKS
+  document.getElementById("homepage").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "index.html";
+  });
 
-    document.getElementById("shopLink").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "shop.html";
-    });
+  document.getElementById("shopLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "shop.html";
+  });
 
-    document.getElementById("aboutpage").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "about.html";
-    });
+  document.getElementById("aboutpage").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "about.html";
+  });
 
-    // ⚠ NOTE: There are two "contact" IDs in your HTML — one in header and one in footer.
-    // This will pick the first one unless we target separately. 
-    // Better give them unique IDs for clarity, e.g., contactHeader & contactFooter
-    document.querySelector("header #contact").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "contact.html";
-    });
+  document.querySelector("header #contact").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "contact.html";
+  });
 
-    // ---------- FOOTER LINKS ----------
-    document.getElementById("about").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "about.html";
-    });
+  // FOOTER LINKS
+  document.getElementById("about").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "about.html";
+  });
 
-    document.querySelector("footer #contact").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "contact.html";
-    });
+  document.querySelector("footer #contact").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "contact.html";
+  });
 
-    document.getElementById("insta").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
-    });
+  document.getElementById("insta").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
+  });
 
-    document.getElementById("WhatsApp").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
-    });
+  document.getElementById("WhatsApp").addEventListener("click", function (e) {
+    e.preventDefault();
+    window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+  });
 });
-
