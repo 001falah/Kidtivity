@@ -128,7 +128,7 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
         // Redirect to homepage after 3 seconds
         setTimeout(() => {
             window.location.href = "index.html";
-        }, 3000);
+        }, 2000);
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
