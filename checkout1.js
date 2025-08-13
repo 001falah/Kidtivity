@@ -10,24 +10,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const productData = JSON.parse(localStorage.getItem("selectedProduct"));
 
   if (productData && productData.name && productData.image) {
-    // Fill image & name
+    // Image & name
     document.querySelector(".order-prod img").src = productData.image;
     document.querySelector(".order-prod img").alt = productData.name;
     document.querySelector(".order-prod .prod-info b").innerText = productData.name;
 
-    // ✅ Fill description from localStorage
+    // ✅ Set description if available
     if (productData.description) {
       document.querySelector(".order-prod .prod-info span").innerText = productData.description;
     }
 
-    // Prices
+    // Pricing
     const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
     const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
     const totalElement = document.querySelector(".order-details .total span:last-child");
 
-    if (subtotalElement) subtotalElement.textContent = productData.price;
+    if (subtotalElement) subtotalElement.textContent = `₹${productData.price}`;
     if (discountElement) discountElement.textContent = "-₹0";
-    if (totalElement) totalElement.textContent = productData.price;
+    if (totalElement) totalElement.textContent = `₹${productData.price}`;
   }
 });
 
@@ -46,13 +46,13 @@ form.addEventListener('submit', function (event) {
     // 2. Payment link
     const totalElement = document.querySelector('.order-details .total span:last-child');
     const amountText = totalElement ? totalElement.textContent.replace(/[^\d.]/g, '') : '0';
-    const amount = parseFloat(amountText);
+    const amount = parseFloat(amountText) || 0;
 
     const upiId = 'falah07mohammed@oksbi';
     const name = 'Kidtivity';
     const gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
 
-    // 3. Open payment method
+    // 3. Payment prompt
     if (isMobile()) {
       alert("Please complete your payment and then confirm it below.");
       window.location.href = gpayUrl;
@@ -61,7 +61,7 @@ form.addEventListener('submit', function (event) {
       alert("Please scan and pay, then confirm your payment below.");
     }
 
-    // 4. Reset form & show confirm payment block
+    // 4. Reset form & show Confirm Payment
     form.reset();
     document.getElementById("payment-confirm-section").style.display = "block";
   })
@@ -135,3 +135,4 @@ function showQRCode(paymentLink) {
   overlay.appendChild(qrBox);
   document.body.appendChild(overlay);
 }
+

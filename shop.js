@@ -53,25 +53,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ------------------------------
-       BUY NOW Buttons — Dynamic Product Transfer
+       BUY NOW Buttons — Save product info + description
     ------------------------------ */
     document.querySelectorAll(".simple-card").forEach(card => {
         let buyBtn = card.querySelector("button");
-
         if (!buyBtn) return; // safety check
 
         buyBtn.addEventListener("click", function () {
             let productName = card.querySelector("h3")?.textContent.trim() || "";
             let productImg = card.querySelector("img")?.getAttribute("src") || "";
             let priceText = card.querySelector(".price")?.textContent.trim() || "";
-            let price = priceText.replace(/[^\d.]/g, "");
+            let price = priceText.replace(/[^\d.]/g, ""); // numbers only
 
+            // ✅ Get the hidden description text
+            let productDescription = card.querySelector("#description")?.textContent.trim() || "";
+
+            // ✅ Save all data to localStorage
             localStorage.setItem("selectedProduct", JSON.stringify({
                 name: productName,
                 price: price,
-                image: productImg
+                image: productImg,
+                description: productDescription
             }));
 
+            // Redirect to checkout page
             window.location.href = "checkout1.html";
         });
     });
