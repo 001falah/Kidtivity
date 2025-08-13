@@ -102,13 +102,13 @@ form.addEventListener('submit', e => {
   e.preventDefault();
 
   // Show a loading message while sending
-  messageBox.style.color = 'blue';
+  messageBox.style.color = '#ffc107';
   messageBox.textContent = 'Sending message...';
 
   fetch(scriptURL, { method: 'POST', body: new FormData(form) })
     .then(response => {
       if (response.ok) {
-        messageBox.style.color = 'green';
+        messageBox.style.color = '#ffc107';
         messageBox.textContent = '✅ Message sent successfully! We will contact you soon.';
         form.reset();
       } else {
