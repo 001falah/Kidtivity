@@ -136,7 +136,7 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
 
         setTimeout(() => {
             window.location.href = "index.html";
-        }, 250);
+        }, 1000);
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
