@@ -1,5 +1,6 @@
-// Reference to form
+// Reference to form and message container
 const form = document.getElementById('gform');
+const formStatusMessage = document.getElementById('formStatusMessage');
 
 // Google Apps Script Web App URL
 const googleScriptURL = "https://script.google.com/macros/s/AKfycbyeiPdjyVdyVaZzuZnHodbMWX3QSLuuHu5lI2nZR2PPoe-WOKIxQRm6xicEFBDPW7Vd-A/exec";
@@ -25,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Define discount as percentage
-    const discountPercent = 10; // Example 10% discount
-    const shippingCharge = 40; // For example ₹40 shipping fee
+    const discountPercent = 10; // Example: 10% discount
+    const shippingCharge = 40;  // Example: ₹40 shipping fee
 
     // Clean and parse price to number
     const subtotal = parseFloat(String(productData.price).replace(/[₹,]/g, "")) || 0;
@@ -57,6 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 form.addEventListener('submit', function (event) {
   event.preventDefault();
 
+  // Show loading message while sending
+  formStatusMessage.style.color = 'blue';
+  formStatusMessage.textContent = '⏳ Sending message, please wait...';
+
   // Get product details from the order summary
   const productName = document.querySelector(".order-prod .prod-info b").innerText;
   const amountText = document.getElementById("totalAmount").textContent.replace(/[^\d.]/g, '');
@@ -73,26 +78,30 @@ form.addEventListener('submit', function (event) {
   fetch(googleScriptURL, {
     method: 'POST',
     body: formData,
-    mode: 'no-cors'
+    mode: 'no-cors' // no-cors used since Google Apps Script web app does not support CORS preflight
   })
   .then(() => {
+    formStatusMessage.style.color = '#ffc107';
+    formStatusMessage.textContent = '✅  Please proceed with the payment. After payment fill the Transaction Id below';
+
     const upiId = 'falah07mohammed@oksbi';
     const name = 'Kidtivity';
     const gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
 
     if (isMobile()) {
-      alert("Please complete your payment and then confirm it below.");
+      // On mobile, redirect to UPI app
       window.location.href = gpayUrl;
     } else {
+      // On desktop, show QR code popup
       showQRCode(gpayUrl);
-      alert("Please scan and pay, then confirm your payment below.");
     }
 
     // Show payment confirmation section
     document.getElementById("payment-confirm-section").style.display = "block";
   })
   .catch(() => {
-    alert('Something went wrong. Please try again to place your order.');
+    formStatusMessage.style.color = 'red';
+    formStatusMessage.textContent = '❌ Something went wrong. Please try again .';
   });
 });
 
@@ -101,8 +110,10 @@ form.addEventListener('submit', function (event) {
 // ----------------------------
 document.getElementById("confirmPaymentBtn").addEventListener("click", function () {
   const txnId = document.getElementById("txnId").value.trim();
+
   if (!txnId) {
-    alert("Please enter your UPI Transaction ID.");
+    formStatusMessage.style.color = 'red';
+    formStatusMessage.textContent = '⚠️ Please enter your UPI Transaction ID before confirming payment.';
     return;
   }
 
@@ -112,18 +123,23 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
   // Create form data again with UPI Transaction ID
   const formData = new FormData(form);
 
+  formStatusMessage.style.color = 'blue';
+  formStatusMessage.textContent = '⏳ Verifying payment, please wait...';
+
   fetch(googleScriptURL, {
     method: "POST",
     body: formData,
     mode: 'no-cors'
   })
   .then(() => {
-    alert("✅ Payment verified and recorded successfully in Google Sheet!");
+    formStatusMessage.style.color = '#ffc107';
+    formStatusMessage.textContent = '✅ Payment verified and recorded successfully! Thank you for your order.';
     document.getElementById("payment-confirm-section").style.display = "none";
     form.reset();
   })
   .catch(() => {
-    alert("Error verifying payment. Please try again.");
+    formStatusMessage.style.color = 'red';
+    formStatusMessage.textContent = '❌ Error verifying payment. Please try again.';
   });
 });
 

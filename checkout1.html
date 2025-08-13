@@ -116,6 +116,7 @@
           <input type="hidden" id="transactionId" name="transactionId" />
 
           <button type="submit" class="pay-btn">Place Order</button>
+          <div id="formStatusMessage" style="margin-top: 10px; font-weight: bold;"></div>
           <div class="secure-checkout">
             <i class="fas fa-lock"></i> Secure Checkout
           </div>
@@ -127,7 +128,7 @@
           <p>After completing your UPI payment, please enter your Transaction/Reference ID below so we can verify and confirm your order.</p>
           <input type="text" id="txnId" placeholder="Enter UPI Transaction ID" style="padding:8px; width:80%; max-width:300px;">
           <br><br>
-          <button id="confirmPaymentBtn" style="padding:10px 20px; cursor:pointer;">Confirm Payment</button>
+          <button id="confirmPaymentBtn" style="padding:10px 20px; cursor:pointer; ">Confirm Payment</button>
         </div>
       </section>
     </main>
