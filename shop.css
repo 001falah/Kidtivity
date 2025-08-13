@@ -1,3 +1,6 @@
+/* =====================================================
+   1. IMPORTS & VARIABLES
+   ===================================================== */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 :root {
@@ -9,15 +12,32 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
-/* Base Styles */
+/* =====================================================
+   2. BASE STYLES
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: var(--white);
   font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
   color: var(--purple);
   overflow-x: hidden;
+  line-height: 1.5;
 }
 
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =====================================================
+   3. CONTAINER
+   ===================================================== */
 .container {
   max-width: 100%;
   width: 100%;
@@ -27,10 +47,11 @@ body {
   border-radius: 16px;
   overflow: hidden;
   padding: 0 16px;
-  box-sizing: border-box;
 }
 
-/* Header */
+/* =====================================================
+   4. HEADER (Same as index.css)
+   ===================================================== */
 header {
   display: flex;
   align-items: center;
@@ -50,7 +71,6 @@ header {
 .logo-img {
   height: 40px;
   width: auto;
-  display: block;
 }
 
 header nav a {
@@ -85,7 +105,9 @@ header nav a:hover {
   transform: scale(0.97);
 }
 
-/* Footer */
+/* =====================================================
+   5. FOOTER (Same as index.css)
+   ===================================================== */
 footer {
   background: var(--white);
   color: var(--purple);
@@ -107,10 +129,11 @@ footer nav a:hover {
   color: var(--accent);
 }
 
-/* Shop Section */
+/* =====================================================
+   6. SHOP PAGE LAYOUT
+   ===================================================== */
 .shop-main {
   padding: 32px 32px 48px;
-  box-sizing: border-box;
 }
 
 .shop-row {
@@ -126,13 +149,14 @@ footer nav a:hover {
   text-align: center;
 }
 
-/* Product Cards */
+/* =====================================================
+   7. PRODUCT CARDS
+   ===================================================== */
 .simple-card-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 16px;
 }
 
 .simple-card {
@@ -140,23 +164,21 @@ footer nav a:hover {
   border-radius: 16px;
   box-shadow: var(--box-shadow);
   max-width: 340px;
-  min-width: 200px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.18s, color 0.18s;
-  box-sizing: border-box;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .simple-card2 {
   background-color: var(--yellow);
 }
+
 .simple-card:hover {
   transform: translateY(-6px) scale(1.035);
   box-shadow: 0 10px 30px rgba(241, 17, 241, 0.12);
-  color: var(--yellow);
 }
 
 .simple-card img {
@@ -166,14 +188,8 @@ footer nav a:hover {
   object-fit: cover;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, rgba(241, 17, 241, 0.09), rgba(255, 193, 7, 0.08));
-  box-shadow: 0 8px 24px 0 rgba(241, 17, 241, 0.13);
+  box-shadow: 0 8px 24px rgba(241, 17, 241, 0.13);
   padding: 6px;
-}
-
-.simple-card:hover h3,
-.simple-card:hover p,
-.simple-card:hover .tag {
-  color: var(--white);
 }
 
 .simple-card-info {
@@ -183,60 +199,41 @@ footer nav a:hover {
 
 .simple-card-info h3 {
   color: var(--white);
-  margin: 0 0 0.25rem 0;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
-  transition: color 0.18s;
 }
 
-/* List Styling for Product Features */
 .simple-card-info ul {
-  list-style: none; /* remove default bullets */
+  list-style: none;
   padding: 0;
-  margin: 10px 0 16px 0;
+  margin: 10px 0 16px;
   color: var(--white);
   font-size: 0.95em;
-  text-align: left; /* align left for better readability */
+  text-align: left;
 }
 
 .simple-card-info ul li {
   position: relative;
-  padding-left: 22px; /* space for custom bullet */
+  padding-left: 22px;
   margin-bottom: 8px;
-  line-height: 1.4em;
 }
 
-/* Custom bullet icon */
 .simple-card-info ul li::before {
-  content: "✔"; /* or use • for dot */
+  content: "✔";
   position: absolute;
   left: 0;
-  color: var(--yellow); /* highlight color */
+  color: var(--yellow);
   font-size: 0.9em;
-  top: 2px;
 }
 
 .simple-card2 .simple-card-info ul li::before {
-  color: var(--purple); /* invert for yellow card */
+  color: var(--purple);
 }
-
-
-/*.tag {
-  color: var(--white);
-  background: var(--purple);
-  padding: 2px 9px;
-  border-radius: 9px;
-  font-weight: 600;
-  font-size: 0.85em;
-  margin-bottom: 9px;
-  display: inline-block;
-  transition: color 0.18s;
-} */
 
 .simple-card-info p {
   color: var(--white);
   font-size: 0.95em;
-  margin: 10px 0 16px 0;
-  transition: color 0.18s;
+  margin: 10px 0 16px;
 }
 
 .simple-buy-row {
@@ -244,7 +241,6 @@ footer nav a:hover {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-top: 6px;
   flex-wrap: wrap;
 }
 
@@ -256,7 +252,6 @@ footer nav a:hover {
   border-radius: 8px;
   font-size: 1em;
   box-shadow: 0 1.5px 6px #ffd6f899;
-  transition: color 0.18s;
 }
 
 button {
@@ -268,7 +263,6 @@ button {
   border: none;
   background: var(--yellow);
   color: var(--white);
-  box-shadow: 0 2px 10px #ffd6f899;
   cursor: pointer;
   transition: background 0.18s, transform 0.18s;
 }
@@ -281,120 +275,53 @@ button:hover {
 .simple-card2 button {
   background-color: var(--purple);
 }
-/* Responsive Media Queries */
+
+/* =====================================================
+   8. RESPONSIVE MEDIA QUERIES
+   ===================================================== */
 @media (max-width: 900px) {
-  .container {
-    margin: 18px auto;
-  }
-  .shop-main {
-    padding: 22px 12px 32px;
-  }
+  .container { margin: 18px auto; }
+  .shop-main { padding: 22px 12px 32px; }
 }
 
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 18px;
-  }
-  .hero,
-  .info-bubbles,
-  .shop-items,
-  .hiw-steps {
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    text-align: center;
-  }
+  header { flex-direction: column; gap: 18px; }
+  .simple-card-row { justify-content: center; }
 }
 
 @media (max-width: 650px) {
-  .simple-card-row {
-    flex-direction: column;
-    gap: 18px;
-  }
-  .simple-card {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-  .shop-row h2 {
-    font-size: 1.4rem;
-  }
+  .simple-card-row { flex-direction: column; gap: 18px; }
+  .simple-card { max-width: 90%; margin: 0 auto; }
+  .shop-row h2 { font-size: 1.4rem; }
 }
 
-@media (max-width: 480px) {
-  .shop-row h2 {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  header nav a {
-    font-size: 0.9rem;
-    margin: 4px 10px;
-  }
-  .simple-card {
-    padding: 0.8rem;
-  }
-  .simple-card img {
-    width: 200px;
-    height: 150px;
-  }
-  .simple-buy-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-  button {
-    padding: 6px 14px;
-    font-size: 0.9rem;
-  }
-  .price {
-    font-size: 0.9rem;
-  }
-}
-
-/* Responsive tweaks for smaller screens */
-@media (max-width: 480px) {
-  .simple-card-info ul {
-    font-size: 0.88em;
-  }
-  .simple-card-info ul li {
-    padding-left: 18px;
-    margin-bottom: 6px;
-  }
-}
-
- /* Mobile resposive header */
 @media (max-width: 500px) {
-  header {
-    display: flex;
-    flex-direction: column; /* stack all children vertically */
-    align-items: center;
-    padding: 12px 0; /* adjust padding for consistency */
-    gap: 10px; /* spacing between rows */
-  }
-
-  /* Logo - its own row */
-  .logo-img {
-    height: 36px; /* slightly smaller for mobile but still clear */
-    width: auto;
-    display: block;
-  }
-
-  /* Nav links - second row */
-  header nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /* keep all nav links in one horizontal line */
-    justify-content: center;
-    gap: 12px;
-  }
-
-  header nav a {
-    font-size: 0.9em;
-    white-space: nowrap;
-  }
-
-  /* Cart icon - third row */
-  .cart-icon {
-    font-size: 1.4em;
-  }
+  header { flex-direction: column; align-items: center; padding: 12px 0; gap: 10px; }
+  .logo-img { height: 36px; }
+  header nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  header nav a { font-size: 0.9em; }
+  .cart-icon { font-size: 1.4em; }
 }
+
+@media (max-width: 480px) {
+  .shop-row h2 { font-size: 1.2rem; }
+  header nav a { font-size: 0.9rem; margin: 4px 10px; }
+  .simple-card { padding: 0.8rem; }
+  .simple-card img { width: 180px; height: 140px; }
+  .simple-buy-row { flex-direction: column; gap: 8px; }
+  button { padding: 6px 14px; font-size: 0.9rem; }
+  .price { font-size: 0.9rem; }
+  .simple-card-info ul { font-size: 0.88em; }
+  .simple-card-info ul li { padding-left: 18px; }
+}
+
+@media (max-width: 400px) {
+  header { gap: 6px; padding: 8px 0; }
+  .logo-img { height: 30px; }
+  header nav a { font-size: 0.8em; }
+  .cart-icon { font-size: 1.1em; }
+  .simple-card { max-width: 95%; }
+  .simple-card img { width: 150px; height: 120px; }
+  .shop-row h2 { font-size: 1.1rem; }
+}
+
