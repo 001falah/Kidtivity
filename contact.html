@@ -22,6 +22,81 @@
       </nav>
  <i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i>
     </header>
+  <main class="contact-container">
+    <section class="contact-header">
+      <h1>Contact Us</h1>
+      <p>Any question or remarks? Just write us a message!</p>
+    </section>
+    <section class="contact-wrapper">
+      <!-- Left: Contact Info -->
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        <p>Fill up the form and our Team will get back to you within 24 hours.</p>
+        <ul>
+          <li>
+            <i class="fas fa-phone"></i>
+            +0123 4567 8910
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            hello@flowbase.com
+          </li>
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            102 Street 2714 Don
+          </li>
+        </ul>
+        <div class="contact-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="shapes">
+          <span class="circle"></span>
+          <span class="circle small"></span>
+        </div>
+      </div>
+      <!-- Right: Contact Form -->
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="input-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="input-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-group full">
+            <label for="email">Mail</label>
+            <input type="email" id="email" name="email" value="ersadwork@gmail.com" required>
+          </div>
+          <div class="input-group full">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" value="+90 543 779 94 64" required>
+          </div>
+        </div>
+        <div class="input-group full">
+          <label>What the of website do you need?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="website_type" value="web-design"> Web Design</label>
+            <label><input type="radio" name="website_type" value="web-dev" checked> Web Development</label>
+            <label><input type="radio" name="website_type" value="logo"> Logo Design</label>
+            <label><input type="radio" name="website_type" value="other"> Other</label>
+          </div>
+        </div>
+        <div class="input-group full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message..." rows="3"></textarea>
+        </div>
+        <button class="send-btn" type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
   <!-- Footer -->
     <footer>
       <nav>
@@ -35,4 +110,5 @@
     </footer>
 <script src="script.js"></script>
 </body>
+
 </html>
