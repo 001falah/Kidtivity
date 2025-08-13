@@ -191,7 +191,7 @@ header nav a:hover {
 
 .checkout-form input:focus,
 .checkout-form select:focus {
-  border-color: var(--magenta);
+  border-color: var(--yellow);
   outline: none;
   box-shadow: 0 1px 8px #f111f144;
 }
@@ -256,7 +256,7 @@ button.pay-btn:hover {
 }
 
 #confirmPaymentBtn:hover {
-  background: var(--magenta);
+  background: var(--yellow);
 }
 
 /* Footer */
