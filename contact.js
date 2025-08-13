@@ -1,6 +1,27 @@
-// ----------------------
+// ======================
+// Helper: Device Detection
+// ======================
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+// ======================
+// Helper: Social Link Handler
+// ======================
+function handleSocialClick(event, url) {
+    event.preventDefault();
+    if (isMobileDevice()) {
+        // On mobile → open directly (letting the app open if installed)
+        window.location.href = url;
+    } else {
+        // On desktop/laptop → open in new tab
+        window.open(url, "_blank");
+    }
+}
+
+// ======================
 // HEADER NAVIGATION
-// ----------------------
+// ======================
 document.getElementById("home-page").addEventListener("click", function (event) {
     event.preventDefault();
     window.location.href = "index.html";
@@ -16,7 +37,7 @@ document.getElementById("aboutpage").addEventListener("click", function (event) 
     window.location.href = "about.html";
 });
 
-// Contact links (header & footer) — all share .contact-link class
+// Contact links (header & footer) — share .contact-link class
 document.querySelectorAll(".contact-link").forEach(link => {
     link.addEventListener("click", function (event) {
         event.preventDefault();
@@ -24,62 +45,50 @@ document.querySelectorAll(".contact-link").forEach(link => {
     });
 });
 
-// ----------------------
+// ======================
 // CART ICON
-// ----------------------
+// ======================
 document.getElementById("cartIcon").addEventListener("click", function () {
     window.location.href = "shop.html";
 });
 
-// ----------------------
+// ======================
 // FOOTER LINKS
-// ----------------------
+// ======================
 document.getElementById("about").addEventListener("click", function (event) {
     event.preventDefault();
     window.location.href = "about.html";
 });
 
 document.getElementById("insta").addEventListener("click", function (event) {
-    event.preventDefault();
-    window.open("https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==", "_blank");
+    handleSocialClick(event, "https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==");
 });
 
 document.getElementById("WhatsApp").addEventListener("click", function (event) {
-    event.preventDefault();
-    window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+    handleSocialClick(event, "https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t");
 });
 
-// ----------------------
+// ======================
 // CONTACT SOCIAL ICON LINKS
-// ----------------------
+// ======================
 
-// Facebook (placeholder URL for now)
+// Facebook (placeholder — replace with your real link)
 document.getElementById("socialFacebook").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open("https://www.facebook.com/", "_blank"); // Replace with your real Facebook link later
+    handleSocialClick(event, "https://www.facebook.com/");
 });
 
-// Twitter (placeholder URL for now)
+// Twitter (placeholder — replace with your real link)
 document.getElementById("socialTwitter").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open("https://twitter.com/", "_blank"); // Replace with your real Twitter link later
+    handleSocialClick(event, "https://twitter.com/");
 });
 
 // Instagram
 document.getElementById("socialInstagram").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open(
-        "https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==",
-        "_blank"
-    );
+    handleSocialClick(event, "https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==");
 });
 
 // WhatsApp
 document.getElementById("socialWhatsapp").addEventListener("click", function(event) {
-    event.preventDefault();
-    window.open(
-        "https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t",
-        "_blank"
-    );
+    handleSocialClick(event, "https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t");
 });
 
