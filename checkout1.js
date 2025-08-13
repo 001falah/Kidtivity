@@ -156,7 +156,7 @@ function showQRCode(paymentLink) {
 // Redirecting
 document.addEventListener("DOMContentLoaded", function () {
     // ---------- HEADER LINKS ----------
-    document.getElementById("home-page").addEventListener("click", function (e) {
+    document.getElementById("homepage").addEventListener("click", function (e) {
         e.preventDefault();
         window.location.href = "index.html";
     });
