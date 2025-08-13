@@ -135,7 +135,7 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
         // Redirect after 3 seconds
         setTimeout(() => {
             window.location.href = "index.html";
-        }, 3000);
+        }, 100);
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
