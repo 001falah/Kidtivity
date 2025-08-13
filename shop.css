@@ -334,8 +334,8 @@ button:hover {
     padding: 0.8rem;
   }
   .simple-card img {
-    width: 90px;
-    height: 90px;
+    width: 200px;
+    height: 150px;
   }
   .simple-buy-row {
     flex-direction: column;
