@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   
-  // Footer
+  // Footer links
   document.getElementById('f-contact').addEventListener('click', function(e) {
-    e.preventDefault(); // prevent empty link jumping to top
+    e.preventDefault();
     window.location.href = 'contact.html';
   });
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.location.href = 'about.html';
   });
 
-  // Nav
+  // Nav links
   document.getElementById('home-page').addEventListener('click', function(){
     window.location.href = 'index.html';
   });
@@ -37,10 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('WhatsApp').addEventListener('click', function(e) {
-  e.preventDefault(); // stop default empty link
-  window.open('https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t', '_blank');
-});
-
+    e.preventDefault();
+    window.open('https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t', '_blank');
+  });
 
   // Join Us Button
   const joinUsBtn = document.getElementById('joinUsBtn');
@@ -64,22 +63,25 @@ document.addEventListener('DOMContentLoaded', function () {
   // Buy Buttons for BOTH Home Page & Shop Page
   // ============================================
 
-  // Home Page cards: .shop-item
   document.querySelectorAll(".shop-section .shop-item .buy-btn").forEach(button => {
     button.addEventListener("click", function () {
       const card = this.closest(".shop-item");
       const productName = card.querySelector("h3").innerText.trim();
       const productPrice = card.querySelector(".price").innerText.trim();
       const productImage = card.querySelector(".shop-img").getAttribute("src");
+      const productDescription = card.querySelector("#description").innerText.trim(); // <-- NEW
 
+      // Save all details to localStorage
       localStorage.setItem("selectedProduct", JSON.stringify({
         name: productName,
         price: productPrice,
-        image: productImage
+        image: productImage,
+        description: productDescription
       }));
 
+      // Go to checkout
       window.location.href = "checkout1.html";
     });
   });
-  });
 
+});

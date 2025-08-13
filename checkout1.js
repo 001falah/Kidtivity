@@ -8,11 +8,19 @@ function isMobile() {
 // Prefill order summary from localStorage
 document.addEventListener("DOMContentLoaded", function () {
   const productData = JSON.parse(localStorage.getItem("selectedProduct"));
+
   if (productData && productData.name && productData.image) {
+    // Fill image & name
     document.querySelector(".order-prod img").src = productData.image;
     document.querySelector(".order-prod img").alt = productData.name;
     document.querySelector(".order-prod .prod-info b").innerText = productData.name;
 
+    // ✅ Fill description from localStorage
+    if (productData.description) {
+      document.querySelector(".order-prod .prod-info span").innerText = productData.description;
+    }
+
+    // Prices
     const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
     const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
     const totalElement = document.querySelector(".order-details .total span:last-child");
@@ -28,7 +36,7 @@ form.addEventListener('submit', function (event) {
   event.preventDefault();
   const formData = new FormData(form);
 
-  // 1. Save order to backend (Google Sheet / DB) with "Pending" status
+  // 1. Save order to backend
   fetch(form.action, {
     method: 'POST',
     body: formData,
@@ -53,7 +61,7 @@ form.addEventListener('submit', function (event) {
       alert("Please scan and pay, then confirm your payment below.");
     }
 
-    // 4. Reset form and show confirm payment block
+    // 4. Reset form & show confirm payment block
     form.reset();
     document.getElementById("payment-confirm-section").style.display = "block";
   })
@@ -70,7 +78,6 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
     return;
   }
 
-  // Send transaction ID to backend for manual verification
   fetch("verify_payment.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
