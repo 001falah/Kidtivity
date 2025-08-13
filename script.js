@@ -1,68 +1,126 @@
 document.addEventListener('DOMContentLoaded', function () {
-  
+
+  // Utility: Detect mobile devices
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // ==============================
   // Footer links
-  document.getElementById('f-contact').addEventListener('click', function(e) {
+  // ==============================
+  document.getElementById('f-contact').addEventListener('click', function (e) {
     e.preventDefault();
     window.location.href = 'contact.html';
   });
 
-  document.getElementById('f-aboutpage').addEventListener('click', function(e) {
+  document.getElementById('f-aboutpage').addEventListener('click', function (e) {
     e.preventDefault();
     window.location.href = 'about.html';
   });
 
-  // Nav links
-  document.getElementById('home-page').addEventListener('click', function(){
+  // ==============================
+  // Navigation links
+  // ==============================
+  document.getElementById('home-page').addEventListener('click', function () {
     window.location.href = 'index.html';
   });
 
-  document.getElementById('cartIcon').addEventListener('click', function() {
+  document.getElementById('cartIcon').addEventListener('click', function () {
     window.location.href = 'shop.html';
   });
 
-  document.getElementById('shopLink').addEventListener('click', function() {
+  document.getElementById('shopLink').addEventListener('click', function () {
     window.location.href = 'shop.html';
   });
 
-  document.getElementById('aboutpage').addEventListener('click', function() {
+  document.getElementById('aboutpage').addEventListener('click', function () {
     window.location.href = 'about.html';
   });
 
-  document.getElementById('contact').addEventListener('click', function() {
+  document.getElementById('contact').addEventListener('click', function () {
     window.location.href = 'contact.html';
   });
 
-  document.getElementById('insta').addEventListener('click', function(){
-    window.open('https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==', '_blank');
+  // ==============================
+  // Instagram footer link
+  // ==============================
+  document.getElementById('insta').addEventListener('click', function () {
+    const instaUsername = 'kidtivity.in';
+    const instaWebURL = 'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==';
+
+    if (isMobile()) {
+      // Try open Instagram app
+      window.location.href = `instagram://user?username=${instaUsername}`;
+      setTimeout(() => {
+        window.location.href = instaWebURL;
+      }, 500);
+    } else {
+      window.open(instaWebURL, '_blank');
+    }
   });
 
-  document.getElementById('WhatsApp').addEventListener('click', function(e) {
+  // ==============================
+  // WhatsApp footer link
+  // ==============================
+  document.getElementById('WhatsApp').addEventListener('click', function (e) {
     e.preventDefault();
-    window.open('https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t', '_blank');
+    const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
+    const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
+
+    if (isMobile()) {
+      window.location.href = whatsappAppLink;
+      setTimeout(() => {
+        window.location.href = whatsappWebURL;
+      }, 500);
+    } else {
+      window.open(whatsappWebURL, '_blank');
+    }
   });
 
+  // ==============================
   // Join Us Button
+  // ==============================
   const joinUsBtn = document.getElementById('joinUsBtn');
   if (joinUsBtn) {
     joinUsBtn.addEventListener('click', function () {
-      const whatsappCommunityLink = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
-      window.open(whatsappCommunityLink, '_blank');
+      const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
+      const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
+
+      if (isMobile()) {
+        window.location.href = whatsappAppLink;
+        setTimeout(() => {
+          window.location.href = whatsappWebURL;
+        }, 500);
+      } else {
+        window.open(whatsappWebURL, '_blank');
+      }
     });
   }
 
+  // ==============================
   // Watch Video Button
+  // ==============================
   const watchVideoBtn = document.getElementById('watchVideoBtn');
   if (watchVideoBtn) {
     watchVideoBtn.addEventListener('click', function () {
-      const videoLink = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MTkzdDcxcGxuaTVlaQ==';
-      window.open(videoLink, '_blank');
+      const videoWebURL = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MTkzdDcxcGxuaTVlaQ==';
+
+      if (isMobile()) {
+        // Try converting to deep link (may not always work with Reels)
+        const deepLink = 'instagram://reel/CsDXGeWLpff';
+        window.location.href = deepLink;
+        setTimeout(() => {
+          window.location.href = videoWebURL;
+        }, 500);
+      } else {
+        window.open(videoWebURL, '_blank');
+      }
     });
   }
 
-  // ============================================
-  // Buy Buttons for BOTH Home Page & Shop Page
-  // ============================================
-
+  // ==============================
+  // Buy Buttons (Home & Shop pages)
+  // ==============================
   document.querySelectorAll(".shop-section .shop-item .buy-btn").forEach(button => {
     button.addEventListener("click", function () {
       const card = this.closest(".shop-item");
