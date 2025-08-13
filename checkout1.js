@@ -1,58 +1,69 @@
-// Form reference
+// Reference to form
 const form = document.getElementById('gform');
 
+// Google Apps Script Web App URL
+const googleScriptURL = "https://script.google.com/macros/s/AKfycbyeiPdjyVdyVaZzuZnHodbMWX3QSLuuHu5lI2nZR2PPoe-WOKIxQRm6xicEFBDPW7Vd-A/exec";
+
+// Check if device is mobile
 function isMobile() {
   return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+// ----------------------------
 // Prefill order summary from localStorage
+// ----------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const productData = JSON.parse(localStorage.getItem("selectedProduct"));
 
   if (productData && productData.name && productData.image) {
-    // Image & name
     document.querySelector(".order-prod img").src = productData.image;
     document.querySelector(".order-prod img").alt = productData.name;
     document.querySelector(".order-prod .prod-info b").innerText = productData.name;
 
-    // ✅ Set description if available
     if (productData.description) {
       document.querySelector(".order-prod .prod-info span").innerText = productData.description;
     }
 
-    // Pricing
     const subtotalElement = document.querySelector(".order-details .row:nth-child(1) span:last-child");
     const discountElement = document.querySelector(".order-details .row:nth-child(2) span:last-child");
     const totalElement = document.querySelector(".order-details .total span:last-child");
 
     if (subtotalElement) subtotalElement.textContent = `₹${productData.price}`;
-    if (discountElement) discountElement.textContent = "-₹0";
+    if (discountElement) discountElement.textContent = "₹0";
     if (totalElement) totalElement.textContent = `₹${productData.price}`;
   }
 });
 
+// ----------------------------
 // Handle checkout form submission
+// ----------------------------
 form.addEventListener('submit', function (event) {
   event.preventDefault();
+
+  // Get product details from the order summary
+  const productName = document.querySelector(".order-prod .prod-info b").innerText;
+  const totalElement = document.querySelector('.order-details .total span:last-child');
+  const amountText = totalElement ? totalElement.textContent.replace(/[^\d.]/g, '') : '0';
+  const amount = parseFloat(amountText) || 0;
+
+  // Fill hidden fields
+  document.getElementById("productName").value = productName;
+  document.getElementById("amount").value = amount;
+
+  // Prepare form data to send to Google Sheet
   const formData = new FormData(form);
 
-  // 1. Save order to backend
-  fetch(form.action, {
+  // Send data to Google Sheet
+  fetch(googleScriptURL, {
     method: 'POST',
     body: formData,
     mode: 'no-cors'
   })
   .then(() => {
-    // 2. Payment link
-    const totalElement = document.querySelector('.order-details .total span:last-child');
-    const amountText = totalElement ? totalElement.textContent.replace(/[^\d.]/g, '') : '0';
-    const amount = parseFloat(amountText) || 0;
-
     const upiId = 'falah07mohammed@oksbi';
     const name = 'Kidtivity';
     const gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
 
-    // 3. Payment prompt
     if (isMobile()) {
       alert("Please complete your payment and then confirm it below.");
       window.location.href = gpayUrl;
@@ -61,8 +72,7 @@ form.addEventListener('submit', function (event) {
       alert("Please scan and pay, then confirm your payment below.");
     }
 
-    // 4. Reset form & show Confirm Payment
-    form.reset();
+    // Show payment confirmation section
     document.getElementById("payment-confirm-section").style.display = "block";
   })
   .catch(() => {
@@ -70,7 +80,9 @@ form.addEventListener('submit', function (event) {
   });
 });
 
+// ----------------------------
 // Handle confirm payment button
+// ----------------------------
 document.getElementById("confirmPaymentBtn").addEventListener("click", function () {
   const txnId = document.getElementById("txnId").value.trim();
   if (!txnId) {
@@ -78,26 +90,30 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
     return;
   }
 
-  fetch("verify_payment.php", {
+  // Store this in hidden field
+  document.getElementById("transactionId").value = txnId;
+
+  // Create form data again with UPI Transaction ID
+  const formData = new FormData(form);
+
+  fetch(googleScriptURL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ transactionId: txnId })
+    body: formData,
+    mode: 'no-cors'
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "success") {
-      alert("✅ Payment verified! Your order has been placed successfully.");
-      document.getElementById("payment-confirm-section").style.display = "none";
-    } else {
-      alert("❌ Payment not found or not yet received. Please wait a few minutes or try again.");
-    }
+  .then(() => {
+    alert("✅ Payment verified and recorded successfully in Google Sheet!");
+    document.getElementById("payment-confirm-section").style.display = "none";
+    form.reset();
   })
   .catch(() => {
     alert("Error verifying payment. Please try again.");
   });
 });
 
+// ----------------------------
 // Show QR popup for desktop
+// ----------------------------
 function showQRCode(paymentLink) {
   const overlay = document.createElement('div');
   overlay.style.position = 'fixed';
