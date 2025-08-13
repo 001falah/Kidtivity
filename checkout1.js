@@ -10,6 +10,11 @@ function isMobile() {
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+// Detect iOS specifically
+function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 // ----------------------------
 // Prefill order summary from localStorage + Calculate Total
 // ----------------------------
@@ -37,11 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const calculatedTotal = subtotal - discountValue + shippingCharge;
         document.getElementById("totalAmount").textContent = `₹${calculatedTotal.toFixed(2)}`;
-
-        console.log(`Subtotal: ₹${subtotal}`);
-        console.log(`Discount (${discountPercent}%): ₹${discountValue}`);
-        console.log(`Shipping: ₹${shippingCharge}`);
-        console.log(`Total: ₹${calculatedTotal}`);
     }
 });
 
@@ -70,20 +70,23 @@ form.addEventListener('submit', function (event) {
     })
     .then(() => {
         formStatusMessage.style.color = '#ffc107';
-        formStatusMessage.textContent = '✅  Please proceed with the payment. After payment fill the Transaction Id below';
+        formStatusMessage.textContent = '✅ Please proceed with the payment. After payment fill the Transaction Id below';
 
         const upiId = 'falah07mohammed@oksbi';
         const name = 'Kidtivity';
         
-        // Detect iPhone/iPad and set proper UPI payment scheme
+        // Force GPay scheme for iOS
         let gpayUrl;
-        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            // Google Pay iOS scheme
+        if (isIOS()) {
+            // iOS-specific Google Pay scheme
             gpayUrl = `gpay://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
         } else {
-            // Generic UPI for Android/other platforms
+            // Works for Android/other platforms
             gpayUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR`;
         }
+
+        // Debugging: show which URL is used
+        console.log("Redirecting to:", gpayUrl);
 
         if (isMobile()) {
             window.location.href = gpayUrl;
@@ -95,7 +98,7 @@ form.addEventListener('submit', function (event) {
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
-        formStatusMessage.textContent = '❌ Something went wrong. Please try again .';
+        formStatusMessage.textContent = '❌ Something went wrong. Please try again.';
     });
 });
 
@@ -127,15 +130,13 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
         formStatusMessage.style.color = '#ffc107';
         formStatusMessage.textContent = '✅ Payment verified and recorded successfully! Thank you for your order.';
         document.getElementById("payment-confirm-section").style.display = "none";
-        
-        // Clear form and localStorage order
+
         form.reset();
         localStorage.removeItem("selectedProduct");
 
-        // Redirect after 3 seconds
         setTimeout(() => {
             window.location.href = "index.html";
-        }, 100);
+        }, 250);
     })
     .catch(() => {
         formStatusMessage.style.color = 'red';
@@ -182,79 +183,4 @@ function showQRCode(paymentLink) {
 
     overlay.appendChild(qrBox);
     document.body.appendChild(overlay);
-}
-
-// ----------------------------
-// Navigation redirects
-// ----------------------------
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("homepage").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "index.html";
-    });
-
-    document.getElementById("shopLink").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "shop.html";
-    });
-
-    document.getElementById("aboutpage").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "about.html";
-    });
-
-    document.querySelector("header #contact").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "contact.html";
-    });
-
-    document.getElementById("about").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "about.html";
-    });
-
-    document.querySelector("footer #contact").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "contact.html";
-    });
-
-    document.getElementById("insta").addEventListener("click", function (e) {
-        e.preventDefault();
-        const instagramAppUrl = "instagram://user?username=kidtivity.in";
-        const instagramWebUrl = "https://www.instagram.com/kidtivity.in/";
-        openAppOrLink(instagramAppUrl, instagramWebUrl);
-    });
-
-    document.getElementById("WhatsApp").addEventListener("click", function (e) {
-        e.preventDefault();
-        const whatsappAppUrl = "whatsapp://send?text=Hi%20there!";
-        const whatsappWebUrl = "https://wa.me/";
-        openAppOrLink(whatsappAppUrl, whatsappWebUrl);
-    });
-});
-
-// Open app or fallback to web
-function openAppOrLink(appUrl, webUrl) {
-    if (isMobile()) {
-        let timeout;
-        const start = Date.now();
-
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appUrl;
-        document.body.appendChild(iframe);
-
-        timeout = setTimeout(() => {
-            const end = Date.now();
-            if (end - start < 1200) {
-                window.location.href = webUrl;
-            }
-        }, 1000);
-
-        window.addEventListener('blur', () => {
-            clearTimeout(timeout);
-        });
-    } else {
-        window.open(webUrl, '_blank');
-    }
 }
