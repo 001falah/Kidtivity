@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // Utility: Try open deep link, fallback only if app not installed
+  // Utility: Try open deep link, fallback to web in same tab
   function tryOpenApp(deepLink, webURL) {
     if (isMobile()) {
       let openedApp = false;
@@ -19,15 +19,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
       document.addEventListener('visibilitychange', onVisibilityChange);
 
+      // Try to open the app
       window.location.href = deepLink;
 
+      // If app not opened, fallback to web in same tab
       setTimeout(() => {
         if (!openedApp) {
           window.location.href = webURL;
         }
       }, 1000);
     } else {
-      window.open(webURL, '_blank');
+      // On desktop → just open in same tab
+      window.location.href = webURL;
     }
   }
 
@@ -135,4 +138,3 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
-
