@@ -13,26 +13,35 @@
 /* ========================================
    Base Styles
 ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: var(--white);
   font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
   color: var(--purple);
   overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .container {
   max-width: 100%;
   width: 100%;
-  margin: 32px auto;
+  margin: auto;
   box-shadow: var(--box-shadow);
   background: var(--white);
   border-radius: 16px;
   overflow: hidden;
   padding: 0 16px;
-  box-sizing: border-box;
 }
-
 /* ========================================
    Header
 ======================================== */
@@ -362,5 +371,14 @@ footer nav a:hover {
   .prod-info {
     max-width: 100%;
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 6px;
   }
 }

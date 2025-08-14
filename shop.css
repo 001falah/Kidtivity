@@ -26,7 +26,6 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   color: var(--purple);
   overflow-x: hidden;
-  line-height: 1.5;
 }
 
 img, video {
@@ -35,13 +34,10 @@ img, video {
   display: block;
 }
 
-/* =====================================================
-   3. CONTAINER
-   ===================================================== */
 .container {
   max-width: 100%;
   width: 100%;
-  margin: 32px auto;
+  margin: auto;
   box-shadow: var(--box-shadow);
   background: var(--white);
   border-radius: 16px;
@@ -325,3 +321,11 @@ button:hover {
   .shop-row h2 { font-size: 1.1rem; }
 }
 
+@media (max-width: 500px) {
+  .container {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 6px;
+  }
+}
