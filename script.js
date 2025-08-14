@@ -5,6 +5,32 @@ document.addEventListener('DOMContentLoaded', function () {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
+  // Utility: Try open deep link, fallback only if app not installed
+  function tryOpenApp(deepLink, webURL) {
+    if (isMobile()) {
+      let openedApp = false;
+
+      function onVisibilityChange() {
+        if (document.hidden) {
+          openedApp = true;
+          document.removeEventListener('visibilitychange', onVisibilityChange);
+        }
+      }
+
+      document.addEventListener('visibilitychange', onVisibilityChange);
+
+      window.location.href = deepLink;
+
+      setTimeout(() => {
+        if (!openedApp) {
+          window.location.href = webURL;
+        }
+      }, 1000);
+    } else {
+      window.open(webURL, '_blank');
+    }
+  }
+
   // ==============================
   // Footer links
   // ==============================
@@ -47,16 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('insta').addEventListener('click', function () {
     const instaUsername = 'kidtivity.in';
     const instaWebURL = 'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==';
-
-    if (isMobile()) {
-      // Try open Instagram app
-      window.location.href = `instagram://user?username=${instaUsername}`;
-      setTimeout(() => {
-        window.location.href = instaWebURL;
-      }, 500);
-    } else {
-      window.open(instaWebURL, '_blank');
-    }
+    tryOpenApp(`instagram://user?username=${instaUsername}`, instaWebURL);
   });
 
   // ==============================
@@ -66,15 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
     const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
-
-    if (isMobile()) {
-      window.location.href = whatsappAppLink;
-      setTimeout(() => {
-        window.location.href = whatsappWebURL;
-      }, 500);
-    } else {
-      window.open(whatsappWebURL, '_blank');
-    }
+    tryOpenApp(whatsappAppLink, whatsappWebURL);
   });
 
   // ==============================
@@ -85,15 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
     joinUsBtn.addEventListener('click', function () {
       const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
       const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
-
-      if (isMobile()) {
-        window.location.href = whatsappAppLink;
-        setTimeout(() => {
-          window.location.href = whatsappWebURL;
-        }, 500);
-      } else {
-        window.open(whatsappWebURL, '_blank');
-      }
+      tryOpenApp(whatsappAppLink, whatsappWebURL);
     });
   }
 
@@ -104,17 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (watchVideoBtn) {
     watchVideoBtn.addEventListener('click', function () {
       const videoWebURL = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MXNjdjlhODhvd212MA==';
-
-      if (isMobile()) {
-        // Try converting to deep link (may not always work with Reels)
-        const deepLink = 'instagram://reel/CsDXGeWLpff';
-        window.location.href = deepLink;
-        setTimeout(() => {
-          window.location.href = videoWebURL;
-        }, 500);
-      } else {
-        window.open(videoWebURL, '_blank');
-      }
+      const deepLink = 'instagram://reel/CsDXGeWLpff';
+      tryOpenApp(deepLink, videoWebURL);
     });
   }
 
@@ -127,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const productName = card.querySelector("h3").innerText.trim();
       const productPrice = card.querySelector(".price").innerText.trim();
       const productImage = card.querySelector(".shop-img").getAttribute("src");
-      const productDescription = card.querySelector("#description").innerText.trim(); // <-- NEW
+      const productDescription = card.querySelector("#description").innerText.trim();
 
       // Save all details to localStorage
       localStorage.setItem("selectedProduct", JSON.stringify({
@@ -143,3 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
