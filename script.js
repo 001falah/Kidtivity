@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Utility: Detect mobile devices
   function isMobile() {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // Utility: Try open deep link, fallback to web in same tab
   function tryOpenApp(deepLink, webURL) {
     if (isMobile()) {
       let openedApp = false;
@@ -19,70 +17,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
       document.addEventListener('visibilitychange', onVisibilityChange);
 
-      // Try to open the app
+      // Try to open app
       window.location.href = deepLink;
 
-      // If app not opened, fallback to web in same tab
+      // Only fallback if app was NOT opened
       setTimeout(() => {
         if (!openedApp) {
           window.location.href = webURL;
         }
-      }, 1000);
+      }, 800); // shorter delay to reduce double open
     } else {
-      // On desktop → just open in same tab
-      window.location.href = webURL;
+      window.location.href = webURL; // desktop always open in same tab
     }
   }
 
   // ==============================
-  // Footer links
+  // Footer Links
   // ==============================
-  document.getElementById('f-contact').addEventListener('click', function (e) {
+  document.getElementById('f-contact').addEventListener('click', e => {
     e.preventDefault();
     window.location.href = 'contact.html';
   });
 
-  document.getElementById('f-aboutpage').addEventListener('click', function (e) {
+  document.getElementById('f-aboutpage').addEventListener('click', e => {
     e.preventDefault();
     window.location.href = 'about.html';
   });
 
   // ==============================
-  // Navigation links
+  // Navigation
   // ==============================
-  document.getElementById('home-page').addEventListener('click', function () {
-    window.location.href = 'index.html';
-  });
-
-  document.getElementById('cartIcon').addEventListener('click', function () {
-    window.location.href = 'shop.html';
-  });
-
-  document.getElementById('shopLink').addEventListener('click', function () {
-    window.location.href = 'shop.html';
-  });
-
-  document.getElementById('aboutpage').addEventListener('click', function () {
-    window.location.href = 'about.html';
-  });
-
-  document.getElementById('contact').addEventListener('click', function () {
-    window.location.href = 'contact.html';
-  });
+  document.getElementById('home-page').addEventListener('click', () => window.location.href = 'index.html');
+  document.getElementById('cartIcon').addEventListener('click', () => window.location.href = 'shop.html');
+  document.getElementById('shopLink').addEventListener('click', () => window.location.href = 'shop.html');
+  document.getElementById('aboutpage').addEventListener('click', () => window.location.href = 'about.html');
+  document.getElementById('contact').addEventListener('click', () => window.location.href = 'contact.html');
 
   // ==============================
-  // Instagram footer link
+  // Instagram Footer Link
   // ==============================
-  document.getElementById('insta').addEventListener('click', function () {
+  document.getElementById('insta').addEventListener('click', e => {
+    e.preventDefault();
     const instaUsername = 'kidtivity.in';
     const instaWebURL = 'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==';
     tryOpenApp(`instagram://user?username=${instaUsername}`, instaWebURL);
   });
 
   // ==============================
-  // WhatsApp footer link
+  // WhatsApp Footer Link
   // ==============================
-  document.getElementById('WhatsApp').addEventListener('click', function (e) {
+  document.getElementById('WhatsApp').addEventListener('click', e => {
     e.preventDefault();
     const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
     const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
@@ -94,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==============================
   const joinUsBtn = document.getElementById('joinUsBtn');
   if (joinUsBtn) {
-    joinUsBtn.addEventListener('click', function () {
+    joinUsBtn.addEventListener('click', () => {
       const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
       const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
       tryOpenApp(whatsappAppLink, whatsappWebURL);
@@ -106,15 +90,16 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==============================
   const watchVideoBtn = document.getElementById('watchVideoBtn');
   if (watchVideoBtn) {
-    watchVideoBtn.addEventListener('click', function () {
+    watchVideoBtn.addEventListener('click', () => {
       const videoWebURL = 'https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MXNjdjlhODhvd212MA==';
+      // This deep link format works better across devices
       const deepLink = 'instagram://reel/CsDXGeWLpff';
       tryOpenApp(deepLink, videoWebURL);
     });
   }
 
   // ==============================
-  // Buy Buttons (Home & Shop pages)
+  // Buy Buttons
   // ==============================
   document.querySelectorAll(".shop-section .shop-item .buy-btn").forEach(button => {
     button.addEventListener("click", function () {
@@ -124,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const productImage = card.querySelector(".shop-img").getAttribute("src");
       const productDescription = card.querySelector("#description").innerText.trim();
 
-      // Save all details to localStorage
       localStorage.setItem("selectedProduct", JSON.stringify({
         name: productName,
         price: productPrice,
@@ -132,9 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
         description: productDescription
       }));
 
-      // Go to checkout
       window.location.href = "checkout1.html";
     });
   });
 
 });
+
