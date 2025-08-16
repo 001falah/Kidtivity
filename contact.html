@@ -11,18 +11,33 @@
 <body>
        <div class="container">
     <!-- Header / Navigation -->
-    <header>
-      <div class="logo">
-        <a href="index.html"><img src="images/logo.png" alt="Kidtivity logo" class="logo-img"></a>
-      </div>
-      <nav>
-        <a href="#" id="home-page">HOME</a>
-        <a href="#" id="shopLink">SHOP</a>
-        <a href="#" id="aboutpage">ABOUT</a>
-        <a href="#" id="contact">CONTACT</a>
-      </nav>
- <i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i>
-    </header>
+   <header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Kidtivity Logo" class="logo-img" />
+    </a>
+  </div>
+
+  <!-- Hamburger trigger (hidden on desktop) -->
+  <input type="checkbox" id="nav-check" />
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+  <!-- ✅ Nav links must come AFTER nav-check for ~ selector -->
+  <nav class="nav-links">
+    <a href="index.html">HOME</a>
+    <a href="shop.html" class="active">SHOP</a>
+    <a href="about.html">ABOUT</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+  <i class="fas fa-shopping-cart cart-icon" aria-label="Cart"></i>
+</header>
   <main class="contact-container">
     <section class="contact-header">
       <h1>Contact Us</h1>

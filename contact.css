@@ -53,8 +53,7 @@ header {
   padding: 24px 32px;
   background: var(--white);
   border-bottom: 1.5px solid #eedaf5;
-  flex-wrap: wrap;
-  gap: 16px;
+  position: relative;
 }
 
 .logo {
@@ -67,14 +66,22 @@ header {
   width: auto;
 }
 
-header nav a {
-  color: var(--purple);
+/* desktop nav links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
   text-decoration: none;
-  margin: 0 14px;
+  color: var(--purple);
   font-weight: 500;
+  padding: 8px 10px;
   transition: color 0.18s;
 }
-header nav a:hover {
+
+.nav-links a:hover {
   color: var(--accent);
 }
 
@@ -95,6 +102,10 @@ header nav a:hover {
   color: #f732e3;
   transform: scale(0.97);
 }
+
+/* Checkbox for hamburger */
+#nav-check { display: none; }
+.nav-btn { display: none; }
 
 /* =====================================================
    4. FOOTER (Unified Across All Pages)
@@ -323,35 +334,17 @@ footer nav a:hover {
 
 /* Mobile Phones */
 @media (max-width: 500px) {
-  /* Header adjustments */
-  header {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 0;
-  }
   .logo-img { height: 36px; }
-  header nav {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 12px;
-  }
-  header nav a { font-size: 0.9em; white-space: nowrap; }
-  .cart-icon { font-size: 1.4em; }
-
   .contact-info, .contact-form { padding: 20px 10px; }
   .contact-info h2 { font-size: 1.1rem; }
   .contact-info ul li { font-size: 0.92rem; }
   .send-btn { font-size: 1rem; }
-  .contact-social a { text-decoration: none;}
+  .contact-social a { text-decoration: none; }
 }
 
 /* Extra Small Devices */
 @media (max-width: 380px) {
   .logo-img { height: 30px; }
-  header nav a { font-size: 0.8em; margin: 0 6px; }
-  .cart-icon { font-size: 1.1em; }
   .contact-header h1 { font-size: 1.3rem; }
   .contact-header p { font-size: 0.85em; }
   .contact-info, .contact-form { font-size: 0.9rem; padding: 10px 6px; }
@@ -367,4 +360,79 @@ footer nav a:hover {
     box-shadow: none;
     padding: 0 6px;
   }
+}
+
+/* =====================================================
+   7. Unified Header Hamburger Menu (same as index)
+   ===================================================== */
+@media (max-width: 780px) {
+  header { flex-wrap: nowrap; }
+
+  .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 16px;
+    top: 24px;
+    z-index: 1001;
+  }
+
+  .nav-btn > label {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px auto;
+    background-color: var(--purple);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-links {
+  position: absolute;
+  top: 100%;        /* ✅ starts exactly below header */
+  left: 0;
+  width: 100%;
+  flex-direction: column;
+  background: var(--white);
+  overflow: hidden;
+  height: 0;
+  gap: 1rem;
+  transition: height 0.3s ease-in-out;
+  z-index: 999;
+  border-top: 1px solid #eedaf5;  /* ✅ subtle top border under header */
+}
+
+  .nav-links a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    color: var(--purple);
+  }
+
+  #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 72px);
+    padding: 1rem 0;
+  }
+
+    .cart-icon {
+    display: none !important;
+  }
+}
+
+@media (min-width: 781px) {
+  .nav-links {
+    display: flex !important;
+    height: auto !important;
+    position: static !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+  }
+  .nav-btn { display: none !important; }
+  #nav-check { display: none !important; }
+   .cart-icon { display: inline-block !important; }
 }
