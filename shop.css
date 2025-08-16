@@ -254,15 +254,15 @@ footer nav a:hover {
 
   .nav-links a {
    display: block;
-    padding: 12px;
+    padding: 2px;
     text-align: center;
     color: var(--purple);
     font-weight: 500;
   }
 
   #nav-check:checked ~ .nav-links {
-    height: calc(100vh - 60px);
-    padding: 12px 0;
+   height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    padding: 1rem 0;
   }
 
   /* hamburger button */
