@@ -536,12 +536,14 @@ footer nav a:hover {
 
   /* Hamburger button */
   .nav-btn {
-    display: inline-block;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%); /* ✅ aligns vertically with logo */
-  }
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  top: 24px;      /* ✅ aligns with logo height */
+  transform: none; /* remove translate */
+  cursor: pointer;
+}
+
   .nav-btn > label {
     display: inline-block;
     width: 40px;

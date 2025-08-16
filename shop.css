@@ -1,6 +1,3 @@
-/* =====================================================
-   1. IMPORTS & VARIABLES
-   ===================================================== */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 :root {
@@ -12,9 +9,6 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
-/* =====================================================
-   2. BASE STYLES
-   ===================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -38,16 +32,13 @@ img, video {
   max-width: 100%;
   width: 100%;
   margin: auto;
-  box-shadow: var(--box-shadow);
   background: var(--white);
   border-radius: 16px;
   overflow: hidden;
   padding: 0 16px;
 }
 
-/* =====================================================
-   4. HEADER (Same as index.css)
-   ===================================================== */
+/* =================== Header =================== */
 header {
   display: flex;
   align-items: center;
@@ -57,6 +48,7 @@ header {
   border-bottom: 1.5px solid #eedaf5;
   flex-wrap: wrap;
   gap: 16px;
+  position: relative;
 }
 
 .logo {
@@ -69,15 +61,22 @@ header {
   width: auto;
 }
 
-header nav a {
-  color: var(--purple);
-  text-decoration: none;
-  margin: 0 14px;
-  font-weight: 500;
-  transition: color 0.18s;
+/* desktop nav links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-header nav a:hover {
+.nav-links a {
+  text-decoration: none;  /* ✅ no underline */
+  color: var(--purple);
+  font-weight: 500;
+  padding: 8px 10px;      /* ✅ spacing for desktop */
+  transition: color 0.18s, border-bottom 0.18s;
+}
+
+.nav-links a:hover {
   color: var(--accent);
 }
 
@@ -85,9 +84,7 @@ header nav a:hover {
   color: #6F18A7;
   font-size: 1.8em;
   cursor: pointer;
-  margin-left: 16px;
   transition: color 0.15s, transform 0.12s;
-  display: inline-block;
 }
 
 .cart-icon:hover,
@@ -96,58 +93,22 @@ header nav a:hover {
   transform: scale(1.12);
 }
 
-.cart-icon:active {
-  color: #f732e3;
-  transform: scale(0.97);
+/* Checkbox for hamburger */
+#nav-check {
+  display: none;
 }
 
-/* =====================================================
-   5. FOOTER (Same as index.css)
-   ===================================================== */
-footer {
-  background: var(--white);
-  color: var(--purple);
-  text-align: center;
-  padding: 22px 0;
-  border-top: 1px solid #eedaf5;
-  font-size: 0.98em;
-  margin-top: 48px;
-}
-
-footer nav a {
-  margin: 0 11px;
-  text-decoration: none;
-  color: var(--purple);
-  transition: color 0.18s;
-}
-
-footer nav a:hover {
-  color: var(--accent);
-}
-
-/* =====================================================
-   6. SHOP PAGE LAYOUT
-   ===================================================== */
+/* =================== Shop Cards =================== */
 .shop-main {
   padding: 32px 32px 48px;
 }
 
-.shop-row {
-  margin-bottom: 3rem;
-}
-
 .shop-row h2 {
   font-size: 2rem;
-  color: var(--purple);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 1px;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-/* =====================================================
-   7. PRODUCT CARDS
-   ===================================================== */
 .simple-card-row {
   display: flex;
   flex-wrap: wrap;
@@ -172,19 +133,12 @@ footer nav a:hover {
   background-color: var(--yellow);
 }
 
-.simple-card:hover {
-  transform: translateY(-6px) scale(1.035);
-  box-shadow: 0 10px 30px rgba(241, 17, 241, 0.12);
-}
-
 .simple-card img {
   width: 200px;
   height: 200px;
   border-radius: 16px;
   object-fit: cover;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, rgba(241, 17, 241, 0.09), rgba(255, 193, 7, 0.08));
-  box-shadow: 0 8px 24px rgba(241, 17, 241, 0.13);
   padding: 6px;
 }
 
@@ -196,7 +150,6 @@ footer nav a:hover {
 .simple-card-info h3 {
   color: var(--white);
   margin-bottom: 0.5rem;
-  font-size: 1rem;
 }
 
 .simple-card-info ul {
@@ -208,28 +161,14 @@ footer nav a:hover {
   text-align: left;
 }
 
-.simple-card-info ul li {
-  position: relative;
-  padding-left: 22px;
-  margin-bottom: 8px;
-}
-
 .simple-card-info ul li::before {
   content: "✔";
-  position: absolute;
-  left: 0;
   color: var(--yellow);
-  font-size: 0.9em;
+  margin-right: 8px;
 }
 
 .simple-card2 .simple-card-info ul li::before {
   color: var(--purple);
-}
-
-.simple-card-info p {
-  color: var(--white);
-  font-size: 0.95em;
-  margin: 10px 0 16px;
 }
 
 .simple-buy-row {
@@ -246,14 +185,11 @@ footer nav a:hover {
   background: #fff7fb;
   padding: 5px 10px;
   border-radius: 8px;
-  font-size: 1em;
-  box-shadow: 0 1.5px 6px #ffd6f899;
 }
 
 button {
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.95em;
   padding: 6px 16px;
   border-radius: 14px;
   border: none;
@@ -272,60 +208,101 @@ button:hover {
   background-color: var(--purple);
 }
 
-/* =====================================================
-   8. RESPONSIVE MEDIA QUERIES
-   ===================================================== */
-@media (max-width: 900px) {
-  .container { margin: 18px auto; }
-  .shop-main { padding: 22px 12px 32px; }
+/* =================== Footer =================== */
+footer {
+  background: var(--white);
+  color: var(--purple);
+  text-align: center;
+  padding: 22px 0;
+  border-top: 1px solid #eedaf5;
+  font-size: 0.98em;
 }
 
+footer nav a {
+  margin: 0 11px;
+  text-decoration: none;
+  color: var(--purple);
+  transition: color 0.18s;
+}
+
+footer nav a:hover {
+  color: var(--accent);
+}
+
+/* =================== Responsive =================== */
 @media (max-width: 768px) {
-  header { flex-direction: column; gap: 18px; }
-  .simple-card-row { justify-content: center; }
-}
+  /* hide cart below 768px */
+  .cart-icon {
+    display: none !important;
+  }
 
-@media (max-width: 650px) {
-  .simple-card-row { flex-direction: column; gap: 18px; }
-  .simple-card { max-width: 90%; margin: 0 auto; }
-  .shop-row h2 { font-size: 1.4rem; }
-}
+  /* dropdown nav */
+  .nav-links {
+   position: absolute;
+    top: 100%; /* ✅ dropdown starts just below full header */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--white);
+    overflow: hidden;
+    height: 0;
+    gap: 1rem;
+    transition: height 0.3s ease-in;
+    z-index: 999;
+    border-top: 1px solid #eedaf5; 
+  }
 
-@media (max-width: 500px) {
-  header { flex-direction: column; align-items: center; padding: 12px 0; gap: 10px; }
-  .logo-img { height: 36px; }
-  header nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-  header nav a { font-size: 0.9em; }
-  .cart-icon { font-size: 1.4em; }
-}
+  .nav-links a {
+   display: block;
+    padding: 12px;
+    text-align: center;
+    color: var(--purple);
+    font-weight: 500;
+  }
 
-@media (max-width: 480px) {
-  .shop-row h2 { font-size: 1.2rem; }
-  header nav a { font-size: 0.9rem; margin: 4px 10px; }
-  .simple-card { padding: 0.8rem; }
-  .simple-card img { width: 180px; height: 140px; }
-  .simple-buy-row { flex-direction: column; gap: 8px; }
-  button { padding: 6px 14px; font-size: 0.9rem; }
-  .price { font-size: 0.9rem; }
-  .simple-card-info ul { font-size: 0.88em; }
-  .simple-card-info ul li { padding-left: 18px; }
-}
+  #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 60px);
+    padding: 12px 0;
+  }
 
-@media (max-width: 400px) {
-  header { gap: 6px; padding: 8px 0; }
-  .logo-img { height: 30px; }
-  header nav a { font-size: 0.8em; }
-  .cart-icon { font-size: 1.1em; }
-  .simple-card { max-width: 95%; }
-  .simple-card img { width: 150px; height: 120px; }
-  .shop-row h2 { font-size: 1.1rem; }
-}
-
-@media (max-width: 500px) {
-  .container {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0 6px;
+  /* hamburger button */
+  .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 16px;
+    top: 24px;
+  }
+ .nav-btn > label {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px auto;
+    background-color: var(--purple);
+    border-radius: 2px;
   }
 }
+
+/* desktop always shows normal nav */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex !important;
+    height: auto !important;
+    position: static !important;
+    flex-direction: row !important;
+    box-shadow: none !important;
+    gap: 20px !important;
+  }
+  .nav-btn {
+    display: none !important;
+  }
+  #nav-check {
+    display: none !important;
+  }
+}
+
