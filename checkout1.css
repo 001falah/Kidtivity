@@ -1,6 +1,6 @@
-/* ========================================
-   Root Variables
-======================================== */
+/* ==============================
+   1. ROOT VARIABLES
+   ============================== */
 :root {
   --purple: #66058f;
   --accent: #343440;
@@ -10,9 +10,9 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
-/* ========================================
-   Base Styles
-======================================== */
+/* ==============================
+   2. BASE STYLES
+   ============================== */
 * {
   margin: 0;
   padding: 0;
@@ -36,49 +36,66 @@ img, video {
   max-width: 100%;
   width: 100%;
   margin: auto;
-  box-shadow: var(--box-shadow);
   background: var(--white);
-  border-radius: 16px;
   overflow: hidden;
-  padding: 0 16px;
 }
-/* ========================================
-   Header
-======================================== */
+
+/* ==============================
+   3. HEADER
+   ============================== */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
-  border-bottom: 1.5px solid #eedaf5;
+  padding: 24px 32px;
+  background: var(--purple);
+  border-bottom: 1.5px solid var(--yellow);
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
-  height: 42px;
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 header nav a {
-  color: var(--purple);
+  color: var(--white);
   text-decoration: none;
   margin: 0 14px;
   font-weight: 500;
+  transition: color .18s;
 }
 
 header nav a:hover {
-  color: var(--accent);
+  color: var(--yellow);
 }
 
 .cart-icon {
-  color: var(--purple);
+  color: var(--white);
   font-size: 1.8em;
+  vertical-align: middle;
   cursor: pointer;
-  transition: color 0.2s, transform 0.15s;
+  margin-left: 16px;
+  transition: color 0.15s, transform 0.12s;
+  display: inline-block;
 }
 
-.cart-icon:hover {
-  color: var(--accent);
-  transform: scale(1.1);
+.cart-icon:hover,
+.cart-icon:focus {
+  color: var(--yellow);
+  transform: scale(1.12);
 }
+.cart-icon:active {
+  color: var(--yellow);
+  transform: scale(0.97);
+}
+
 
 /* ========================================
    Checkout Layout
@@ -322,41 +339,8 @@ footer nav a:hover {
   }
 }
 
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    gap: 14px;
-  }
-}
 
 @media (max-width: 500px) {
-  /* Header adjustments for mobile */
-  header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px 0;
-    gap: 10px;
-  }
-  .logo-img {
-    height: 36px;
-    width: auto;
-  }
-  header nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 12px;
-  }
-  header nav a {
-    font-size: 0.9em;
-    white-space: nowrap;
-  }
-  .cart-icon {
-    font-size: 1.4em;
-  }
-
   /* Make order image appear above product info */
   .order-prod {
     flex-direction: column;
@@ -374,11 +358,88 @@ footer nav a:hover {
   }
 }
 
-@media (max-width: 500px) {
-  .container {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0 6px;
+/* ==============================
+   11. HAMBURGER MENU (≤780px)
+   ============================== */
+@media (max-width: 780px) {
+  /* Hide cart icon below 780px */
+  .cart-icon {
+    display: none !important;
+  }
+
+  /* Hide normal nav initially */
+  header .nav-list {
+    position: absolute;
+    top: 100%; /* ✅ dropdown starts just below full header */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--white);
+    overflow: hidden;
+    height: 0;
+    gap: 1rem;
+    transition: height 0.3s ease-in;
+    z-index: 999;
+    border-top: 1px solid #eedaf5; /* nice separation */
+  }
+
+  header .nav-list a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  /* Hide checkbox from all views */
+  #nav-check {
+    display: none !important;
+  }
+
+  /* Show menu when checked */
+  #nav-check:checked ~ .nav-list {
+    height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    padding: 1rem 0;
+  }
+
+  /* Hamburger button */
+  .nav-btn {
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  top: 24px;      /* ✅ aligns with logo height */
+  transform: none; /* remove translate */
+  cursor: pointer;
+}
+
+  .nav-btn > label {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px auto;
+    background-color: var(--white);
+    border-radius: 2px;
+  }
+}
+
+/* Desktop (≥781px) - Ensure normal nav shows */
+@media (min-width: 781px) {
+  header .nav-list {
+    display: flex !important;
+    position: static !important;
+    height: auto !important;
+    flex-direction: row !important;
+  }
+  .nav-btn {
+    display: none !important;
+  }
+  #nav-check {
+    display: none !important;
   }
 }

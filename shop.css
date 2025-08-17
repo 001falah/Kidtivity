@@ -188,7 +188,7 @@ button {
   padding: 6px 16px;
   border-radius: 14px;
   border: none;
-  background: var(--yellow);
+  background: var(--purple);
   color: var(--white);
   cursor: pointer;
   transition: background 0.18s, transform 0.18s;
@@ -200,7 +200,7 @@ button:hover {
 }
 
 .simple-card2 button {
-  background-color: var(--purple);
+  background-color: var(--yellow);
 }
 
 /* =================== Footer =================== */
