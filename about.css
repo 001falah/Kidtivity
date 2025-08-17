@@ -1,6 +1,6 @@
-/* =====================================================
+/* ==============================
    1. ROOT VARIABLES
-   ===================================================== */
+   ============================== */
 :root {
   --purple: #66058f;
   --accent: #343440;
@@ -10,9 +10,9 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
-/* =====================================================
+/* ==============================
    2. BASE STYLES
-   ===================================================== */
+   ============================== */
 * {
   margin: 0;
   padding: 0;
@@ -38,20 +38,19 @@ img, video {
   margin: auto;
   box-shadow: var(--box-shadow);
   background: var(--white);
-  border-radius: 16px;
   overflow: hidden;
-  padding: 0 16px;
 }
-/* =====================================================
-   3. HEADER (Exact Same as Index & Shop)
-   ===================================================== */
+
+/* ==============================
+   3. HEADER
+   ============================== */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 32px;
-  background: var(--white);
-  border-bottom: 1.5px solid #eedaf5;
+  background: var(--purple);
+  border-bottom: 1.5px solid var(--yellow);
   position: relative;
 }
 
@@ -67,7 +66,7 @@ header {
 }
 
 header nav a {
-  color: var(--purple);
+  color: var(--white);
   text-decoration: none;
   margin: 0 14px;
   font-weight: 500;
@@ -75,11 +74,11 @@ header nav a {
 }
 
 header nav a:hover {
-  color: var(--accent);
+  color: var(--yellow);
 }
 
 .cart-icon {
-  color: #6F18A7;
+  color: var(--white);
   font-size: 1.8em;
   vertical-align: middle;
   cursor: pointer;
@@ -90,11 +89,11 @@ header nav a:hover {
 
 .cart-icon:hover,
 .cart-icon:focus {
-  color: var(--accent);
+  color: var(--yellow);
   transform: scale(1.12);
 }
 .cart-icon:active {
-  color: #f732e3;
+  color: var(--yellow);
   transform: scale(0.97);
 }
 
@@ -102,7 +101,7 @@ header nav a:hover {
    4. ABOUT HERO SECTION
    ===================================================== */
 .about-hero {
-  background: var(--purple);
+  background: var(--yellow);
   color: var(--white);
   padding: 56px 32px 36px;
   display: flex;
@@ -110,7 +109,7 @@ header nav a:hover {
   justify-content: space-between;
   gap: 42px;
   flex-wrap: nowrap;
-  margin-top: 40px;
+  margin: 30px;
   border-radius: 16px;
   max-width: 1300px;
 }
@@ -226,7 +225,7 @@ header nav a:hover {
   position: absolute;
   width: 160px;
   height: 220px;
-  background: var(--yellow);
+  background: var(--purple);
   border-radius: 50% / 70% 70% 30% 30%;
   top: 30px;
   left: 0;
@@ -382,16 +381,6 @@ footer nav a:hover {
   .promo-desc { font-size: 0.9em; }
 }
 
-@media (max-width: 500px) {
-  .container {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0 6px;
-  }
-}
-
-
 /* ==============================
    11. HAMBURGER MENU (≤780px)
    ============================== */
@@ -457,7 +446,7 @@ footer nav a:hover {
     width: 25px;
     height: 2px;
     margin: 6px auto;
-    background-color: var(--purple);
+    background-color: var(--white);
     border-radius: 2px;
   }
 }
@@ -477,3 +466,4 @@ footer nav a:hover {
     display: none !important;
   }
 }
+

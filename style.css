@@ -479,14 +479,6 @@ footer nav a:hover {
   .hero-image img { max-width: 160px; border-radius: 8px; }
 }
 
-@media (max-width: 500px) {
-  .container {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0 6px;
-  }
-}
 
 /* ==============================
    11. HAMBURGER MENU (≤780px)
