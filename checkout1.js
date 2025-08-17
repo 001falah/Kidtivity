@@ -185,65 +185,57 @@ function showQRCode(paymentLink) {
     document.body.appendChild(overlay);
 }
 
-// Header Navigation
 document.addEventListener("DOMContentLoaded", function () {
-  // Grab elements
-  const homeLink = document.getElementById("home-page");
-  const shopLink = document.getElementById("shopLink");
-  const aboutLink = document.getElementById("aboutpage");
-  const contactLink = document.getElementById("contact");
+  /* ---------------- Header Navigation ---------------- */
+  const header = document.querySelector("header");
+  if (header) {
+    const homeLink = header.querySelector("#home-page");
+    const shopLink = header.querySelector("#shopLink");
+    const aboutLink = header.querySelector("#aboutpage");
+    const contactLink = header.querySelector("#contact"); // header's CONTACT
 
-  // Add click events
-  homeLink.addEventListener("click", function (e) {
-    e.preventDefault(); // stop "#" from reloading page
-    window.location.href = "index.html";
-  });
+    const go = (url) => (e) => { e.preventDefault(); window.location.href = url; };
 
-  shopLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "shop.html";
-  });
+    homeLink && homeLink.addEventListener("click", go("index.html"));
+    shopLink && shopLink.addEventListener("click", go("shop.html"));
+    aboutLink && aboutLink.addEventListener("click", go("about.html"));
+    contactLink && contactLink.addEventListener("click", go("contact.html"));
+  }
 
-  aboutLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "about.html";
-  });
+  /* ---------------- Footer Links ---------------- */
+  const footer = document.querySelector("footer");
+  if (footer) {
+    const aboutFooter   = footer.querySelector("#about");
+    const contactFooter = footer.querySelector("#contact"); // footer's CONTACT (scoped)
+    const instaFooter   = footer.querySelector("#insta");
+    // Handle either id="whatsapp" or id="WhatsApp"
+    const whatsappFooter = footer.querySelector("#whatsapp, #WhatsApp");
 
-  contactLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "contact.html";
-  });
+    // Page links
+    aboutFooter && aboutFooter.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = "about.html";
+    });
+
+    contactFooter && contactFooter.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = "contact.html";
+    });
+
+    // Instagram (open profile in new tab)
+    instaFooter && instaFooter.addEventListener("click", function (e) {
+      e.preventDefault();
+      // use your real Instagram handle URL
+      window.open("https://instagram.com/kidtivity.in", "_blank");
+    });
+
+    // WhatsApp (group or chat link in new tab)
+    whatsappFooter && whatsappFooter.addEventListener("click", function (e) {
+      e.preventDefault();
+      // your provided group link; replace if you want a direct chat link
+      window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank");
+      // for 1:1 chat use: https://wa.me/<countrycode><number>  e.g., https://wa.me/911234567890
+    });
+  }
 });
 
-// Footer 
-document.addEventListener("DOMContentLoaded", function () {
-  // Footer links
-  const aboutFooter = document.getElementById("about");
-  const contactFooter = document.getElementById("contact");
-  const instaFooter = document.getElementById("insta");
-  const whatsappFooter = document.getElementById("whatsapp");
-
-  // About Page
-  aboutFooter.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "about.html";
-  });
-
-  // Contact Page
-  contactFooter.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.location.href = "contact.html";
-  });
-
-  // Instagram Link 
-  instaFooter.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.open("instagram://user?username=kidtivity.in", "_blank");
-  });
-
-  // WhatsApp Link 
-  whatsappFooter.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank"); 
-  });
-});
