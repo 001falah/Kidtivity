@@ -122,3 +122,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
+
+// ==============================
+// Multi-card carousel logic
+// ==============================
+const slides = document.querySelectorAll('.carousel-slide');
+const container = document.querySelector('.carousel-container');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const nextBtn = document.querySelector('.carousel-btn.next');
+
+let currentIndex = 0;
+
+// Calculate how many slides fit in viewport
+function slidesPerView() {
+  if (window.innerWidth <= 480) return 1;
+  if (window.innerWidth <= 768) return 2;
+  if (window.innerWidth <= 1024) return 3;
+  return 4;  // default desktop
+}
+
+function showSlide(index) {
+  const perView = slidesPerView();
+  const maxIndex = slides.length - perView; 
+
+  if (index > maxIndex) index = 0;       // loop back
+  if (index < 0) index = maxIndex;       // loop to end
+
+  currentIndex = index;
+  const offset = -(100 / perView) * currentIndex;
+  container.style.transform = `translateX(${offset}%)`;
+}
+
+nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+setInterval(() => showSlide(currentIndex + 1), 5000);
+
