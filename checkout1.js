@@ -69,7 +69,7 @@ form.addEventListener('submit', function (event) {
         mode: 'no-cors'
     })
     .then(() => {
-        formStatusMessage.style.color = '#ffc107';
+        formStatusMessage.style.color = '#343440';
         formStatusMessage.textContent = '✅ Please proceed with the payment. After payment fill the Transaction Id below';
 
         const upiId = 'falah07mohammed@oksbi';
@@ -118,7 +118,7 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
 
     const formData = new FormData(form);
 
-    formStatusMessage.style.color = 'green';
+    formStatusMessage.style.color = '#343440';
     formStatusMessage.textContent = '⏳ Verifying payment, please wait...';
 
     fetch(googleScriptURL, {
@@ -127,15 +127,24 @@ document.getElementById("confirmPaymentBtn").addEventListener("click", function 
         mode: 'no-cors'
     })
     .then(() => {
-        formStatusMessage.style.color = '#ffc107';
+        formStatusMessage.style.color = '#343440';
         formStatusMessage.textContent = '✅ Payment verified and recorded successfully! Thank you for your order.';
+
         document.getElementById("payment-confirm-section").style.display = "none";
 
         form.reset();
         localStorage.removeItem("selectedProduct");
 
-        setTimeout(() => {
-            window.location.href = "index.html";
+        // Countdown redirect
+        let countdown = 5; // seconds before redirect
+        const interval = setInterval(() => {
+            formStatusMessage.textContent = `✅ Payment verified! Redirecting to home page in ${countdown}`;
+            countdown--;
+
+            if (countdown < 0) {
+                clearInterval(interval);
+                window.location.href = "index.html";
+            }
         }, 1000);
     })
     .catch(() => {
