@@ -101,9 +101,10 @@ header nav a:hover {
    ============================== */
 .hero {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  padding: 38px 32px;
+  justify-content: space-between;
+  gap: 56px;
+  padding: 38px 80px;
   background: var(--white);
 }
 
@@ -161,14 +162,16 @@ header nav a:hover {
 
 .hero-image {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: right;
-  min-width: 240px;
-  padding: 0 100px;
+  min-width: 320px;
+  margin-left: 0;
 }
 
 .hero-image img {
-  max-width: 400px;
-  border-radius: 14px;
+  max-width: 420px;
 }
 
 /* ==============================
@@ -438,7 +441,10 @@ footer nav a:hover {
    10. RESPONSIVE MEDIA QUERIES
    ============================== */
 @media (max-width: 1024px) {
-  .hero-image img { max-width: 300px; }
+  .hero{ padding: 28px 24px; gap: 28px;}
+  .hero-image img {
+    max-width: 320px;
+  }
   .join-us, .watch-btn { font-size: 0.9em; padding: 8px 20px; }
   .info-bubbles { padding: 30px 15px; }
   .bubble { max-width: 130px; }
