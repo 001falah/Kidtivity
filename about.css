@@ -52,6 +52,7 @@ header {
   padding: 24px 32px;
   background: var(--white);
   border-bottom: 1.5px solid #eedaf5;
+  position: relative;
 }
 
 .logo {
@@ -334,7 +335,6 @@ footer nav a:hover {
     text-align: center;
   }
   .about-hero-image { justify-content: center; }
-  header { flex-direction: column; gap: 18px; text-align: center; padding: 20px 4px; }
 }
 
 /* Mobile Adjustments */
@@ -372,43 +372,9 @@ footer nav a:hover {
   .promo-solution { font-size: 1.1em; }
 }
 
-/* Mobile Header Consistency */
-@media (max-width: 500px) {
-    header { flex-direction: column; align-items: center; padding: 12px 0; gap: 10px; }
-  .logo-img { height: 36px; }
-  header nav { display: flex; gap: 12px; flex-wrap: nowrap; justify-content: center; }
-  header nav a { font-size: 0.9em; white-space: nowrap; }
-  .cart-icon { font-size: 1.4em; }
-}
 
 /* Extra Small Devices */
 @media (max-width: 400px) {
-header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 8px 0;
-    text-align: center;
-  }
-  .logo-img {
-    height: 30px;
-    width: auto;
-  }
-  header nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-  }
-  header nav a {
-    font-size: 0.8em;
-  }
-  .cart-icon {
-    font-size: 1.1em;
-    margin-left: 0;
-  }
-
   .about-hero-content h1 { font-size: 1.4em; }
   .about-hero-content p { font-size: 0.85em; }
   .team-member-name { font-size: 0.9em; }
@@ -422,5 +388,92 @@ header {
     border-radius: 0;
     box-shadow: none;
     padding: 0 6px;
+  }
+}
+
+
+/* ==============================
+   11. HAMBURGER MENU (≤780px)
+   ============================== */
+@media (max-width: 780px) {
+  /* Hide cart icon below 780px */
+  .cart-icon {
+    display: none !important;
+  }
+
+  /* Hide normal nav initially */
+  header .nav-list {
+    position: absolute;
+    top: 100%; /* ✅ dropdown starts just below full header */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--white);
+    overflow: hidden;
+    height: 0;
+    gap: 1rem;
+    transition: height 0.3s ease-in;
+    z-index: 999;
+    border-top: 1px solid #eedaf5; /* nice separation */
+  }
+
+  header .nav-list a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  /* Hide checkbox from all views */
+  #nav-check {
+    display: none !important;
+  }
+
+  /* Show menu when checked */
+  #nav-check:checked ~ .nav-list {
+    height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    padding: 1rem 0;
+  }
+
+  /* Hamburger button */
+  .nav-btn {
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  top: 24px;      /* ✅ aligns with logo height */
+  transform: none; /* remove translate */
+  cursor: pointer;
+}
+
+  .nav-btn > label {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px auto;
+    background-color: var(--purple);
+    border-radius: 2px;
+  }
+}
+
+/* Desktop (≥781px) - Ensure normal nav shows */
+@media (min-width: 781px) {
+  header .nav-list {
+    display: flex !important;
+    position: static !important;
+    height: auto !important;
+    flex-direction: row !important;
+  }
+  .nav-btn {
+    display: none !important;
+  }
+  #nav-check {
+    display: none !important;
   }
 }
