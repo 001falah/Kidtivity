@@ -184,3 +184,66 @@ function showQRCode(paymentLink) {
     overlay.appendChild(qrBox);
     document.body.appendChild(overlay);
 }
+
+// Header Navigation
+document.addEventListener("DOMContentLoaded", function () {
+  // Grab elements
+  const homeLink = document.getElementById("home-page");
+  const shopLink = document.getElementById("shopLink");
+  const aboutLink = document.getElementById("aboutpage");
+  const contactLink = document.getElementById("contact");
+
+  // Add click events
+  homeLink.addEventListener("click", function (e) {
+    e.preventDefault(); // stop "#" from reloading page
+    window.location.href = "index.html";
+  });
+
+  shopLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "shop.html";
+  });
+
+  aboutLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "about.html";
+  });
+
+  contactLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "contact.html";
+  });
+});
+
+// Footer 
+document.addEventListener("DOMContentLoaded", function () {
+  // Footer links
+  const aboutFooter = document.getElementById("about");
+  const contactFooter = document.getElementById("contact");
+  const instaFooter = document.getElementById("insta");
+  const whatsappFooter = document.getElementById("whatsapp");
+
+  // About Page
+  aboutFooter.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "about.html";
+  });
+
+  // Contact Page
+  contactFooter.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "contact.html";
+  });
+
+  // Instagram Link 
+  instaFooter.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.open("instagram://user?username=kidtivity.in", "_blank");
+  });
+
+  // WhatsApp Link 
+  whatsappFooter.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.open("https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t", "_blank"); 
+  });
+});
