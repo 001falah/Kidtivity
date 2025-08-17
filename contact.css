@@ -1,6 +1,6 @@
-/* =====================================================
+/* ==============================
    1. ROOT VARIABLES
-   ===================================================== */
+   ============================== */
 :root {
   --purple: #66058f;
   --accent: #343440;
@@ -10,9 +10,9 @@
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
 }
 
-/* =====================================================
+/* ==============================
    2. BASE STYLES
-   ===================================================== */
+   ============================== */
 * {
   margin: 0;
   padding: 0;
@@ -38,21 +38,19 @@ img, video {
   margin: auto;
   box-shadow: var(--box-shadow);
   background: var(--white);
-  border-radius: 16px;
   overflow: hidden;
-  padding: 0 16px;
 }
 
-/* =====================================================
-   3. HEADER (Unified Across All Pages)
-   ===================================================== */
+/* ==============================
+   3. HEADER
+   ============================== */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 32px;
-  background: var(--white);
-  border-bottom: 1.5px solid #eedaf5;
+  background: var(--purple);
+  border-bottom: 1.5px solid var(--yellow);
   position: relative;
 }
 
@@ -64,48 +62,40 @@ header {
 .logo-img {
   height: 40px;
   width: auto;
+  display: block;
 }
 
-/* desktop nav links */
-.nav-links {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-links a {
+header nav a {
+  color: var(--white);
   text-decoration: none;
-  color: var(--purple);
+  margin: 0 14px;
   font-weight: 500;
-  padding: 8px 10px;
-  transition: color 0.18s;
+  transition: color .18s;
 }
 
-.nav-links a:hover {
-  color: var(--accent);
+header nav a:hover {
+  color: var(--yellow);
 }
 
 .cart-icon {
-  color: #6F18A7;
+  color: var(--white);
   font-size: 1.8em;
+  vertical-align: middle;
   cursor: pointer;
   margin-left: 16px;
   transition: color 0.15s, transform 0.12s;
   display: inline-block;
 }
+
 .cart-icon:hover,
 .cart-icon:focus {
-  color: var(--accent);
+  color: var(--yellow);
   transform: scale(1.12);
 }
 .cart-icon:active {
-  color: #f732e3;
+  color: var(--yellow);
   transform: scale(0.97);
 }
-
-/* Checkbox for hamburger */
-#nav-check { display: none; }
-.nav-btn { display: none; }
 
 /* =====================================================
    4. FOOTER (Unified Across All Pages)
@@ -353,28 +343,59 @@ footer nav a:hover {
   .send-btn { padding: 10px 0; font-size: 0.9rem; }
 }
 
-@media (max-width: 500px) {
-  .container {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0 6px;
-  }
-}
-
-/* =====================================================
-   7. Unified Header Hamburger Menu (same as index)
-   ===================================================== */
+/* ==============================
+   11. HAMBURGER MENU (≤780px)
+   ============================== */
 @media (max-width: 780px) {
-  header { flex-wrap: nowrap; }
-
-  .nav-btn {
-    display: inline-block;
-    position: absolute;
-    right: 16px;
-    top: 24px;
-    z-index: 1001;
+  /* Hide cart icon below 780px */
+  .cart-icon {
+    display: none !important;
   }
+
+  /* Hide normal nav initially */
+  header .nav-list {
+    position: absolute;
+    top: 100%; /* ✅ dropdown starts just below full header */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--white);
+    overflow: hidden;
+    height: 0;
+    gap: 1rem;
+    transition: height 0.3s ease-in;
+    z-index: 999;
+    border-top: 1px solid #eedaf5; /* nice separation */
+  }
+
+  header .nav-list a {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  /* Hide checkbox from all views */
+  #nav-check {
+    display: none !important;
+  }
+
+  /* Show menu when checked */
+  #nav-check:checked ~ .nav-list {
+    height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    padding: 1rem 0;
+  }
+
+  /* Hamburger button */
+  .nav-btn {
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  top: 24px;      /* ✅ aligns with logo height */
+  transform: none; /* remove translate */
+  cursor: pointer;
+}
 
   .nav-btn > label {
     display: inline-block;
@@ -387,52 +408,23 @@ footer nav a:hover {
     width: 25px;
     height: 2px;
     margin: 6px auto;
-    background-color: var(--purple);
+    background-color: var(--white);
     border-radius: 2px;
-    transition: all 0.3s ease-in-out;
   }
-
-  .nav-links {
-  position: absolute;
-  top: 100%;        /* ✅ starts exactly below header */
-  left: 0;
-  width: 100%;
-  flex-direction: column;
-  background: var(--white);
-  overflow: hidden;
-  height: 0;
-  gap: 1rem;
-  transition: height 0.3s ease-in-out;
-  z-index: 999;
-  border-top: 1px solid #eedaf5;  /* ✅ subtle top border under header */
 }
 
-  .nav-links a {
-    display: block;
-    padding: 12px;
-    text-align: center;
-    color: var(--purple);
+/* Desktop (≥781px) - Ensure normal nav shows */
+@media (min-width: 781px) {
+  header .nav-list {
+    display: flex !important;
+    position: static !important;
+    height: auto !important;
+    flex-direction: row !important;
   }
-
-  #nav-check:checked ~ .nav-links {
-    height: calc(100vh - 72px);
-    padding: 1rem 0;
-  }
-
-    .cart-icon {
+  .nav-btn {
     display: none !important;
   }
-}
-
-@media (min-width: 781px) {
-  .nav-links {
-    display: flex !important;
-    height: auto !important;
-    position: static !important;
-    flex-direction: row !important;
-    gap: 20px !important;
+  #nav-check {
+    display: none !important;
   }
-  .nav-btn { display: none !important; }
-  #nav-check { display: none !important; }
-   .cart-icon { display: inline-block !important; }
 }
