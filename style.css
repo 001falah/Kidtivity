@@ -36,7 +36,6 @@ img, video {
   max-width: 100%;
   width: 100%;
   margin: auto;
-  box-shadow: var(--box-shadow);
   background: var(--white);
   overflow: hidden;
 }

@@ -36,7 +36,6 @@ img, video {
   max-width: 100%;
   width: 100%;
   margin: auto;
-  box-shadow: var(--box-shadow);
   background: var(--white);
   overflow: hidden;
 }
@@ -113,7 +112,7 @@ header nav a:hover {
 }
 
 .simple-card {
-  background: var(--purple);
+  background: var(--yellow);
   border-radius: 16px;
   box-shadow: var(--box-shadow);
   max-width: 340px;
@@ -126,7 +125,7 @@ header nav a:hover {
 }
 
 .simple-card2 {
-  background-color: var(--yellow);
+  background-color: var(--purple);
 }
 
 .simple-card img {
