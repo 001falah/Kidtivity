@@ -8,6 +8,7 @@
   --magenta: #f111f1;
   --white: #fff;
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
+  --header-height:90px;
 }
 
 /* ==============================
@@ -24,6 +25,7 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   color: var(--purple);
   overflow-x: hidden;
+  padding-top: var(--header-height);
 }
 
 img, video {
@@ -39,7 +41,10 @@ img, video {
   background: var(--white);
   overflow: hidden;
 }
-/* =================== Header =================== */
+
+/* ==============================
+   3. HEADER
+   ============================== */
 header {
   display: flex;
   align-items: center;
@@ -47,7 +52,11 @@ header {
   padding: 24px 32px;
   background: var(--purple);
   border-bottom: 1.5px solid var(--yellow);
-  position: relative;
+  position: fixed;       /* ✅ FIXED instead of relative */
+  top: 0;                /* ✅ Stick to top */
+  left: 0;
+  width: 100%;           /* ✅ Occupy full width */
+  z-index: 1000;         /* ✅ Stay above everything else */
 }
 
 .logo {
@@ -112,7 +121,7 @@ header nav a:hover {
 }
 
 .simple-card {
-  background: var(--yellow);
+  background: var(--purple);
   border-radius: 16px;
   box-shadow: var(--box-shadow);
   max-width: 340px;
@@ -125,7 +134,7 @@ header nav a:hover {
 }
 
 .simple-card2 {
-  background-color: var(--purple);
+  background-color: var(--yellow);
 }
 
 .simple-card img {
@@ -185,10 +194,10 @@ header nav a:hover {
 button {
   font-family: inherit;
   font-weight: 700;
-  padding: 6px 16px;
+  padding: 8px 16px;
   border-radius: 14px;
   border: none;
-  background: var(--purple);
+  background: var(--yellow);
   color: var(--white);
   cursor: pointer;
   transition: background 0.18s, transform 0.18s;
@@ -200,7 +209,7 @@ button:hover {
 }
 
 .simple-card2 button {
-  background-color: var(--yellow);
+  background-color: var(--purple);
 }
 
 /* =================== Footer =================== */

@@ -8,6 +8,7 @@
   --magenta: #f111f1;
   --white: #fff;
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
+  --header-height:90px;
 }
 
 /* ==============================
@@ -24,6 +25,7 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   color: var(--purple);
   overflow-x: hidden;
+  padding-top: var(--header-height);
 }
 
 img, video {
@@ -50,7 +52,11 @@ header {
   padding: 24px 32px;
   background: var(--purple);
   border-bottom: 1.5px solid var(--yellow);
-  position: relative;
+  position: fixed;       /* ✅ FIXED instead of relative */
+  top: 0;                /* ✅ Stick to top */
+  left: 0;
+  width: 100%;           /* ✅ Occupy full width */
+  z-index: 1000;         /* ✅ Stay above everything else */
 }
 
 .logo {
