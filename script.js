@@ -134,27 +134,42 @@ const nextBtn = document.querySelector('.carousel-btn.next');
 
 let currentIndex = 0;
 
-// Calculate how many slides fit in viewport
-function slidesPerView() {
-  if (window.innerWidth <= 480) return 1;
-  if (window.innerWidth <= 768) return 2;
-  if (window.innerWidth <= 1024) return 3;
-  return 4;  // default desktop
-}
-
+// Show specific slide
 function showSlide(index) {
-  const perView = slidesPerView();
-  const maxIndex = slides.length - perView; 
+  const maxIndex = slides.length - 1;
 
-  if (index > maxIndex) index = 0;       // loop back
-  if (index < 0) index = maxIndex;       // loop to end
+  if (index > maxIndex) index = 0;     // loop back to first
+  if (index < 0) index = maxIndex;     // loop to last
 
   currentIndex = index;
-  const offset = -(100 / perView) * currentIndex;
+  const offset = -(100 * currentIndex); // One slide = full width
   container.style.transform = `translateX(${offset}%)`;
 }
 
+// Manual navigation
 nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
 prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
-setInterval(() => showSlide(currentIndex + 1), 5000);
+
+// Mute/Unmute buttons
+document.querySelectorAll('.carousel-slide').forEach(slide => {
+  const video = slide.querySelector('video');
+  const button = slide.querySelector('.mute-btn');
+
+  button.addEventListener('click', () => {
+    if (video.muted) {
+      // Mute all other videos first
+      document.querySelectorAll('.carousel-slide video').forEach(v => v.muted = true);
+
+      video.muted = false;
+      button.textContent = '🔊';
+    } else {
+      video.muted = true;
+      button.textContent = '🔈';
+    }
+  });
+});
+
+// Initialize (show the first slide)
+showSlide(currentIndex);
+
 

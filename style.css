@@ -589,13 +589,14 @@ footer nav a:hover {
 
 /* Each card (slide) */
 .carousel-slide {
-  flex: 0 0 25%;   /* Show 4 cards by default */
+  flex: 0 0 100%;   /* Always show 1 card at a time */
   padding: 10px;
   box-sizing: border-box;
   position: relative;
 }
 
-.carousel-slide img {
+.carousel-slide img,
+.carousel-slide video {
   width: 100%;
   height: 280px;
   object-fit: cover;
@@ -614,16 +615,24 @@ footer nav a:hover {
   padding: 6px 12px;
   border-radius: 6px;
 }
+.carouselHead {
+  text-align:center; 
+  color: white; 
+  font-size:2em; 
+  font-weight:bold; 
+  margin-bottom:24px;
+}
 
-/* Responsive control for cards */
-@media (max-width: 1024px) {
-  .carousel-slide { flex: 0 0 33.33%; } /* 3 cards */
-}
-@media (max-width: 768px) {
-  .carousel-slide { flex: 0 0 50%; }     /* 2 cards */
-}
-@media (max-width: 480px) {
-  .carousel-slide { flex: 0 0 100%; }    /* 1 card */
+.mute-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* ==============================
@@ -631,8 +640,8 @@ footer nav a:hover {
 ============================== */
 .carousel-btn {
   position: absolute;
-  top: 50%;                        /* Vertical center */
-  transform: translateY(-50%);     /* Perfect centering */
+  top: 50%;                       /* Vertical center */
+  transform: translateY(-50%);    /* Perfect centering */
   background: var(--purple);
   border: 2px solid var(--white);
   color: var(--white);
@@ -645,7 +654,7 @@ footer nav a:hover {
   align-items: center;
   justify-content: center;
   transition: 0.3s;
-  z-index: 10;                     /* Stay above images */
+  z-index: 10;                    /* Stay above videos */
 }
 
 .carousel-btn:hover {
@@ -661,11 +670,14 @@ footer nav a:hover {
   right: 15px;
 }
 
-/* Smaller on mobile but KEEP centered on Y */
+/* Smaller buttons on mobile but keep centered */
 @media (max-width: 600px) {
   .carousel-btn {
     width: 38px;
     height: 38px;
     font-size: 1em;
+  }
+  .carouselHead {
+    font-size: 1.2em;
   }
 }
