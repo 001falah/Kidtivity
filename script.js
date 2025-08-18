@@ -134,21 +134,36 @@ const nextBtn = document.querySelector('.carousel-btn.next');
 
 let currentIndex = 0;
 
-// Show specific slide
-function showSlide(index) {
-  const maxIndex = slides.length - 1;
+// Calculate how many slides fit in the viewport
+function slidesPerView() {
+  if (window.innerWidth <= 480) return 1;
+  if (window.innerWidth <= 768) return 2;
+  if (window.innerWidth <= 1024) return 3;
+  return 4; // default for desktop
+}
 
-  if (index > maxIndex) index = 0;     // loop back to first
-  if (index < 0) index = maxIndex;     // loop to last
+// Show specific group of slides
+function showSlide(index) {
+  const perView = slidesPerView();
+  const maxIndex = slides.length - perView; // last valid index
+
+  // Looping behavior
+  if (index > maxIndex) index = 0;        // go back to first
+  if (index < 0) index = maxIndex;        // go to last
 
   currentIndex = index;
-  const offset = -(100 * currentIndex); // One slide = full width
+
+  // Each step = (100 / perView)%
+  const offset = -(100 / perView) * currentIndex;
   container.style.transform = `translateX(${offset}%)`;
 }
 
 // Manual navigation
 nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
 prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+
+// Handle resize (keep alignment consistent)
+window.addEventListener('resize', () => showSlide(currentIndex));
 
 // Mute/Unmute buttons
 document.querySelectorAll('.carousel-slide').forEach(slide => {
@@ -157,9 +172,8 @@ document.querySelectorAll('.carousel-slide').forEach(slide => {
 
   button.addEventListener('click', () => {
     if (video.muted) {
-      // Mute all other videos first
+      // Mute all other videos before unmuting this one
       document.querySelectorAll('.carousel-slide video').forEach(v => v.muted = true);
-
       video.muted = false;
       button.textContent = '🔊';
     } else {
@@ -169,7 +183,8 @@ document.querySelectorAll('.carousel-slide').forEach(slide => {
   });
 });
 
-// Initialize (show the first slide)
+// Initialize
 showSlide(currentIndex);
+
 
 

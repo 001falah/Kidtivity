@@ -589,7 +589,7 @@ footer nav a:hover {
 
 /* Each card (slide) */
 .carousel-slide {
-  flex: 0 0 100%;   /* Always show 1 card at a time */
+  flex: 0 0 25%;   /* Show 4 cards at a time on desktop */
   padding: 10px;
   box-sizing: border-box;
   position: relative;
@@ -598,9 +598,9 @@ footer nav a:hover {
 .carousel-slide img,
 .carousel-slide video {
   width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 10px;
+  height: 440px;          /* Portrait / Reel-style height */
+  object-fit: cover;      /* Fill like a reel without distorting */
+  border-radius: 12px;
 }
 
 .carousel-text {
@@ -615,12 +615,13 @@ footer nav a:hover {
   padding: 6px 12px;
   border-radius: 6px;
 }
+
 .carouselHead {
-  text-align:center; 
-  color: white; 
-  font-size:2em; 
-  font-weight:bold; 
-  margin-bottom:24px;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 24px;
 }
 
 .mute-btn {
@@ -670,7 +671,19 @@ footer nav a:hover {
   right: 15px;
 }
 
-/* Smaller buttons on mobile but keep centered */
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .carousel-slide { flex: 0 0 33.33%; } /* 3 cards */
+}
+
+@media (max-width: 768px) {
+  .carousel-slide { flex: 0 0 50%; }    /* 2 cards */
+}
+
+@media (max-width: 480px) {
+  .carousel-slide { flex: 0 0 100%; }   /* 1 card */
+}
+
 @media (max-width: 600px) {
   .carousel-btn {
     width: 38px;
@@ -681,3 +694,4 @@ footer nav a:hover {
     font-size: 1.2em;
   }
 }
+
