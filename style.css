@@ -820,7 +820,7 @@ footer nav a:hover {
 ============================== */
 .carousel {
   position: relative;
-  background: var(--purple); /* Purple background behind cards */
+  background: var(--yellow); /* Purple background behind cards */
   padding: 30px 0;
   overflow: hidden;
 }
@@ -886,7 +886,7 @@ footer nav a:hover {
   position: absolute;
   top: 50%;                       /* Vertical center */
   transform: translateY(-50%);    /* Perfect centering */
-  background: var(--purple);
+  background: var(--yellow);
   border: 2px solid var(--white);
   color: var(--white);
   width: 46px;
