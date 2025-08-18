@@ -246,16 +246,21 @@ header nav a:hover {
   min-width: 200px;
   text-align: center;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .hiw-icon-img {
-  width: 180px;
+  display: block;
+  margin: 0 auto 12px auto;
+  max-width: 180px;
+  width: 100%;
   height: 180px;
-  border-radius: 14px;
   object-fit: contain;
-  margin-bottom: 12px;
 }
-
+  
 .hiw-step p {
   font-size: 1.2em;
   font-weight: 500;
