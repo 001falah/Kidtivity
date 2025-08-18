@@ -114,6 +114,24 @@ header nav a:hover {
   background: var(--white);
 }
 
+/* Fix overlapping issue for screen widths between 800px and 900px */
+@media (min-width: 800px) and (max-width: 900px) {
+  .hero {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .hero-content {
+    flex: 1 1 60%;
+    min-width: 280px;
+  }
+  .crew-carousel {
+    flex: 1 1 35%;
+    max-width: none;
+    height: auto;
+    margin-left: 0;
+  }
+}
+
 .hero-content {
   flex: 1;
   min-width: 240px;
@@ -166,18 +184,232 @@ header nav a:hover {
   background: var(--accent);
 }
 
-.hero-image {
-  flex: 1;
+/* ==============================
+   5. CREW CAROUSEL IN HERO
+   ============================== */
+.crew-carousel {
+  width: 100%;
+  max-width: 580px;       
+  height: 320px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: auto;
+  margin-right: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: right;
-  min-width: 320px;
-  margin-left: 0;
 }
 
-.hero-image img {
-  max-width: 420px;
+.crew-carousel .crew-track {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.crew-carousel .crew-card {
+  position: absolute;
+  width: 150px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.8s ease;
+  cursor: pointer;
+}
+
+.crew-carousel .crew-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* prevent image from interfering with drag/click */
+}
+
+/* Position and styling for carousel cards */
+.crew-carousel .crew-card.center {
+  z-index: 10;
+  transform: scale(1.05);
+  opacity: 1;
+  filter: none;
+}
+
+.crew-carousel .crew-card.left-1 {
+  transform: translateX(-120px) scale(0.9);
+  opacity: 1;
+  filter: none;
+  z-index: 5;
+}
+
+.crew-carousel .crew-card.left-2 {
+  transform: translateX(-240px) scale(0.8);
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+}
+
+.crew-carousel .crew-card.right-1 {
+  transform: translateX(120px) scale(0.9);
+  opacity: 1;
+  filter: none;
+  z-index: 5;
+}
+
+.crew-carousel .crew-card.right-2 {
+  transform: translateX(240px) scale(0.8);
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+}
+
+.crew-carousel .crew-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Arrow buttons */
+.crew-carousel .crew-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--yellow);
+  color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 20;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crew-carousel .crew-arrow:hover {
+  background: var(--purple);
+  color: var(--white);
+}
+
+.crew-carousel .crew-left {
+  left: 12px;
+}
+
+.crew-carousel .crew-right {
+  right: 12px;
+}
+
+/* ==============================
+   6. RESPONSIVE
+   ============================== */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 28px 40px;
+    gap: 36px;
+  }
+  .crew-carousel {
+    max-width: 400px;      /* increased from 340px */
+    height: 300px;         /* increased from 260px */
+  }
+  .crew-carousel .crew-card {
+    width: 140px;          /* increased from 110px */
+    height: 200px;         /* increased from 160px */
+    border-radius: 14px;
+  }
+  .crew-carousel .crew-card.left-1 {
+    transform: translateX(-105px) scale(0.9); /* adjusted */
+  }
+  .crew-carousel .crew-card.left-2 {
+    transform: translateX(-210px) scale(0.8);
+  }
+  .crew-carousel .crew-card.right-1 {
+    transform: translateX(105px) scale(0.9);
+  }
+  .crew-carousel .crew-card.right-2 {
+    transform: translateX(210px) scale(0.8);
+  }
+}
+
+@media (max-width: 900px) and (min-width: 801px) {
+  .hero {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .hero-content {
+    flex: 1 1 60%;
+    min-width: 280px;
+  }
+  .crew-carousel {
+    flex: 1 1 35%;
+    max-width: none;
+    height: auto;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 16px;
+    gap: 24px;
+  }
+  .crew-carousel {
+    max-width: 320px;      /* increased from 280px */
+    height: 260px;         /* increased from 220px */
+    margin: 0 auto;
+  }
+  .crew-carousel .crew-card {
+    width: 120px;          /* increased from 90px */
+    height: 170px;         /* increased from 130px */
+    border-radius: 12px;
+  }
+  .crew-carousel .crew-card.left-1 {
+    transform: translateX(-85px) scale(0.9);
+  }
+  .crew-carousel .crew-card.left-2 {
+    opacity: 0; /* still hiding far-away cards for clarity */
+  }
+  .crew-carousel .crew-card.right-1 {
+    transform: translateX(85px) scale(0.9);
+  }
+  .crew-carousel .crew-card.right-2 {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .crew-carousel {
+    max-width: 300px;      /* increased from 220px */
+    height: 250px;         /* increased from 170px */
+  }
+  .crew-carousel .crew-card {
+    width: 150px;          /* increased from 70px */
+    height: 200px;         /* increased from 100px */
+    border-radius: 10px;
+  }
+  .crew-carousel .crew-arrow {
+    width: 34px;           /* slightly bigger buttons */
+    height: 34px;
+    font-size: 1.1rem;
+  }
+  .crew-carousel .crew-card.left-1 {
+    transform: translateX(-60px) scale(0.9);
+  }
+  .crew-carousel .crew-card.right-1 {
+    transform: translateX(60px) scale(0.9);
+  }
+  .crew-carousel .crew-card.left-2,
+  .crew-carousel .crew-card.right-2 {
+    opacity: 0;
+  }
 }
 
 /* ==============================
@@ -706,3 +938,143 @@ footer nav a:hover {
   }
 }
 
+/* ==============================
+   12. CAROUSEL STYLES
+============================== */
+.carousel {
+  position: relative;
+  background: var(--purple); /* Purple background behind cards */
+  padding: 30px 0;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+/* Each card (slide) */
+.carousel-slide {
+  flex: 0 0 25%;   /* Show 4 cards by default */
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.carousel-text {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--white);
+  font-size: 1em;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Responsive control for cards */
+@media (max-width: 1024px) {
+  .carousel-slide { flex: 0 0 33.33%; } /* 3 cards */
+}
+@media (max-width: 768px) {
+  .carousel-slide { flex: 0 0 50%; }     /* 2 cards */
+}
+@media (max-width: 480px) {
+  .carousel-slide { flex: 0 0 100%; }  
+}
+
+/* ==============================
+   Carousel Navigation Buttons
+============================== */
+.carousel-btn {
+  position: absolute;
+  top: 50%;                 /* Vertical center */
+  transform: translateY(-50%);     /* Perfect centering */
+  background: var(--purple);
+  border: 2px solid var(--white);
+  color: var(--white);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  z-index: 10;               /* Stay above images */
+}
+
+.carousel-btn:hover {
+  background: var(--purple);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Position left/right */
+.carousel-btn.prev {
+  left: 15px;
+}
+.carousel-btn.next {
+  right: 15px;
+}
+
+/* Smaller on mobile but KEEP centered on Y */
+@media (max-width: 600px) {
+  .carousel-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 950px) and (min-width: 750px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 28px 16px;
+    text-align: center;
+  }
+
+  .hero-content,
+  .crew-carousel {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 900px) and (min-width: 800px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 32px 16px;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .crew-carousel {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    height: 340px;
+  }
+}
