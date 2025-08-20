@@ -11,6 +11,12 @@
   --header-height:90px;
 }
 
+@font-face {
+  font-family: 'Penny Pinch';
+  src: url('fonts/PennyPinch-Vnww.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /* ==============================
    2. BASE STYLES
    ============================== */
@@ -138,10 +144,11 @@ header nav a:hover {
 }
 
 .hero-content h1 {
+  font-family: 'Fredoka', sans-serif;
   color: var(--purple);
   margin-bottom: 10px;
-  font-size: 2.5em;
-  font-weight: bold;
+  font-size: 2em;
+  font-weight: 1px;
 }
 
 .hero-content p {
