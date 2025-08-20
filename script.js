@@ -147,20 +147,69 @@ document.addEventListener('DOMContentLoaded', function () {
       currentIndex = index;
       const offset = -(100 / perView) * currentIndex;
       container.style.transform = `translateX(${offset}%)`;
+
+      if (isMobile()) {
+        // Mute all videos and pause except current
+        slides.forEach((slide, idx) => {
+          const video = slide.querySelector('video');
+          if (video) {
+            video.muted = true;
+            if (idx !== currentIndex) {
+              video.pause();
+            }
+          }
+        });
+        // Unmute and play current video
+        const currentVideo = slides[currentIndex].querySelector('video');
+        if (currentVideo) {
+          currentVideo.muted = false;
+          currentVideo.play();
+        }
+      }
     }
 
     nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
     prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
     window.addEventListener('resize', () => showSlide(currentIndex));
 
-    // Video mute/unmute for this carousel
-    document.querySelectorAll('.carousel-slide').forEach(slide => {
+    // Touch events for swipe
+    let startX = 0;
+    let endX = 0;
+
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      endX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchend', () => {
+      let diff = startX - endX;
+      if (Math.abs(diff) > 30) {  // Minimum swipe distance threshold
+        if (diff > 0) showSlide(currentIndex + 1);
+        else showSlide(currentIndex - 1);
+      }
+    });
+
+    // Mouse wheel support only on desktop
+    if (!isMobile()) {
+      container.addEventListener('wheel', e => {
+        e.preventDefault();
+        if (e.deltaY > 0) showSlide(currentIndex + 1);
+        else if (e.deltaY < 0) showSlide(currentIndex - 1);
+      }, { passive: false });
+    }
+
+    // Video mute/unmute buttons
+    slides.forEach(slide => {
       const video = slide.querySelector('video');
       const button = slide.querySelector('.mute-btn');
 
       button.addEventListener('click', () => {
         if (video.muted) {
-          document.querySelectorAll('.carousel-slide video').forEach(v => v.muted = true);
+          // Mute all first
+          slides.forEach(s => s.querySelector('video').muted = true);
           video.muted = false;
           button.textContent = '🔊';
         } else {
@@ -217,6 +266,34 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === "ArrowLeft") updateCrewCarousel(crewIndex - 1);
       else if (e.key === "ArrowRight") updateCrewCarousel(crewIndex + 1);
     });
+
+    // Touch events for swipe on mobile
+    let startX = 0, endX = 0;
+    const crewContainer = document.querySelector('.crew-hero');
+    if (crewContainer) {
+      crewContainer.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+      });
+      crewContainer.addEventListener('touchmove', e => {
+        endX = e.touches[0].clientX;
+      });
+      crewContainer.addEventListener('touchend', () => {
+        const diff = startX - endX;
+        if (Math.abs(diff) > 30) {
+          if (diff > 0) updateCrewCarousel(crewIndex + 1);
+          else updateCrewCarousel(crewIndex - 1);
+        }
+      });
+
+      // Mouse wheel support on desktop
+      if (!isMobile()) {
+        crewContainer.addEventListener('wheel', e => {
+          e.preventDefault();
+          if (e.deltaY > 0) updateCrewCarousel(crewIndex + 1);
+          else if (e.deltaY < 0) updateCrewCarousel(crewIndex - 1);
+        }, { passive: false });
+      }
+    }
 
     updateCrewCarousel(0);
   })();
