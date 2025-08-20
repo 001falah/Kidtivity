@@ -28,7 +28,6 @@
 
 body {
   background: var(--white);
-  font-family: 'Segoe UI', Arial, sans-serif;
   color: var(--purple);
   overflow-x: hidden;
   padding-top: var(--header-height);
@@ -77,10 +76,11 @@ header {
 }
 
 header nav a {
+  font-family: 'Fredoka', sans-serif;
   color: var(--white);
   text-decoration: none;
   margin: 0 14px;
-  font-weight: 500;
+  font-weight: 250;
   transition: color .18s;
 }
 
@@ -118,6 +118,15 @@ header nav a:hover {
   gap: 56px;
   padding: 38px 80px;
   background: var(--white);
+}
+
+.hero-content h1 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.hero-content p {
+  font-family: 'Raleway', sans-serif;
+   font-weight: 400;
 }
 
 /* Fix overlapping issue for screen widths between 800px and 900px */
@@ -162,9 +171,10 @@ header nav a:hover {
 
 .join-us,
 .watch-btn {
+  font-family: 'Fredoka', sans-serif;
   padding: 10px 26px;
   border-radius: 22px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1em;
   cursor: pointer;
   border: none;
@@ -473,6 +483,7 @@ header nav a:hover {
 }
 
 .how-it-works h2 {
+  font-family: 'Fredoka', sans-serif;
   font-size: clamp(1.5em, 3vw, 2em);
   font-weight: bold;
   margin-bottom: 24px;
