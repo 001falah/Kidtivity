@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Utility: Detect mobile
   // ==============================
   function isMobile() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
   function tryOpenApp(deepLink, webURL) {
@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       document.addEventListener('visibilitychange', onVisibilityChange);
-
       // Try app
       window.location.href = deepLink;
 
@@ -35,44 +34,65 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==============================
   // Footer Links
   // ==============================
-  document.getElementById('f-contact').addEventListener('click', e => {
-    e.preventDefault();
-    window.location.href = 'contact.html';
-  });
+  const fContact = document.getElementById('f-contact');
+  if (fContact) {
+    fContact.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = 'contact.html';
+    });
+  }
 
-  document.getElementById('f-aboutpage').addEventListener('click', e => {
-    e.preventDefault();
-    window.location.href = 'about.html';
-  });
+  const fAbout = document.getElementById('f-aboutpage');
+  if (fAbout) {
+    fAbout.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = 'about.html';
+    });
+  }
 
   // ==============================
   // Navigation
   // ==============================
-  document.getElementById('home-page').addEventListener('click', () => window.location.href = 'index.html');
-  document.getElementById('cartIcon').addEventListener('click', () => window.location.href = 'shop.html');
-  document.getElementById('shopLink').addEventListener('click', () => window.location.href = 'shop.html');
-  document.getElementById('aboutpage').addEventListener('click', () => window.location.href = 'about.html');
-  document.getElementById('contact').addEventListener('click', () => window.location.href = 'contact.html');
+  const homePage = document.getElementById('home-page');
+  if (homePage) homePage.addEventListener('click', () => window.location.href = 'index.html');
+
+  const cartIcon = document.getElementById('cartIcon');
+  if (cartIcon) cartIcon.addEventListener('click', () => window.location.href = 'shop.html');
+
+  const shopLink = document.getElementById('shopLink');
+  if (shopLink) shopLink.addEventListener('click', () => window.location.href = 'shop.html');
+
+  const aboutPage = document.getElementById('aboutpage');
+  if (aboutPage) aboutPage.addEventListener('click', () => window.location.href = 'about.html');
+
+  const contact = document.getElementById('contact');
+  if (contact) contact.addEventListener('click', () => window.location.href = 'contact.html');
 
   // ==============================
   // Instagram Footer Link
   // ==============================
-  document.getElementById('insta').addEventListener('click', e => {
-    e.preventDefault();
-    const instaUsername = 'kidtivity.in';
-    const instaWebURL = 'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==';
-    tryOpenApp(`instagram://user?username=${instaUsername}`, instaWebURL);
-  });
+  const instaBtn = document.getElementById('insta');
+  if (instaBtn) {
+    instaBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const instaUsername = 'kidtivity.in';
+      const instaWebURL = 'https://www.instagram.com/kidtivity.in?igsh=MXZ4MTZveDNvMjlmaA==';
+      tryOpenApp(`instagram://user?username=${instaUsername}`, instaWebURL);
+    });
+  }
 
   // ==============================
   // WhatsApp Footer Link
   // ==============================
-  document.getElementById('WhatsApp').addEventListener('click', e => {
-    e.preventDefault();
-    const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
-    const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
-    tryOpenApp(whatsappAppLink, whatsappWebURL);
-  });
+  const waBtn = document.getElementById('WhatsApp');
+  if (waBtn) {
+    waBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const whatsappWebURL = 'https://chat.whatsapp.com/EF7EZfWWglvGdNbhPoROiI?mode=ac_t';
+      const whatsappAppLink = 'whatsapp://chat?code=EF7EZfWWglvGdNbhPoROiI';
+      tryOpenApp(whatsappAppLink, whatsappWebURL);
+    });
+  }
 
   // ==============================
   // Join Us Button
@@ -120,116 +140,115 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-// ==============================
-// Multi-card Video Carousel ("Explore what's in the box")
-// ==============================
-(function () {
-  const slides = document.querySelectorAll('.carousel-slide');
-  const container = document.querySelector('.carousel-container');
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
-  let currentIndex = 0;
+  // ==============================
+  // Multi-card Video Carousel ("Explore what's in the box")
+  // ==============================
+  (function () {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const container = document.querySelector('.carousel-container');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    let currentIndex = 0;
 
-  function slidesPerView() {
-    if (window.innerWidth <= 480) return 1;
-    if (window.innerWidth <= 768) return 2;
-    if (window.innerWidth <= 1024) return 3;
-    return 4;
-  }
+    // Holds the index of the currently unmuted slide
+    let unmutedIndex = null;
 
-  function showSlide(index) {
-    const perView = slidesPerView();
-    const maxIndex = slides.length - perView;
-
-    if (index > maxIndex) index = 0;
-    if (index < 0) index = maxIndex;
-
-    currentIndex = index;
-    const offset = -(100 / perView) * currentIndex;
-    container.style.transform = `translateX(${offset}%)`;
-
-    // Always mute/pause all videos except the ones in view
-    slides.forEach((slide, idx) => {
-      const video = slide.querySelector('video');
-      if (video) {
-        if (idx >= currentIndex && idx < currentIndex + perView) {
-          // Slide is in view → play with sound only if single slide (mobile)
-          if (isMobile()) {
-            video.muted = (idx !== currentIndex);
-          } else {
-            video.muted = true; // Desktop: keep muted unless manually unmuted
-          }
-          video.play().catch(() => {}); // Ignore autoplay errors
-        } else {
-          video.pause();
-          video.muted = true;
-        }
-      }
-    });
-  }
-
-  nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
-  prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
-  window.addEventListener('resize', () => showSlide(currentIndex));
-
-  // Touch events for swipe
-  let startX = 0;
-  let endX = 0;
-
-  container.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  container.addEventListener('touchmove', (e) => {
-    endX = e.touches[0].clientX;
-  });
-
-  container.addEventListener('touchend', () => {
-    let diff = startX - endX;
-    if (Math.abs(diff) > 30) {  // Minimum swipe distance threshold
-      if (diff > 0) showSlide(currentIndex + 1);
-      else showSlide(currentIndex - 1);
+    function slidesPerView() {
+      if (window.innerWidth <= 480) return 1;
+      if (window.innerWidth <= 768) return 2;
+      if (window.innerWidth <= 1024) return 3;
+      return 4;
     }
-  });
 
-  // Mouse wheel support only on desktop
-  if (!isMobile()) {
-    container.addEventListener('wheel', e => {
-      e.preventDefault();
-      if (e.deltaY > 0) showSlide(currentIndex + 1);
-      else if (e.deltaY < 0) showSlide(currentIndex - 1);
-    }, { passive: false });
-  }
+    function showSlide(index) {
+      const perView = slidesPerView();
+      const maxIndex = slides.length - perView;
 
-  // Video mute/unmute buttons
-  slides.forEach(slide => {
-    const video = slide.querySelector('video');
-    const button = slide.querySelector('.mute-btn');
+      if (index > maxIndex) index = 0;
+      if (index < 0) index = maxIndex;
 
-    if (button && video) {
-      button.addEventListener('click', () => {
-        if (video.muted) {
-          // Mute all first
-          slides.forEach(s => {
-            const v = s.querySelector('video');
-            if (v) v.muted = true;
-          });
-          video.muted = false;
-          button.textContent = '🔊';
-        } else {
-          video.muted = true;
-          button.textContent = '🔈';
+      currentIndex = index;
+      const offset = -(100 / perView) * currentIndex;
+      container.style.transform = `translateX(${offset}%)`;
+
+      slides.forEach((slide, idx) => {
+        const video = slide.querySelector('video');
+        if (video) {
+          if (idx >= currentIndex && idx < currentIndex + perView) {
+            if (unmutedIndex === idx) {
+              video.muted = false;
+            } else {
+              video.muted = true;
+            }
+            video.play().catch(() => { });
+          } else {
+            video.pause();
+            video.muted = true;
+          }
+        }
+      });
+
+      slides.forEach((slide, idx) => {
+        const button = slide.querySelector('.mute-btn');
+        const video = slide.querySelector('video');
+        if (button && video) {
+          if (idx === unmutedIndex && idx >= currentIndex && idx < currentIndex + perView) {
+            button.textContent = '🔊';
+          } else {
+            button.textContent = '🔈';
+          }
         }
       });
     }
-  });
 
-  // Initial load
-  showSlide(currentIndex);
+    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+    window.addEventListener('resize', () => showSlide(currentIndex));
 
-  // Removed auto-swipe (no setInterval)
-})();
+    // Touch swipe only on mobile
+    if (isMobile()) {
+      let startX = 0, endX = 0;
+      container.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+      container.addEventListener('touchmove', (e) => endX = e.touches[0].clientX);
+      container.addEventListener('touchend', () => {
+        const diff = startX - endX;
+        if (Math.abs(diff) > 30) {
+          if (diff > 0) showSlide(currentIndex + 1);
+          else showSlide(currentIndex - 1);
+        }
+      });
+    }
 
+    slides.forEach((slide, idx) => {
+      const video = slide.querySelector('video');
+      const button = slide.querySelector('.mute-btn');
+      if (button && video) {
+        button.addEventListener('click', () => {
+          const perView = slidesPerView();
+          // Only allow unmute if slide is visible
+          if (idx >= currentIndex && idx < currentIndex + perView) {
+            if (video.muted === false) {
+              video.muted = true;
+              unmutedIndex = null;
+              button.textContent = '🔈';
+            } else {
+              slides.forEach((s, i) => {
+                const v = s.querySelector('video');
+                const b = s.querySelector('.mute-btn');
+                if (v) v.muted = true;
+                if (b) b.textContent = '🔈';
+              });
+              video.muted = false;
+              unmutedIndex = idx;
+              button.textContent = '🔊';
+            }
+          }
+        });
+      }
+    });
+
+    showSlide(currentIndex);
+  })();
 
   // ==============================
   // Hero Crew Carousel
@@ -263,8 +282,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 400);
     }
 
-    leftBtn.addEventListener("click", () => updateCrewCarousel(crewIndex - 1));
-    rightBtn.addEventListener("click", () => updateCrewCarousel(crewIndex + 1));
+    if (leftBtn) leftBtn.addEventListener("click", () => updateCrewCarousel(crewIndex - 1));
+    if (rightBtn) rightBtn.addEventListener("click", () => updateCrewCarousel(crewIndex + 1));
 
     crewCards.forEach((card, i) => {
       card.addEventListener("click", () => updateCrewCarousel(i));
@@ -275,31 +294,19 @@ document.addEventListener('DOMContentLoaded', function () {
       else if (e.key === "ArrowRight") updateCrewCarousel(crewIndex + 1);
     });
 
-    // Touch events for swipe on mobile
-    let startX = 0, endX = 0;
-    const crewContainer = document.querySelector('.crew-hero');
-    if (crewContainer) {
-      crewContainer.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-      });
-      crewContainer.addEventListener('touchmove', e => {
-        endX = e.touches[0].clientX;
-      });
-      crewContainer.addEventListener('touchend', () => {
-        const diff = startX - endX;
-        if (Math.abs(diff) > 30) {
-          if (diff > 0) updateCrewCarousel(crewIndex + 1);
-          else updateCrewCarousel(crewIndex - 1);
-        }
-      });
-
-      // Mouse wheel support on desktop
-      if (!isMobile()) {
-        crewContainer.addEventListener('wheel', e => {
-          e.preventDefault();
-          if (e.deltaY > 0) updateCrewCarousel(crewIndex + 1);
-          else if (e.deltaY < 0) updateCrewCarousel(crewIndex - 1);
-        }, { passive: false });
+    if (isMobile()) {
+      const crewContainer = document.querySelector('.crew-hero');
+      let startX = 0, endX = 0;
+      if (crewContainer) {
+        crewContainer.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        crewContainer.addEventListener('touchmove', e => endX = e.touches[0].clientX);
+        crewContainer.addEventListener('touchend', () => {
+          const diff = startX - endX;
+          if (Math.abs(diff) > 30) {
+            if (diff > 0) updateCrewCarousel(crewIndex + 1);
+            else updateCrewCarousel(crewIndex - 1);
+          }
+        });
       }
     }
 
