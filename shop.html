@@ -9,116 +9,103 @@
   <link rel="icon" type="image/png" href="images/tablogo.png" />
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
- <header>
-  <div class="logo">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Kidtivity logo" class="logo-img" />
-    </a>
-  </div>
-
-  <!-- Hamburger Navigation -->
-  <input type="checkbox" id="nav-check">
-  <div class="nav-btn">
-    <label for="nav-check">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
-  </div>
-
-  <nav class="nav-list">
-    <a href="#" id="home-page">HOME</a>
-    <a href="#" id="shopLink">SHOP</a>
-    <a href="#" id="aboutpage">ABOUT</a>
-    <a href="#" id="contact">CONTACT</a>
-  </nav>
-
-  <i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i>
-</header>
-
-<!-- Shop Section -->
-<section class="shop-main">
-  <div class="shop-row">
-    <h2>Explore Our Boxes</h2>
-    <div class="simple-card-row">
-
-      <!-- Curious Box — keeps previous bullet list -->
-      <div class="simple-card">
-        <img src="images/Curious.png" alt="Curious Box">
-        <div class="simple-card-info">
-          <h3>CURIOUS BOX</h3>
-           <span style="display: none;" id="description">Unlock a world of knowledge, creativity, and endless fun with The Curious Box – the ultimate all-in-one educational kit designed to spark curiosity and inspire learning in children. Packed with thoughtfully curated activities and resources, it makes learning exciting, interactive, and hands-on.</span>
-          <ul>
-            <li>Language Concept Kit</li>
-            <li>Number Concept Kit</li>
-            <li>Activity Kit (Puzzle)</li>
-            <li>Brain Game Book</li>
-            <li>Calendar Chart</li>
-            <li>Stamp Trace Kit</li>
-            <li>Online Reading Kit</li>
-            <li>Unlimited Printable Worksheets</li>
-          </ul>
-          <div class="simple-buy-row">
-            <span class="price">&#8377;2999</span>
-            <button id="buyBtn1">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Explorer Box — updated bullet list -->
-      <div class="simple-card simple-card2">
-        <img src="images/Eplorer.png" alt="Explorer Box">
-        <div class="simple-card-info">
-          <h3>EXPLORER BOX</h3>
-          <span style="display: none;" id="description">Ignite your child’s creativity, responsibility, and problem-solving skills with The Explorer Box – a specially curated collection of fun, educational tools that make learning an adventure every single day. Perfect for home learning, skill-building, and screen-free play!</span>
-          <ul>
-              <li>Writing Kit (Magic Book)</li>
-            <li>Responsibility Chart</li>
-            <li>Activity Kit (Tangram)</li>
-            <li>Body Part Kit</li>
-            <li>Mosaic DIY Kit</li>
-            <li>Calculation Cube</li>
-            <li>Online Reading Kit</li>
-            <li>Unlimited Printable Worksheets</li>
-          </ul>
-          <div class="simple-buy-row">
-            <span class="price">&#8377;3999</span>
-            <button id="buyBtn2">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Kidtivity logo" class="logo-img" />
+      </a>
     </div>
-  </div>
-</section>
-          <!-- <div class="simple-card">
-            <img src="images/box-6-7.jpg" alt="Box for Ages 6–7">
+
+    <!-- Hamburger Navigation -->
+    <input type="checkbox" id="nav-check">
+    <div class="nav-btn">
+      <label for="nav-check">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+
+    <nav class="nav-list">
+      <a href="#" id="home-page">HOME</a>
+      <a href="#" id="shopLink">SHOP</a>
+      <a href="#" id="aboutpage">ABOUT</a>
+      <a href="#" id="contact">CONTACT</a>
+    </nav>
+
+    <i class="fas fa-shopping-cart cart-icon" id="cartIcon" aria-label="Cart"></i>
+  </header>
+
+  <!-- Main Content -->
+  <main class="shop-main-wrapper">
+    <section class="shop-main">
+      <div class="shop-row">
+        <h2>Explore Our Boxes</h2>
+        <div class="simple-card-row">
+
+          <!-- Curious Box -->
+          <div class="simple-card">
+            <img src="images/Curious.png" alt="Curious Box">
             <div class="simple-card-info">
-              <span class="tag">Ages 6–7</span>
-              <h3>Early Learner Box</h3>
-              <p>STEM-based challenges and learning projects.</p>
+              <h3>CURIOUS BOX</h3>
+              <span style="display: none;" id="description">Unlock a world of knowledge...</span>
+              <ul>
+                <li>Language Concept Kit</li>
+                <li>Number Concept Kit</li>
+                <li>Activity Kit (Puzzle)</li>
+                <li>Brain Game Book</li>
+                <li>Calendar Chart</li>
+                <li>Stamp Trace Kit</li>
+                <li>Online Reading Kit</li>
+                <li>Unlimited Printable Worksheets</li>
+              </ul>
               <div class="simple-buy-row">
-                <span class="price">$29.99</span>
+                <span class="price">&#8377;2999</span>
                 <button id="buyBtn1">Buy Now</button>
               </div>
             </div>
-          </div> -->
+          </div>
+
+          <!-- Explorer Box -->
+          <div class="simple-card simple-card2">
+            <img src="images/Eplorer.png" alt="Explorer Box">
+            <div class="simple-card-info">
+              <h3>EXPLORER BOX</h3>
+              <span style="display: none;" id="description">Ignite your child’s creativity...</span>
+              <ul>
+                <li>Writing Kit (Magic Book)</li>
+                <li>Responsibility Chart</li>
+                <li>Activity Kit (Tangram)</li>
+                <li>Body Part Kit</li>
+                <li>Mosaic DIY Kit</li>
+                <li>Calculation Cube</li>
+                <li>Online Reading Kit</li>
+                <li>Unlimited Printable Worksheets</li>
+              </ul>
+              <div class="simple-buy-row">
+                <span class="price">&#8377;3999</span>
+                <button id="buyBtn2">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-      <nav>
-         <a href="about.html" id="f-aboutpage">About Us</a>
-        <a href="contact.html" id="f-contact">Contact</a>
-        <a href="https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MTkzdDcxcGxuaTVlaQ==" id="insta">Instagram</a>
-        <a href="#" id="WhatsApp">WhatsApp</a>
-      </nav>
-    </footer>
-  </div>
+  <!-- Footer -->
+  <footer>
+    <nav>
+      <a href="about.html" id="f-aboutpage">About Us</a>
+      <a href="contact.html" id="f-contact">Contact</a>
+      <a href="https://www.instagram.com/reel/CsDXGeWLpff/?igsh=MTkzdDcxcGxuaTVlaQ==" id="insta">Instagram</a>
+      <a href="#" id="WhatsApp">WhatsApp</a>
+    </nav>
+  </footer>
+
   <script src="shop.js"></script>
 </body>
 </html>
+

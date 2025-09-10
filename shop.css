@@ -8,24 +8,35 @@
   --magenta: #f111f1;
   --white: #fff;
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
-  --header-height:90px;
+  --header-height: 90px;
 }
 
 /* ==============================
    2. BASE STYLES
    ============================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html, body {
+  height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: var(--white);
   font-family: 'Segoe UI', Arial, sans-serif;
   color: var(--purple);
   overflow-x: hidden;
   padding-top: var(--header-height);
+}
+
+main.shop-main-wrapper {
+  flex: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 img, video {
@@ -52,11 +63,11 @@ header {
   padding: 24px 32px;
   background: var(--purple);
   border-bottom: 1.5px solid var(--yellow);
-  position: fixed;       /* ✅ FIXED instead of relative */
-  top: 0;                /* ✅ Stick to top */
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;           /* ✅ Occupy full width */
-  z-index: 1000;         /* ✅ Stay above everything else */
+  width: 100%;
+  z-index: 1000;
 }
 
 .logo {
@@ -75,7 +86,7 @@ header nav a {
   text-decoration: none;
   margin: 0 14px;
   font-weight: 500;
-  transition: color .18s;
+  transition: color 0.18s;
 }
 
 header nav a:hover {
@@ -237,15 +248,13 @@ footer nav a:hover {
    11. HAMBURGER MENU (≤780px)
    ============================== */
 @media (max-width: 780px) {
-  /* Hide cart icon below 780px */
   .cart-icon {
     display: none !important;
   }
 
-  /* Hide normal nav initially */
   header .nav-list {
     position: absolute;
-    top: 100%; /* ✅ dropdown starts just below full header */
+    top: 100%;
     left: 0;
     width: 100%;
     flex-direction: column;
@@ -255,7 +264,7 @@ footer nav a:hover {
     gap: 1rem;
     transition: height 0.3s ease-in;
     z-index: 999;
-    border-top: 1px solid #eedaf5; /* nice separation */
+    border-top: 1px solid #eedaf5;
   }
 
   header .nav-list a {
@@ -266,26 +275,22 @@ footer nav a:hover {
     font-weight: 500;
   }
 
-  /* Hide checkbox from all views */
   #nav-check {
     display: none !important;
   }
 
-  /* Show menu when checked */
   #nav-check:checked ~ .nav-list {
-    height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    height: calc(100vh - var(--header-height, 72px));
     padding: 1rem 0;
   }
 
-  /* Hamburger button */
   .nav-btn {
-  display: inline-block;
-  position: absolute;
-  right: 16px;
-  top: 24px;      /* ✅ aligns with logo height */
-  transform: none; /* remove translate */
-  cursor: pointer;
-}
+    display: inline-block;
+    position: absolute;
+    right: 16px;
+    top: 24px;
+    cursor: pointer;
+  }
 
   .nav-btn > label {
     display: inline-block;
@@ -293,6 +298,7 @@ footer nav a:hover {
     height: 30px;
     cursor: pointer;
   }
+
   .nav-btn > label > span {
     display: block;
     width: 25px;
@@ -318,3 +324,4 @@ footer nav a:hover {
     display: none !important;
   }
 }
+

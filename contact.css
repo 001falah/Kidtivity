@@ -8,16 +8,18 @@
   --magenta: #f111f1;
   --white: #fff;
   --box-shadow: 0 4px 24px rgba(140, 33, 180, 0.07);
-  --header-height:90px;
+  --header-height: 90px;
 }
 
 /* ==============================
    2. BASE STYLES
    ============================== */
-* {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -26,6 +28,10 @@ body {
   color: var(--purple);
   overflow-x: hidden;
   padding-top: var(--header-height);
+}
+
+main.main-content {
+  flex: 1 0 auto;
 }
 
 img, video {
@@ -52,12 +58,13 @@ header {
   padding: 24px 32px;
   background: var(--purple);
   border-bottom: 1.5px solid var(--yellow);
-  position: fixed;       /* ✅ FIXED instead of relative */
-  top: 0;                /* ✅ Stick to top */
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;           /* ✅ Occupy full width */
-  z-index: 1000;         /* ✅ Stay above everything else */
+  width: 100%;
+  z-index: 1000;
 }
+
 .logo {
   display: flex;
   align-items: center;
@@ -74,7 +81,7 @@ header nav a {
   text-decoration: none;
   margin: 0 14px;
   font-weight: 500;
-  transition: color .18s;
+  transition: color 0.18s;
 }
 
 header nav a:hover {
@@ -96,14 +103,15 @@ header nav a:hover {
   color: var(--yellow);
   transform: scale(1.12);
 }
+
 .cart-icon:active {
   color: var(--yellow);
   transform: scale(0.97);
 }
 
-/* =====================================================
-   4. FOOTER (Unified Across All Pages)
-   ===================================================== */
+/* ==============================
+   4. FOOTER (Sticky Enabled)
+   ============================== */
 footer {
   background: var(--white);
   color: var(--purple);
@@ -111,31 +119,34 @@ footer {
   padding: 22px 0;
   border-top: 1px solid #eedaf5;
   font-size: 0.98em;
+  flex-shrink: 0;
 }
+
 footer nav a {
   margin: 0 11px;
   text-decoration: none;
   color: var(--purple);
   transition: color 0.18s;
 }
+
 footer nav a:hover {
   color: var(--accent);
 }
 
-/* =====================================================
-   5. CONTACT PAGE LAYOUT & CONTENT
-   ===================================================== */
+/* ==============================
+   5. CONTACT PAGE LAYOUT
+   ============================== */
 .contact-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Contact Header */
 .contact-header {
   text-align: center;
   margin-bottom: 28px;
 }
+
 .contact-header h1 {
   color: #22223B;
   font-size: 2.2rem;
@@ -143,13 +154,13 @@ footer nav a:hover {
   letter-spacing: 1px;
   margin-bottom: 7px;
 }
+
 .contact-header p {
   color: #686868;
   font-size: 1rem;
   opacity: 0.8;
 }
 
-/* Wrapper */
 .contact-wrapper {
   display: flex;
   background: #fff;
@@ -158,7 +169,6 @@ footer nav a:hover {
   overflow: hidden;
 }
 
-/* Contact Info Section */
 .contact-info {
   background: var(--purple);
   color: #fff;
@@ -170,23 +180,27 @@ footer nav a:hover {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .contact-info h2 {
   font-size: 1.22rem;
   font-weight: 600;
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
+
 .contact-info p {
   font-size: 1rem;
   margin-bottom: 28px;
   color: #f3eaff;
   opacity: 0.86;
 }
+
 .contact-info ul {
   list-style: none;
   margin-bottom: 36px;
   padding: 0;
 }
+
 .contact-info ul li {
   margin-bottom: 18px;
   font-size: 1rem;
@@ -195,14 +209,17 @@ footer nav a:hover {
   gap: 13px;
   font-weight: 500;
 }
+
 .contact-info i {
   min-width: 19px;
   color: var(--yellow);
 }
+
 .contact-social {
   display: flex;
   gap: 18px;
 }
+
 .contact-social a {
   color: #fff;
   background: #7d44c1;
@@ -216,10 +233,12 @@ footer nav a:hover {
   transition: background 0.2s;
   text-decoration: none;
 }
+
 .contact-social a:hover {
   background: var(--accent);
   color: #5f259f;
 }
+
 .shapes {
   position: absolute;
   left: 18px;
@@ -227,31 +246,37 @@ footer nav a:hover {
   pointer-events: none;
 }
 
-/* Contact Form */
 .contact-form {
   flex: 2.1;
   padding: 36px 32px;
   display: flex;
   flex-direction: column;
 }
+
 .form-row {
   display: flex;
   gap: 15px;
   margin-bottom: 21px;
   flex-wrap: wrap;
 }
+
 .input-group {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.input-group.full { flex: 2; }
+
+.input-group.full {
+  flex: 2;
+}
+
 .input-group label {
   font-size: 0.98rem;
   font-weight: 500;
   color: #22223B;
   margin-bottom: 7px;
 }
+
 .input-group input,
 .input-group textarea {
   padding: 12px 10px;
@@ -265,32 +290,34 @@ footer nav a:hover {
   outline: none;
   resize: none;
 }
+
 .input-group input:focus,
 .input-group textarea:focus {
   border-bottom: 2px solid #5f259f;
 }
+
 .input-group textarea {
   min-height: 60px;
   max-height: 140px;
 }
 
-/* Radio Buttons */
 .radio-group {
   display: flex;
   gap: 20px;
   margin: 6px 0 8px;
   flex-wrap: wrap;
 }
+
 .radio-group label {
   font-weight: normal;
   color: #5c5370;
 }
+
 .radio-group input[type="radio"] {
   margin-right: 7px;
   accent-color: #7d44c1;
 }
 
-/* Send Button */
 .send-btn {
   margin-top: 13px;
   padding: 12px 0;
@@ -304,29 +331,27 @@ footer nav a:hover {
   transition: background 0.16s;
   box-shadow: 0 1px 6px rgba(95,37,159,0.06);
 }
+
 .send-btn:hover {
   background: #7d44c1;
 }
 
-/* =====================================================
-   6. RESPONSIVE MEDIA QUERIES
-   ===================================================== */
+/* ==============================
+   6. MEDIA QUERIES
+   ============================== */
 
-/* Tablet */
 @media (max-width: 900px) {
   .contact-container { padding: 15px; }
   .contact-wrapper { flex-direction: column; }
   .contact-info, .contact-form { padding: 28px 20px; }
 }
 
-/* Small Tablet / Large Mobile */
 @media (max-width: 650px) {
   .contact-header h1 { font-size: 1.8rem; }
   .contact-header p { font-size: 0.95em; }
   .form-row { flex-direction: column; gap: 0; }
 }
 
-/* Mobile Phones */
 @media (max-width: 500px) {
   .logo-img { height: 36px; }
   .contact-info, .contact-form { padding: 20px 10px; }
@@ -336,7 +361,6 @@ footer nav a:hover {
   .contact-social a { text-decoration: none; }
 }
 
-/* Extra Small Devices */
 @media (max-width: 380px) {
   .logo-img { height: 30px; }
   .contact-header h1 { font-size: 1.3rem; }
@@ -351,15 +375,13 @@ footer nav a:hover {
    11. HAMBURGER MENU (≤780px)
    ============================== */
 @media (max-width: 780px) {
-  /* Hide cart icon below 780px */
   .cart-icon {
     display: none !important;
   }
 
-  /* Hide normal nav initially */
   header .nav-list {
     position: absolute;
-    top: 100%; /* ✅ dropdown starts just below full header */
+    top: 100%;
     left: 0;
     width: 100%;
     flex-direction: column;
@@ -369,7 +391,7 @@ footer nav a:hover {
     gap: 1rem;
     transition: height 0.3s ease-in;
     z-index: 999;
-    border-top: 1px solid #eedaf5; /* nice separation */
+    border-top: 1px solid #eedaf5;
   }
 
   header .nav-list a {
@@ -380,26 +402,22 @@ footer nav a:hover {
     font-weight: 500;
   }
 
-  /* Hide checkbox from all views */
   #nav-check {
     display: none !important;
   }
 
-  /* Show menu when checked */
   #nav-check:checked ~ .nav-list {
-    height: calc(100vh - var(--header-height, 72px)); /* ✅ auto-fit under header */
+    height: calc(100vh - var(--header-height, 72px));
     padding: 1rem 0;
   }
 
-  /* Hamburger button */
   .nav-btn {
-  display: inline-block;
-  position: absolute;
-  right: 16px;
-  top: 24px;      /* ✅ aligns with logo height */
-  transform: none; /* remove translate */
-  cursor: pointer;
-}
+    display: inline-block;
+    position: absolute;
+    right: 16px;
+    top: 24px;
+    cursor: pointer;
+  }
 
   .nav-btn > label {
     display: inline-block;
@@ -407,6 +425,7 @@ footer nav a:hover {
     height: 30px;
     cursor: pointer;
   }
+
   .nav-btn > label > span {
     display: block;
     width: 25px;
@@ -417,7 +436,6 @@ footer nav a:hover {
   }
 }
 
-/* Desktop (≥781px) - Ensure normal nav shows */
 @media (min-width: 781px) {
   header .nav-list {
     display: flex !important;
@@ -425,9 +443,11 @@ footer nav a:hover {
     height: auto !important;
     flex-direction: row !important;
   }
+
   .nav-btn {
     display: none !important;
   }
+
   #nav-check {
     display: none !important;
   }
