@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/kidtivity/static/css/main.972d7f27.css",
+    "main.js": "/kidtivity/static/js/main.6617dbda.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/kidtivity/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/about.png": "/kidtivity/static/media/about.18981c5aad9f9e4df9ea.png",
+    "static/media/girlAbout.png": "/kidtivity/static/media/girlAbout.73c76d46d2e1a71996cd.png",
+    "static/media/kidtivity2.png": "/kidtivity/static/media/kidtivity2.2142bcbab1f8e4d6c999.png",
+    "static/media/kidtiviy3.png": "/kidtivity/static/media/kidtiviy3.f1b2975f8f66f3867bce.png",
+    "static/media/bootstrap-icons.woff?": "/kidtivity/static/media/bootstrap-icons.1295669cd4e305c97f2c.woff",
+    "static/media/fontawesome-webfont.eot": "/kidtivity/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/kidtivity/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/faq.png": "/kidtivity/static/media/faq.867532fe0ba4f853d6a9.png",
+    "static/media/bootstrap-icons.woff2?": "/kidtivity/static/media/bootstrap-icons.92ea18a81d737146ff04.woff2",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/kidtivity/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/5.jpeg": "/kidtivity/static/media/5.4fb9ab38a92e38b97ba5.jpeg",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/kidtivity/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/6.jpeg": "/kidtivity/static/media/6.3120bf3b2c89d06b0e41.jpeg",
+    "static/media/4.jpeg": "/kidtivity/static/media/4.d7d349d5e6b602821f78.jpeg",
+    "static/media/Explorer.jpeg": "/kidtivity/static/media/Explorer.f5df646fe462751287d3.jpeg",
+    "static/media/3.jpeg": "/kidtivity/static/media/3.0d5064073f7364fda903.jpeg",
+    "static/media/PennyPinch.ttf": "/kidtivity/static/media/PennyPinch.c84a1608d560c6f8e581.ttf",
+    "index.html": "/kidtivity/index.html",
+    "main.972d7f27.css.map": "/kidtivity/static/css/main.972d7f27.css.map",
+    "main.6617dbda.js.map": "/kidtivity/static/js/main.6617dbda.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.972d7f27.css",
+    "static/js/main.6617dbda.js"
+  ]
+}
